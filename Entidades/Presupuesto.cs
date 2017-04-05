@@ -8,7 +8,10 @@ namespace Entidades
 {
     public class Presupuesto
     {
-
+        /// <summary>
+        /// Esto define el tipo de presupuesto del objeto
+        /// </summary>
+        public int tipoPresupuesto { get; set; }
         public int codPresupuesto { get; set; }
         public String desPresupuesto { get; set; }
         public int version { get; set; }
