@@ -1,0 +1,103 @@
+﻿@model  AppV2.Models.ViewModelDetallePresup
+
+
+
+<br />
+<h3>@Html.DisplayNameFor(model => model.nombrePresup) @Model.nombrePresup</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].codigoMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].descMaterial)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].precioUnit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].unidadMedida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].cantidad)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].Total)
+        </th>      
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].mesSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalles[0].mesEntrega)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.detalles) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codigoMaterial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descMaterial)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.precioUnit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unidadMedida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>   
+        <td>
+            @Html.DisplayFor(modelItem => item.mesSoliText )
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mesEntText)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { idPresupuesto=item.idDetalle }) |
+            <a href="#" data-toggle="modal" data-target="#myModal">Observar </a> |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.idDetalle })
+        </td>
+    </tr>
+}
+
+
+</table>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Observación de Ítem</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <center><label for="comment">Detalle:</label>
+                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </center>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+
+    </div>
+</div>

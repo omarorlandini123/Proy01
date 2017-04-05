@@ -1,0 +1,12 @@
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\LogicAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\LogicAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\Data.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\Oracle.DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\DataAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\bin\Debug\Data.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\obj\Debug\LogicAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\LogicAccess\obj\Debug\LogicAccess.pdb

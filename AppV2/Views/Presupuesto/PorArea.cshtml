@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AppV2.Models.ViewPresupuestoArea>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        <div class="list-group-item list-group-item-action flex-column align-items-start">           
+            <div class="row">
+
+                <div class="col-sm-6">
+                    @Html.ActionLink(Html.DisplayNameFor(model => model.nombreArea).ToString() + " " + item.nombreArea, "PresupArea", new { id = item.idArea,sede=item.idSede })
+                    @*<h5> @Html.DisplayNameFor(model => model.nombreArea) @item.nombreArea </h5>*@
+                    <h5> @item.codArea </h5>
+                    <h5> @Html.ActionLink("Aprobar", "Aprobar", new { id = item.idArea }) </h5>
+                </div>
+                <div class="col-sm-6">
+                    <h5> @Html.DisplayNameFor(model => model.desde) @item.desde </h5>
+                    <h5> @Html.DisplayNameFor(model => model.hasta) @item.hasta </h5>
+                    <h5> @Html.DisplayNameFor(model => model.montoTotal) @item.montoTotal  </h5>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

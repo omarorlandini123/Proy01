@@ -1,0 +1,51 @@
+﻿@using AppV2.Models;
+@model  ViewModelPresupArea
+
+<div class="row">
+    <br />
+    <h3 class="mb-1">Presupuesto del Área de : @Model.nombreArea </h3>
+    <div class="col-sm-6">
+
+        <div class="list-group">
+
+            @foreach (ViewPresupuestoArea preArea in Model.presupuestosArea)
+            {
+
+                <a href="#" onclick="listarVersiones(@preArea.idArea,@preArea.idSede,@preArea.anio);" class="list-group-item list-group-item-action flex-column align-items-start ">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h4 class="mb-1"><strong>Presupuesto</strong> @preArea.anio </h4>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <h5>@Html.LabelFor(model => preArea.desde ) @preArea.desde</h5>
+                            <h5>@Html.LabelFor(model => preArea.hasta ) @preArea.hasta </h5>
+                            <h5>@Html.LabelFor(model => preArea.fecReg ) @preArea.fecReg </h5>
+                            <h5>@Html.LabelFor(model => preArea.usu_apro) @preArea.usu_apro </h5>
+
+
+                        </div>
+                        
+                    </div>
+
+                </a>
+
+            }
+
+
+        </div>
+
+    </div>
+    <div class="col-sm-6" id="VersionesArea">
+
+    </div>
+
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

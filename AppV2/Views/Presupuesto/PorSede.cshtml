@@ -1,0 +1,51 @@
+﻿@using AppV2.Models;
+@model AppV2.Models.ViewModelPresupPorSede
+
+<div class="row">
+    <br />
+    <div class="col-sm-6">
+
+        <div class="list-group">
+
+            @foreach (ViewPresupuestoGeneral preSede in Model.presupuestosPorAnio)
+            {
+
+                <a href="#" onclick="listarPorArea(@preSede.idSede,@preSede.anio);"  class="list-group-item list-group-item-action flex-column align-items-start ">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-1">@Html.LabelFor(model=> preSede.anio) @preSede.anio </h3>
+                         
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <h5>@Html.LabelFor(model=>preSede.Desde ) @preSede.Desde</h5>
+                            <h5>@Html.LabelFor(model => preSede.fechaRegistro )</h5>
+                            <h5>@Html.LabelFor(model => preSede.AprobadoPor ) </h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5>@Html.LabelFor(model => preSede.Hasta) @preSede.Hasta</h5>
+                            <h5>@preSede.fechaRegistro</h5>
+                            <h5>@preSede.AprobadoPor </h5>
+
+                        </div>
+                    </div>
+                   
+                </a>
+
+            }          
+
+            
+        </div>
+
+    </div>
+    <div class="col-sm-6" id="PresupPorArea">
+                
+    </div>
+
+
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

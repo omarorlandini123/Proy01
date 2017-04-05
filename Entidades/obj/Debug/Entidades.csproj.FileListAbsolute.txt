@@ -1,0 +1,5 @@
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\bin\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\bin\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.pdb
