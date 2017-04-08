@@ -21,9 +21,9 @@ namespace DataAccess
 
         public List<Sede> getSedes() {
             List<Sede> lista = new List<Sede>();
-           // OracleDataReader rpta = conector.Ejecutar("select COD_SEDE,DES_SEDE from T_SEDE");
+           OracleDataReader rpta = conector.Ejecutar("select COD_SEDE,DES_SEDE from T_SEDE");
 
-           // while (rpta.Read()) {
+           while (rpta.Read()) {
 
                 Sede sede = new Sede();
             sede.codSede = 1;
@@ -36,7 +36,7 @@ namespace DataAccess
             lista.Add(sede);
             lista.Add(sede2);
 
-            //  }
+            }
             return lista;
         }
 

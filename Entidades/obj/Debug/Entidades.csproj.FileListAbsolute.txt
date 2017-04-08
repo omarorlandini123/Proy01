@@ -3,3 +3,8 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\bin\Debug\Entidades.
 D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
 D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\AppV2\Entidades\obj\Debug\Entidades.pdb
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Entidades\bin\Debug\Entidades.dll
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Entidades\bin\Debug\Entidades.pdb
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Entidades\obj\Debug\Entidades.dll
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Entidades\obj\Debug\Entidades.pdb
