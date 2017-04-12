@@ -46,13 +46,13 @@
               </div>
              </div>
            </div>
-           <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#">
+           <a class="navbar-brand hidden-sm hidden-md hidden-lg"  href="#">
             Sistema de Presupuestos
          </a>
          </div>
          <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
            <ul class="nav navbar-nav">
-             <li class="active"><a href="#">Presupuesto</a></li>
+             <li class="active"><a onclick="mostrarPresupuestosPorSede();" href="#">Presupuesto</a></li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
 
@@ -64,13 +64,11 @@
      </nav>
 
      <!-- Main component for a primary marketing message or call to action -->
-     <div class="jumbotron">
-       <h1>Navbar example</h1>
-       <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-       <p>
-         <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-       </p>
-     </div>
+     <div class="panel panel-default">
+      <div class="panel-body" id="contenido-principal">
+
+      </div>
+    </div>
 
    </div>
 
@@ -78,5 +76,6 @@
     <script src="js/jquery-3.2.0.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/funciones.js"></script>
   </body>
 </html>

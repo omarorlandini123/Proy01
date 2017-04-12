@@ -13,6 +13,7 @@ namespace AppV2.Controllers
         {
             return View();
         }
+       
 
         public ActionResult PorSede() {
             ViewModelPresupPorSede vista = new ViewModelPresupPorSede();
@@ -104,6 +105,37 @@ namespace AppV2.Controllers
             return View(vista);
         }
 
+
+        public ActionResult TiposPresupuesto() {
+            List<ViewTipoPresupuesto> lista = new List<ViewTipoPresupuesto>();
+
+            ViewTipoPresupuesto tipo1 = new ViewTipoPresupuesto();
+
+            tipo1.codTipoPresup = "COD_235";
+            tipo1.nomTipoPresup = "Gasto de Capital";
+            tipo1.ultimaModif = "10/04/2017";
+
+            tipo1.monto = "S/ 45 000";
+            tipo1.desde = "En Edicion";
+            tipo1.hasta = "En Edicion";
+
+            ViewTipoPresupuesto tipo2 = new ViewTipoPresupuesto();
+
+            tipo2.codTipoPresup = "COD_235";
+            tipo2.nomTipoPresup = "Gasto de Funcionamiento";
+            tipo2.ultimaModif = "05/04/2017";
+
+            tipo2.monto = "S/ 48 589";
+            tipo2.desde = "En Edicion";
+            tipo2.hasta = "En Edicion";
+
+            lista.Add(tipo1);
+            lista.Add(tipo2);
+
+            return PartialView(lista);
+
+        }
+
         public ActionResult Versiones(int idArea, int idSede, int anio) {
 
             List<ViewPresupuestoArea> lista = new List<ViewPresupuestoArea>();
@@ -121,7 +153,7 @@ namespace AppV2.Controllers
 
             ViewPresupuestoArea presup2 = new ViewPresupuestoArea();
             presup2.version = "2";
-            presup2.codArea = "S-655";
+            presup2.codArea = "S-656";
             presup2.desde = "01/01/2016";
             presup2.hasta = "31/12/2016";
             presup2.fecReg = "07/01/2016";
@@ -132,7 +164,7 @@ namespace AppV2.Controllers
 
             ViewPresupuestoArea presup3 = new ViewPresupuestoArea();
             presup3.version = "1";
-            presup3.codArea = "S-655";
+            presup3.codArea = "S-657";
             presup3.desde = "01/01/2016";
             presup3.hasta = "31/12/2016";
             presup3.fecReg = "09/01/2016";
@@ -172,14 +204,19 @@ namespace AppV2.Controllers
             vista.Detalle=detalle1;
 
 
-            return View(vista);
+            return PartialView(vista);
+        }
+
+        public ActionResult Observaciones() {
+
+            return PartialView();
         }
 
 
         public ActionResult Detalle(int idVersion,int idanio, int idArea,int sede)
         {
             ViewModelDetallePresup vista = new ViewModelDetallePresup();
-            vista.nombrePresup="Presupuesto "+ idanio + " #"+ idVersion;
+            vista.nombrePresup= "Detalle de Presupuesto 2015 - III - Versión #2";
             List<ViewDetallePresup> listaDetalles = new List<ViewDetallePresup>();
             ViewDetallePresup detalle1 = new ViewDetallePresup();
             detalle1.idDetalle = 1;
@@ -199,7 +236,7 @@ namespace AppV2.Controllers
             detalle1.mesEntrega = new DateTime(2016, 03, 01);
 
             ViewDetallePresup detalle2 = new ViewDetallePresup();
-            detalle2.idDetalle = 1;
+            detalle2.idDetalle = 2;
             detalle2.codigoMaterial = "60734983";
             detalle2.descMaterial = "Viga de acero";
             detalle2.Clase = "Clase 1";

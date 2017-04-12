@@ -2,81 +2,110 @@
 
 
 
+
+<h3>@Model.nombrePresup</h3>
 <br />
-<h3>@Html.DisplayNameFor(model => model.nombrePresup) @Model.nombrePresup</h3>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].codigoMaterial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].descMaterial)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].precioUnit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].unidadMedida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].cantidad)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].Total)
-        </th>      
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].mesSolicitud)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalles[0].mesEntrega)
-        </th>
-        <th></th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-success btn-sm" > Aprobar </button>
+                <button type="button" class="btn btn-danger btn-sm" > Rechazar Todo </button>
+                <button type="button" class="btn btn-info btn-sm" > Enviar Aprobación </button>
 
-@foreach (var item in Model.detalles) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codigoMaterial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descMaterial)
-        </td>
+            </div>
+            <div class="col-sm-6 " role="group" aria-label="...">
+                <div class="dropdown" style="float: right;">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Materiales y Suministros
+                        <span class="caret"></span>
+                    </button>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Materiales y Suministros</a></li>
+                        <li><a href="#">Servicios</a></li>
+                    </ul>
+                </div>
+                
+                <div style="float: right;margin-right:5px;">
+                     <button type="button" class="btn btn-warning btn-sm">
+                        Agregar Ítem
+                     </button>
+                </div>
+            </div>
+            
+        </div><br/>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="estado">
+                    <div class="estado-ind estado-ind-verde" ></div>
+                    <label>Aprobado</label>
+                </div>
+                <div class="estado">
+                    <div class="estado-ind estado-ind-blanco"></div>
+                    <label>En Edición</label>
+                </div>
+                <div class="estado">
+                    <div class="estado-ind estado-ind-rojo"></div>
+                    <label>Observado</label>
+                </div>
+
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar ... ">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Buscar</button>
+                    </span>
+                </div>
+            </div>
+        </div><br/>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-hover">
+                    <tr>
+                        <td><b>#</b></td>
+                        <td><b>Código</b></td>
+                        <td><b>Descripción</b></td>
+                        <td><b>Unid.</b></td>
+                        <td><b>Precio Unit.</b></td>
+                        <td><b>Cantidad</b></td>
+                        <td><b>Precio</b></td>
+                        <td></td>
+                    </tr>
+                    @foreach (var item in Model.detalles)
+                    {
+                        <tr class="success">
+                            <td>@item.idDetalle</td>
+                            <td>@Html.DisplayFor(modelItem => item.codigoMaterial)</td>
+                            <td>@Html.DisplayFor(modelItem => item.descMaterial)</td>
+                            <td>@Html.DisplayFor(modelItem => item.unidadMedida)</td>
+                            <td>@Html.DisplayFor(modelItem => item.precioUnit)</td>
+                            <td>@Html.DisplayFor(modelItem => item.cantidad)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                            <td>
+                                <button type="button" class="btn btn-success btn-xs">Aprobar</button>
+                                <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
+                                <button type="button" class="btn btn-primary btn-xs" onclick="ExpandirObservaciones('@item.idDetalle')">Obser</button>
+                                <button type="button" class="btn btn-danger btn-xs">Eliminar</button>
+                                
+                            </td>
+                        </tr>
+                    <tr style="display:none;" id="DETALLE_@item.idDetalle">
+                        <td colspan="8">
+                            <div class="col-sm-12" id="DETALLEDIV_@item.idDetalle">
+
+                            </div>
+                        </td>
+                    </tr> 
+                    }
+
+                </table>
+            </div>
+        </div>
        
-        <td>
-            @Html.DisplayFor(modelItem => item.precioUnit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.unidadMedida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidad)
-        </td>       
-        <td>
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>   
-        <td>
-            @Html.DisplayFor(modelItem => item.mesSoliText )
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mesEntText)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { idPresupuesto=item.idDetalle }) |
-            <a href="#" data-toggle="modal" data-target="#myModal">Observar </a> |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.idDetalle })
-        </td>
-    </tr>
-}
-
-
-</table>
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -89,8 +118,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <center><label for="comment">Detalle:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <center>
+                        <label for="comment">Detalle:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
                     </center>
                 </div>
             </div>
