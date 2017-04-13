@@ -30,13 +30,13 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <div class="row hidden-xs">
-             <div class="col-sm-3 ">
+           <div class="row hidden-xs" style="width: 370px;">
+             <div class="col-md-3 hidden-sm">
                <a href="#" class="thumbnail" style="margin-top: 20px;background-color: rgba(255, 255, 255, 0);border: 1px solid rgba(221, 221, 221, 0);">
-                 <img alt="40%x50%" style="/* height: 40%; */width: 63%;/* display: block; */" src="images/escudo.png">
+                 <img alt="40%x50%" style="width: 100%;" src="images/escudo.png">
                </a>
              </div>
-             <div class="col-sm-9" style=" margin-top: 20px;">
+             <div class="col-md-9 " style=" margin-top: 20px;">
                <div class="row">
 
                 <a class="navbar-brand" style="font-size: 30px;" href="#">
@@ -55,9 +55,55 @@
              <li class="active"><a onclick="mostrarPresupuestosPorSede();" href="#">Presupuesto</a></li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
+            <li class="hidden-xs hidden-sm" style="width: 130px;margin: -20px;">
 
-             <li><a href="../navbar-static-top/">Nombre del Usuario</a></li>
-             <li><a href="../navbar-fixed-top/">Cerrar Sesión</a></li>
+                <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 90px;"></span>
+              
+
+            </li>
+            <li class="hidden-xs" style="margin: -25px;">
+              <a href="../navbar-static-top/" style="padding: 5px;">Omar Orlandini Vera</a>  
+              <div class="dropdown clearfix" style="text-align: center;margin: 5px;"> 
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 1px;width: 120px;"> 
+                  Lima 
+                  <span class="caret"></span> 
+                </button> 
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"> 
+                  <li><a href="#">Lima</a></li> 
+                  <li><a href="#">Chimbote</a></li>                   
+                </ul> 
+              </div>
+              <div class="dropdown clearfix" style="text-align: center;margin: 5px;"> 
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 1px;width: 120px;"> 
+                  Sistemas 
+                  <span class="caret"></span> 
+                </button> 
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"> 
+                  <li><a href="#">Contabilidad</a></li> 
+                  <li><a href="#">Logística</a></li> 
+                </ul> 
+              </div>
+            </li>
+
+
+            <li class="hidden-sm hidden-md hidden-lg"><a href="#">Omar Orlandini Vera</a></li>
+            <li class="dropdown hidden-sm hidden-md hidden-lg">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lima <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Lima</a></li> 
+                <li><a href="#">Chimbote</a></li>  
+              </ul>
+            </li>
+            <li class="dropdown hidden-sm hidden-md hidden-lg">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sistemas <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Contabilidad</a></li> 
+                <li><a href="#">Logística</a></li>
+              </ul>
+            </li>
+            <li style="margin-left: 10px;">
+              <a href="../navbar-fixed-top/">Cerrar Sesión</a>
+            </li>
            </ul>
          </div>
        </div><!--/.container-fluid -->
