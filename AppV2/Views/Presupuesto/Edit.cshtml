@@ -1,209 +1,142 @@
 ﻿@model AppV2.Models.ViewModelEditPresup
-
-<br />
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Detalle.idDetalle)
+<div class="row">
+    <div class="col-sm-12">
+        <br />
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.codigoMaterial, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-5">
-                        @Html.EditorFor(model => model.Detalle.codigoMaterial, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.codigoMaterial, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-3">
-                        <input type="Button" value="Buscar" class="btn btn-default" />
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6" >Código Material:</div>
+                <div class="col-sm-6">
+                <input class="form-control" type="text" name="" value="@Model.Detalle.codigoMaterial"></div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.descMaterial, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.descMaterial, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.descMaterial, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-8">
+                <div class="col-sm-2">Descripción:</div>
+                <div class="col-sm-10"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.descMaterial"></div>
             </div>
-
-        </div>
+        </div><br>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.Clase, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.Clase, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.Clase, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">Clase:</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.Clase"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.precioUnit, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.precioUnit, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.precioUnit, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">Precio Unit.</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.precioUnit"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.unidadMedida, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.unidadMedida, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.unidadMedida, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Unidad de Medida:</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.unidadMedida"></div>
+            </div><br>
         </div>
+        <br>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.subClase, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.subClase, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.subClase, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Sub-Clase:</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.subClase"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.cantidad, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.cantidad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.cantidad, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6"> Cantidad:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.cantidad"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.UnidadSoli, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.UnidadSoli, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.UnidadSoli, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Unidad Solicitada:</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.UnidadSoli" ></div>
             </div>
-         
-        </div>
+        </div><br>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.criticidad, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.criticidad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.criticidad, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Criticidad:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.criticidad"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.Total, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.Total, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.Total, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Total:</div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.Total"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.largo, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.largo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.largo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">Largo:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.largo"></div>
             </div>
-
-        </div>
+        </div><br>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.prioridad, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.prioridad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.prioridad, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">Prioridad:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.prioridad"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.mesSolicitud, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.mesSolicitud, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.mesSolicitud, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
+            <div class="col-sm-4">
+                <div class="col-sm-6">Alto:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.alto"></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.ancho, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.ancho, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.ancho, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-4">
+                <div class="col-sm-6">Ancho:</div>
+                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.ancho"></div>
             </div>
-
-        </div>
+        </div><br>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.sustento, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.sustento, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.sustento, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-12">
+                <div class="col-sm-2">Sustento:</div>
+                <div class="col-sm-10"><textarea class="form-control" rows="3" value="@Model.Detalle.sustento"></textarea></div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.mesEntrega, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.mesEntrega, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.mesEntrega, "", new { @class = "text-danger" })
+            <div class="col-sm-4 col-sm-offset-8" style="float:right;">
+                <input type="file" class="btn btn-success btn-xs "  />
+            </div>
+            <br>
+        </div><br>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="col-sm-6">Mes solicitud:</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ene</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Feb</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Mar</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Abr</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">May</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jun</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jul</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ago</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Sep</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Oct</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Nov</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Dic</div>
                     </div>
                 </div>
+                
 
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Detalle.alto, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Detalle.alto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Detalle.alto, "", new { @class = "text-danger" })
+            <div class="col-sm-2">
+                <div class="col-sm-6">Mes Entrega:</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ene</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Feb</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Mar</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Abr</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">May</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jun</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jul</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ago</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Sep</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Oct</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Nov</div>
+                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Dic</div>
                     </div>
                 </div>
             </div>
-
         </div>
-       <div class="row">
-           <div class="form-group">
-               <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                   <input type="button" value="Guardar" class="btn btn-default" />
-                   <input type="button" value="Cancelar" onclick="OcultarDetalle('@(Model.Detalle.idDetalle)')" class="btn btn-danger" />
-                   
-               </div>
-           </div>
-       </div>
         
     </div>
-}
+</div>
 
+<br />
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+            <input type="button" value="Guardar" class="btn btn-default" />
+            <input type="button" value="Cancelar" onclick="OcultarDetalle('@(Model.Detalle.idDetalle)')" class="btn btn-danger" />
 
-
-
+        </div>
+    </div>
+</div>

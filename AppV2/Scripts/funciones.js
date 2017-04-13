@@ -72,3 +72,7 @@ function ExpandirObservaciones(codDetalle) {
 function OcultarDetalle(codDetalle) {
     $('#DETALLE_' + codDetalle).hide();
 }
+
+$(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+});
