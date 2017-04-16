@@ -1,0 +1,28 @@
+﻿.estado-ind {
+    border-radius: 50%;
+    float:left;
+    width: 20px;
+    height: 20px;
+    max-width:20px;
+    max-height:20px;    
+    margin-right:5px;
+}
+
+.estado-ind-rojo {    
+    background: red;   
+    border: none; 
+}
+.estado-ind-verde {    
+    background: green;    
+    border: none;
+}
+.estado-ind-blanco {    
+    background: white;    
+    border: 1px solid black;
+}
+
+.estado {   
+    margin:2px;
+    overflow-x:hidden;
+    display:inline-block;
+}
