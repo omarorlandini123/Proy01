@@ -9,18 +9,13 @@ namespace Entidades
     public class NivelAprobacion
     {
 
-        public int codNivel { get; set; }
-        public String desNivel { get; set; }
-        public int activo { get; set; }
-        public int tipoNivel { get; set; }
+        public int idNivel { get; set; }
+        public string nombre { get; set; }
         public int orden { get; set; }
-        /// <summary>
-        /// Lista los usuarios que poseen este nivel de aprobaion
-        /// </summary>
-        public List<Usuario> usuariosAprobacion { get; set; }
-        public NivelAprobacion() {
-            usuariosAprobacion = new List<Usuario>();
-        }
+        public DateTime vigenciaIni { get; set; }
+        public DateTime vigenciaFin { get; set; }
+        public DateTime fechaReg { get; set; }
+        public Usuario usuarioReg { get; set; }
 
     }
 }

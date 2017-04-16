@@ -35,8 +35,11 @@ namespace Data
                 conectionString = "Data Source="+ ip + "/"+ schema + ";User ID="+user+";Password="+pass;
         }
 
-        public OracleDataReader Ejecutar(String Query) {
+       
 
+        public DataTable Ejecutar(String Query)
+        {
+            DataTable dtrpta = new DataTable();
             OracleDataReader reader = null;
             try
             {
@@ -50,36 +53,37 @@ namespace Data
                 sqlConnection1.Open();
 
                 reader = cmd.ExecuteReader();
-
+                dtrpta.Load(reader);
                 sqlConnection1.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error ejecutando consulta ==> "+e.Message);
+                Console.WriteLine("Error ejecutando consulta ==> " + e.Message);
             }
-                        
-            return reader;
+
+            return dtrpta;
 
         }
 
-        public OracleDataReader EjecutarProcedimiento(Procedimiento proc) {
+        public DataTable EjecutarProcedimiento(Procedimiento proc) {
 
+            DataTable dtrpta = new DataTable();
             OracleDataReader reader;
 
             OracleConnection conn = new OracleConnection(conectionString);
-            
             conn.Open();
-
             OracleCommand command = new OracleCommand(proc.nombre, conn);
             command.CommandType = CommandType.StoredProcedure;
 
             foreach (Parametro param in proc.parametros) {
                 command.Parameters.Add(param.nombreVariable, param.contenido);
             }
-            reader=command.ExecuteReader();
-            conn.Close();            
 
-            return reader;
+            reader=command.ExecuteReader();
+            dtrpta.Load(reader);
+            conn.Close();           
+
+            return dtrpta;
 
         }
 

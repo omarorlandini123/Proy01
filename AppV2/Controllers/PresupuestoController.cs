@@ -213,7 +213,7 @@ namespace AppV2.Controllers
         }
 
 
-        public ActionResult Detalle(int idVersion,int idanio, int idArea,int sede)
+        public ActionResult Detalle(int idVersion)
         {
             ViewModelDetallePresup vista = new ViewModelDetallePresup();
             vista.nombrePresup= "Detalle de Presupuesto 2015 - III - Versión #2";

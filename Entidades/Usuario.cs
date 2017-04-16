@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class Usuario
     {
-
+        public int idUsuario { get; set; }
         public String usuario { get; set; }
         public String Nombres { get; set; }
         public String ApellidoPaterno { get; set; }
@@ -32,7 +32,7 @@ namespace Entidades
         /// <summary>
         /// List los detalles de presupuesto que han sido creados por el usuario
         /// </summary>
-        public List<DetallePresupuesto> detallesCreados { get; set; }
+      
         public Usuario() {
             presupAper = new List<Presupuesto>();
             presupAprob = new List<Presupuesto>();

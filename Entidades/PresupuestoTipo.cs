@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Presupuesto
+    public class PresupuestoTipo
     {
 
-        public int idPresupuesto { get; set; }
-        public string nombrePresupuesto { get; set; }
-        public DateTime fechaReg { get; set; }
+        public int idPresupuestoTipo { get; set; }
+        public Presupuesto presupuesto { get; set; }
+        public TipoPresupuesto tipoPresupuesto { get; set; }
+        public DateTime FechaReg { get; set; }
         public Usuario usuarioReg { get; set; }
-        public DateTime UltModifFec { get; set; }
+        public DateTime UltModifReg { get; set; }
         public Usuario UltModifUser { get; set; }
         public DateTime fechaValIni { get; set; }
         public DateTime fechaValFin { get; set; }

@@ -9,20 +9,22 @@ namespace Entidades
     public class Aprobacion
     {
 
-        public int tipoAprobacion { get; set; }
-        public String observacion { get; set; }
-        /// <summary>
-        /// El presupuesto al cual aplica esta aprobación
-        /// </summary>
-        public Presupuesto presupAprob { get; set; }
-        /// <summary>
-        /// El detalle al cual aplica esta aprobación
-        /// </summary>
-        public DetallePresupuesto DetalleAprobado { get; set; }
-        /// <summary>
-        /// El nivel de aprobacion al cual corresponte esta aprobación
-        /// </summary>
-        public NivelAprobacion nivelAprobacion { get; set; }
+        public enum estados {
+            aprobado=1,
+            desaprobado,
+            noVerficiado
+        }
+        public int idAprobacion { get; set; }
+        public NivelAprobacion nivel { get; set; }
+        public int estado { get; set; }
+        public Usuario usuarioReg { get; set; }
+        public DateTime FechaReg { get; set; }
+        public string Observacion { get; set; }
+        public Presupuesto presupAplica { get; set; }
+        public PresupuestoTipo tipoPresup { get; set; }
+        public Version version { get; set; }
+        public DetalleVersion detalleVersion { get; set; }
+
 
     }
 }

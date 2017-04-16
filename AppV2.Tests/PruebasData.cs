@@ -2,7 +2,6 @@
 using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data;
-using Oracle.DataAccess.Client;
 using System.Configuration;
 namespace AppV2.Tests
 {
@@ -10,13 +9,12 @@ namespace AppV2.Tests
     public class PruebasData
     {
         [TestMethod]
-        public OracleDataReader TestConexionBasica()
+        public void TestConexionBasica()
         {
             Conexion con = new Conexion("192.168.1.10","orcl","SIMAUSR","1234");
             Assert.IsNotNull(con);
-            OracleDataReader reader = con.Ejecutar("select 1");
+            DataTable reader = con.Ejecutar("select table_name from user_tables order by table_name");
             Assert.IsNotNull(reader);
-            return reader;
         }
 
         

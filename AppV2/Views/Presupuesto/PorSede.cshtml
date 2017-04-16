@@ -3,43 +3,127 @@
 
 <div class="row">
     <br />
-    <div class="col-sm-6">
+    <div class="col-sm-6 panel-principal">
+        <h3>Presupuestos de Sede: <strong>Lima</strong></h3>
+      
 
         <div class="list-group">
 
-            @foreach (ViewPresupuestoGeneral preSede in Model.presupuestosPorAnio)
-            {
-
-                <a href="#" onclick="listarPorArea(@preSede.idSede,@preSede.anio);"  class="list-group-item list-group-item-action flex-column align-items-start ">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h3 class="mb-1">@Html.LabelFor(model=> preSede.anio) @preSede.anio </h3>
-                         
+                <a href="#" class="list-group-item est-edicion">
+                    <div class="row">
+                        <div class="col-sm-6 excesodiv">
+                            <h4 class="list-group-item-heading"> Presupuesto 2015-III</h4>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Aprobar</h5>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Ver Reportes</h5>
+                        </div>
                     </div>
                     <div class="row">
-
-                        <div class="col-sm-6">
-                            <h5>@Html.LabelFor(model=>preSede.Desde ) @preSede.Desde</h5>
-                            <h5>@Html.LabelFor(model => preSede.fechaRegistro )</h5>
-                            <h5>@Html.LabelFor(model => preSede.AprobadoPor ) </h5>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Registro:</p>
+                            <p class="list-group-item-text">Ultima Modif:</p>
+                            <p class="list-group-item-text">Aprobado por:</p>
                         </div>
-                        <div class="col-sm-6">
-                            <h5>@Html.LabelFor(model => preSede.Hasta) @preSede.Hasta</h5>
-                            <h5>@preSede.fechaRegistro</h5>
-                            <h5>@preSede.AprobadoPor </h5>
-
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">12/12/2017</p>
+                            <p class="list-group-item-text">01/01/2016</p>
+                            <p class="list-group-item-text">Sin Aprobar</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Monto:</p>
+                            <p class="list-group-item-text">Desde:</p>
+                            <p class="list-group-item-text">Hasta:</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">S/.42000</p>
+                            <p class="list-group-item-text">En edicion</p>
+                            <p class="list-group-item-text">En edicion</p>
                         </div>
                     </div>
-                   
                 </a>
-
-            }          
+                <a href="#" class="list-group-item est-aprobado">
+                    <div class="row">
+                        <div class="col-sm-6 excesodiv">
+                            <h4 class="list-group-item-heading"> Presupuesto 2015-III</h4>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Aprobar</h5>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Ver Reportes</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Registro:</p>
+                            <p class="list-group-item-text">Ultima Modif:</p>
+                            <p class="list-group-item-text">Aprobado por:</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">12/12/2017</p>
+                            <p class="list-group-item-text">01/01/2016</p>
+                            <p class="list-group-item-text">Sin Aprobar</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Monto:</p>
+                            <p class="list-group-item-text">Desde:</p>
+                            <p class="list-group-item-text">Hasta:</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">S/.42000</p>
+                            <p class="list-group-item-text">En edicion</p>
+                            <p class="list-group-item-text">En edicion</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item est-inactivo">
+                    <div class="row">
+                        <div class="col-sm-6 excesodiv">
+                            <h4 class="list-group-item-heading"> Presupuesto 2015-III</h4>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Aprobar</h5>
+                        </div>
+                        <div class="col-sm-3">
+                            <h5 class="list-group-item-heading">Ver Reportes</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Registro:</p>
+                            <p class="list-group-item-text">Ultima Modif:</p>
+                            <p class="list-group-item-text">Aprobado por:</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">12/12/2017</p>
+                            <p class="list-group-item-text">01/01/2016</p>
+                            <p class="list-group-item-text">Sin Aprobar</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">Monto:</p>
+                            <p class="list-group-item-text">Desde:</p>
+                            <p class="list-group-item-text">Hasta:</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="list-group-item-text">S/.42000</p>
+                            <p class="list-group-item-text">En edicion</p>
+                            <p class="list-group-item-text">En edicion</p>
+                        </div>
+                    </div>
+                </a>
+                     
 
             
         </div>
 
     </div>
-    <div class="col-sm-6" id="PresupPorArea">
-                
+    <div class="col-sm-6 panel-secundario" id="PresupPorArea">
+        <center><h3>Presupuestos por Área </h3></center>
+        <center><h4><strong>Presupuesto Seleccionado</strong></h4></center>
+               
     </div>
 
 
