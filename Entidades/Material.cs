@@ -15,17 +15,17 @@ namespace Entidades
         /// <summary>
         /// Lista los detalles de presupuesto que contienen este material
         /// </summary>
-        public List<DetallePresupuesto> detallesPresup { get; set; }
+        public List<DetalleVersion> detallesPresup { get; set; }
         /// <summary>
         /// La unidad actual de este material
         /// </summary>
-        public Unidad unidad { get; set; }
+        public string unidad { get; set; }
         /// <summary>
         /// La sub clase a la cual pertenece este material
         /// </summary>
         public SubClase subClase { get; set; }
         public Material() {
-            detallesPresup = new List<DetallePresupuesto>();
+            detallesPresup = new List<DetalleVersion>();
         } 
 
     }

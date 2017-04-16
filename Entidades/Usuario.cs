@@ -37,7 +37,6 @@ namespace Entidades
             presupAper = new List<Presupuesto>();
             presupAprob = new List<Presupuesto>();
             nivelesAprobacion = new List<NivelAprobacion>();
-            detallesCreados = new List<DetallePresupuesto>();
         }
 
     }

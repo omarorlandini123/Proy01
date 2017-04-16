@@ -56,7 +56,6 @@
     <Compile Include="Sede.cs" />
     <Compile Include="SubClase.cs" />
     <Compile Include="TipoPresupuesto.cs" />
-    <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>

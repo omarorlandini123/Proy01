@@ -12,3 +12,7 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Entidades\bin\Debug\Enti
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Entidades\bin\Debug\Entidades.pdb
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Entidades\obj\Debug\Entidades.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Entidades\obj\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\obj\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\obj\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\bin\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\bin\Debug\Entidades.pdb
