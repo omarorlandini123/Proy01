@@ -20,3 +20,15 @@ E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\bin\Debug\Entidades.p
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\obj\Debug\DataAccess.dll
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\obj\Debug\DataAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\DataAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Data.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Oracle.DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Oracle.Web.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Oracle.ManagedDataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Data.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\bin\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\obj\Debug\DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\DataAccess\obj\Debug\DataAccess.pdb

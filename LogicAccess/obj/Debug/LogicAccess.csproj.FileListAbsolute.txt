@@ -22,3 +22,15 @@ E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\LogicAccess\bin\Debug\Data.pdb
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\LogicAccess\obj\Debug\LogicAccess.dll
 E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\LogicAccess\obj\Debug\LogicAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\LogicAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\LogicAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\Entidades.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\Data.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\Oracle.DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\DataAccess.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\Entidades.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\bin\Debug\Data.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\obj\Debug\LogicAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\LogicAccess\obj\Debug\LogicAccess.pdb

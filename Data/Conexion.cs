@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Web;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -18,25 +19,45 @@ namespace Data
 
         public Conexion() {
 
-            conectionString = ConfigurationManager.ConnectionStrings["ORACLESTR"].ConnectionString;
+            try
+            {
+                conectionString = ConfigurationManager.ConnectionStrings["ORACLESTR"].ConnectionString;
 
+            }
+            catch (Exception es)
+            {
+                Console.WriteLine("No hay cadena de conexíon");
+            }
+        }
+
+        public Conexion(string ip,string schema, string user, string pass)
+        {           
+                conectionString = "Data Source="+ ip + "/"+ schema + ";User ID="+user+";Password="+pass;
         }
 
         public OracleDataReader Ejecutar(String Query) {
 
-            OracleConnection sqlConnection1 = new OracleConnection(conectionString);
-            OracleCommand cmd = new OracleCommand();
-            OracleDataReader reader;
+            OracleDataReader reader = null;
+            try
+            {
+                OracleConnection sqlConnection1 = new OracleConnection(conectionString);
+                OracleCommand cmd = new OracleCommand();
 
-            cmd.CommandText = Query;
-            cmd.CommandType = CommandType.Text;
-            cmd.Connection = sqlConnection1;
+                cmd.CommandText = Query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = sqlConnection1;
 
-            sqlConnection1.Open();
+                sqlConnection1.Open();
 
-            reader = cmd.ExecuteReader();
-            
-            sqlConnection1.Close();
+                reader = cmd.ExecuteReader();
+
+                sqlConnection1.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error ejecutando consulta ==> "+e.Message);
+            }
+                        
             return reader;
 
         }
