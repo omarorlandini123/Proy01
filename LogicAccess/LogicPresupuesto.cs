@@ -57,62 +57,6 @@ namespace LogicAccess
             return dao.getPresupuesto(codPresupuesto);
         }
 
-        /// <summary>
-        /// Obtiene el detalle de presupuesto 
-        /// </summary>
-        /// <param name="presup">Presupuesto del cual se quiere el detalle</param>
-        /// <returns></returns>
-        public DetallePresupuesto getDetallePresupuesto(Presupuesto presup)
-        {
-            DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getDetallePresupuesto(presup);
-        }
-
-        /// <summary>
-        /// Permite realizar una observacion a un Detalle de presupuesto
-        /// </summary>
-        /// <param name="detPresup">El detalle que se desea Observar. Solo es necesario el codigo y el texto de observacion</param>
-        /// <returns></returns>
-        public Boolean observarDetallePresupuesto(DetallePresupuesto detPresup)
-        {
-            DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.observarDetallePresupuesto(detPresup);
-        }
-
-        /// <summary>
-        /// Permite editar el detalle de presupuesto 
-        /// </summary>
-        /// <param name="detPresup">El nuevo detalle de presupuesto, debe tener obligatoriamente el codigo</param>
-        /// <returns></returns>
-        public Boolean editarDetallePresupuesto(DetallePresupuesto detPresup)
-        {
-            DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.editarDetallePresupuesto(detPresup);
-        }
-
-        /// <summary>
-        /// Permite insertar un nuevo detalle al presupuesto
-        /// </summary>
-        /// <param name="detPresup">El detalle de presupuesto a agregar. No se considera el código</param>
-        /// <returns></returns>
-        public Boolean insertarDetallePresupuesto(DetallePresupuesto detPresup)
-        {
-
-            DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.insertarDetallePresupuesto(detPresup);
-
-        }
-
-        /// <summary>
-        /// Permite eliminar un detalle de presupuesto específico
-        /// </summary>
-        /// <param name="detPresup">El detalle que desea eliminar. Solo es necesario el código</param>
-        /// <returns></returns>
-        public Boolean eliminarDetallePresupuesto(DetallePresupuesto detPresup)
-        {
-            DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.eliminarDetallePresupuesto(detPresup);
-        }
 
         /// <summary>
         /// Permite enviar el borrador de presupuesto al siguiente Nivel 
@@ -136,5 +80,14 @@ namespace LogicAccess
             return dao.rechazarPresupuesto(presup);
         }
 
+        public DetalleVersion getObservacionesDetalle(int idDetalle)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getObservacionesDetalle(idDetalle);
+        }
+        public bool ObservarDetalle(int idDetalle, string observacion) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.ObservarDetalle(idDetalle,observacion);
+        }
     }
 }

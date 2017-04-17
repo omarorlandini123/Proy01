@@ -56,7 +56,7 @@ function ExpandirDetalle(codDetalle) {
 
 function ExpandirObservaciones(codDetalle) {
     $(TRSELECT).hide();
-    $.get("/Presupuesto/Observaciones", { idPresupuesto: codDetalle })
+    $.get("/Presupuesto/Observaciones", { idDetalle: codDetalle })
       .done(function (data) {
           $('#DETALLEDIV_' + codDetalle).hide();
           $('#DETALLEDIV_' + codDetalle).html(data);
@@ -73,6 +73,34 @@ function OcultarDetalle(codDetalle) {
     $('#DETALLE_' + codDetalle).hide();
 }
 
+function CambiarIdResolverObs(codDetalle,desDetalle) {
+
+    $('#ObservacionInicial').html(desDetalle);
+    $('#resObservacion').val('');
+}
+
+
+var idObservarDetalle = 0;
+function CambiarIdObservarDetalle(codDetalle, desDetalle) {
+    $('#NombreItem').html(desDetalle);
+    idObservarDetalle = codDetalle;    
+    $('#btnObsAceptar').hide();
+    $('#btnObsGuardar').show();
+}
+
+function ObservarDetalle() {
+
+   
+
+    $.post("/Presupuesto/ObservarDetalle", { idDetalle: idObservarDetalle, observacion: $('#commentObservacion').val() })
+      .done(function (data) {
+          alert(data);
+          $('#btnObsGuardar').fadeOut(500, function () {
+              $('#btnObsAceptar').html(data).fadeIn(500);
+          });
+      });
+}
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
 });
+

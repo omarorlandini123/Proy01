@@ -1,29 +1,47 @@
-﻿<div class="row">
+﻿@using Entidades;
+@model DetalleVersion
+
+<div class="row">
+@if (Model != null)
+{
+    if (Model.observaciones != null)
+    {
+        if (Model.observaciones.Count > 0)
+        {
+            <div class="col-sm-12">        
+                <table class="table table-hover">            
+                    <tr>
+                        <td><b>Usuario</b></td>
+                        <td><b>Observación</b></td>
+                        <td></td>
+                    </tr>
+                    @foreach (var obs in Model.observaciones)
+                    {
+                        <tr>
+                            <td>@obs.usuarioReg.Nombres</td>
+                            <td>@obs.observacion</td>                    
+                            <td>                    
+                                @if (obs.isResuelta)
+                                {
+                                    <strong>Resuelto</strong>                    
+                                }
+                                else
+                                {                        
+                                    <button type="button" data-toggle="modal" data-target="#ModalResolverObs" onclick="CambiarIdResolverObs(@obs.idObservacion,'@obs.observacion');" class="btn btn-success btn-xs">Observación Resuelta</button>
+                                }
+                            </td>                
+                        </tr>            
+                    }
+                </table>
+            </div>
+        }
+    }
+}
+else
+{
     <div class="col-sm-12">
-        <table class="table table-hover">
-            <tr>
-                <td><b>Usuario</b></td>
-                <td colspan="2"><b>Observación</b></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Pedro del Castillo Ramos</td>
-                <td>El item tiene demasiado costo para las caracteristicas que se piden</td>
-                <td><button type="button" class="btn btn-success btn-xs">Observación Resuelta</button></td>
-            </tr>
-            <tr>
-                <td>Miguel Rodriguez Fernandez</td>
-                <td>El item falta especificar caracteristicas internas</td>
-                <td><button type="button" class="btn btn-success btn-xs">Observación Resuelta</button></td>
-            </tr>
-
-        </table>
+        <center><h5>No hay Observaciones</h5></center>
     </div>
-    <div class="col-sm-12" style="text-align: right;">
-       
-             <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">Observar</button>
-            <button type="button" value="Cancelar" onclick="OcultarDetalle('1')" class="btn btn-danger" >Cancelar</button>
-
-        
-    </div>
+}
+    
 </div>

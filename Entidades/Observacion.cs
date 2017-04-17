@@ -19,7 +19,7 @@ namespace Entidades
         {
             get
             {
-                return (usuarioRes != null && usuarioRes.idUsuario != 0);              
+                return (usuarioRes != null && usuarioRes.idUsuario != "");              
             }
         }
         

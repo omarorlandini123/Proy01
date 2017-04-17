@@ -12,5 +12,9 @@ namespace Data
         public String nombre { get; set; }
         public List<Parametro> parametros { get; set; }
 
+        public Procedimiento() {
+            parametros = new List<Parametro>();
+        }
+
     }
 }

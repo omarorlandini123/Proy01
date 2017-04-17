@@ -15,3 +15,9 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Data\bin\Debug\Oracle.Da
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Data\obj\Debug\Data.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Data\obj\Debug\Data.pdb
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\bin\Debug\Data.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\bin\Debug\Data.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\bin\Debug\Oracle.DataAccess.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.dll
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.pdb
+D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache

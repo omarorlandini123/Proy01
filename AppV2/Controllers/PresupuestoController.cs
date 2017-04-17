@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppV2.Models;
+using LogicAccess;
 namespace AppV2.Controllers
 {
     public class PresupuestoController : Controller
@@ -207,11 +208,16 @@ namespace AppV2.Controllers
             return PartialView(vista);
         }
 
-        public ActionResult Observaciones() {
-
-            return PartialView();
+        public ActionResult Observaciones(int idDetalle) {
+            LogicPresupuesto logicPresup = new LogicPresupuesto();            
+            return PartialView(logicPresup.getObservacionesDetalle(idDetalle));
         }
 
+        [HttpPost]
+        public JsonResult ObservarDetalle(int idDetalle,string observacion) {
+            LogicPresupuesto logicPresup = new LogicPresupuesto();
+            return Json(logicPresup.ObservarDetalle(idDetalle, observacion),JsonRequestBehavior.DenyGet);
+        }
 
         public ActionResult Detalle(int idVersion)
         {

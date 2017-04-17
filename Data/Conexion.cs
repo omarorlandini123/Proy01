@@ -67,22 +67,54 @@ namespace Data
 
         public DataTable EjecutarProcedimiento(Procedimiento proc) {
 
-            DataTable dtrpta = new DataTable();
-            OracleDataReader reader;
+            DataTable dtrpta = null ;
+            OracleDataReader reader ;
+            try
+            {
+                OracleConnection conn = new OracleConnection(conectionString);
+                
+                OracleCommand command = new OracleCommand(proc.nombre, conn);
+                command.CommandType = CommandType.StoredProcedure;
 
-            OracleConnection conn = new OracleConnection(conectionString);
-            conn.Open();
-            OracleCommand command = new OracleCommand(proc.nombre, conn);
-            command.CommandType = CommandType.StoredProcedure;
+                foreach (Parametro param in proc.parametros)
+                {
+                    OracleParameter paramorcl = null;
+                    if (param.tipo == Parametro.tipoIN)
+                    {
+                        paramorcl = command.Parameters.Add(param.nombreVariable, param.contenido);
+                        paramorcl.Direction = ParameterDirection.Input;
+                        paramorcl.OracleDbType = param.SQLDBTYPE;
+                    }
+                    else if (param.tipo == Parametro.tipoINOUT)
+                    {
+                        paramorcl = command.Parameters.Add(param.nombreVariable, param.contenido);
+                        paramorcl.Direction = ParameterDirection.InputOutput;
+                        paramorcl.OracleDbType = param.SQLDBTYPE;
+                        
+                    }
+                    else if (param.tipo == Parametro.tipoOUT)
+                    {
+                        paramorcl = command.Parameters.Add(param.nombreVariable, param.contenido);
+                        paramorcl.Direction = ParameterDirection.Output;
+                        paramorcl.OracleDbType = param.SQLDBTYPE;
+                    }
+                }               
+                
+                command.Parameters.Add("CUR_RPTA", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
-            foreach (Parametro param in proc.parametros) {
-                command.Parameters.Add(param.nombreVariable, param.contenido);
+                conn.Open();
+                reader = command.ExecuteReader();
+                if (reader!=null && reader.HasRows) {
+                    dtrpta = new DataTable();
+                    dtrpta.Load(reader);
+                }                
+                conn.Close();
+
             }
-
-            reader=command.ExecuteReader();
-            dtrpta.Load(reader);
-            conn.Close();           
-
+            catch (Exception s)
+            {
+                Console.WriteLine("Error ejecutando procedimiento ==> " + s.Message);
+            }
             return dtrpta;
 
         }
