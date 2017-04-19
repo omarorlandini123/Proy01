@@ -57,106 +57,126 @@ function ExpandirDetalle(codDetalle) {
 }
 
 
+function showDataObservaciones(codDetalle,data) {
+    $('#DETALLEDIV_' + codDetalle).hide();
+    $('#DETALLEDIV_' + codDetalle).html(data);
+    $('#DETALLE_' + codDetalle).show();
+    $('#DETALLEDIV_' + codDetalle).fadeOut(500, function () {
+        $('#DETALLEDIV_' + codDetalle).html(data).fadeIn(500);
+    });
+}
+
+function getImgEspera() {
+
+    return '<div class="row" style="height: 120px;"><div class="cssload-box-loading"></div></div>';
+}
+
+function getErrorMesaje() {
+    return '<div class="row" style="height: 120px;"><center><h5>Hubo un error al consultar la informacion </h5></center></div>';
+}
+
 function ExpandirObservaciones(codDetalle) {
     $(TRSELECT).hide();
     $(DIVSEl).html('');
+
+    showDataObservaciones(codDetalle, getImgEspera());
+
     $.get("/Presupuesto/Observaciones", { idDetalle: codDetalle })
       .done(function (data) {
-          $('#DETALLEDIV_' + codDetalle).hide();
-          $('#DETALLEDIV_' + codDetalle).html(data);
-          $('#DETALLE_' + codDetalle).show();
-          $('#DETALLEDIV_' + codDetalle).fadeOut(500, function () {
-              $('#DETALLEDIV_' + codDetalle).html(data).fadeIn(500);
-          });
-      });
+          showDataObservaciones(codDetalle,data);
+      })
+        .fail(function (data) {
+            showDataObservaciones(codDetalle, getErrorMesaje());
+        })
+    ;
     TRSELECT = '#DETALLE_' + codDetalle;
     DIVSEl = '#DETALLEDIV_' + codDetalle;
 }
 
-function OcultarDetalle(codDetalle) {
-    $('#DETALLE_' + codDetalle).hide();
-}
+    function OcultarDetalle(codDetalle) {
+        $('#DETALLE_' + codDetalle).hide();
+    }
 
 
 
-var idObservacionSel = 0;
-function CambiarIdResolverObs(codDetalle,desDetalle) {
-    idObservacionSel = codDetalle;
-    $('#ObservacionInicial').html(desDetalle);
-    $('#resObservacion').val('');
-}
+    var idObservacionSel = 0;
+    function CambiarIdResolverObs(codDetalle,desDetalle) {
+        idObservacionSel = codDetalle;
+        $('#ObservacionInicial').html(desDetalle);
+        $('#resObservacion').val('');
+    }
 
+    function MensajeObservarDetalle(mensaje) {
 
-var idObservarDetalle = 0;
-function CambiarIdObservarDetalle(codDetalle, desDetalle) {
-    $('#NombreItem').html(desDetalle);
-    idObservarDetalle = codDetalle;    
-    $('#btnObsAceptar').hide();
-    $('#btnObsGuardar').show();
-}
-
-function ObservarDetalle() {
-
-    if ($('#commentObservacion').val() == "") {
+        $('#contObser').html(mensaje);
         $('#alertaObser').fadeIn(2000, function () {
             $('#alertaObser').fadeOut(2000);
         });
+    }
 
-    } else {
+    function ObservarDetalle(idObservarDetalle) {
+
+        if ($('#commentObservacion').val() == "") {
+            MensajeObservarDetalle('Observación no puede estar en blanco');
+        } else {
 
 
-        $('#btnObsGuardar').fadeOut(500, function () {
-            $('#btnEspere').fadeIn(500);
+            $('#btnObsGuardar').fadeOut(500, function () {
+                $('#btnEspere').fadeIn(500);
 
-            $.post("/Presupuesto/ObservarDetalle", { idDetalle: idObservarDetalle, observacion: $('#commentObservacion').val() })
+                $.post("/Presupuesto/ObservarDetalle", { idDetalle: idObservarDetalle, observacion: $('#commentObservacion').val() })
+                      .done(function (data) {
+                          if (data) {
+                              $('#btnEspere').fadeOut(500, function () {
+                                  $('#btnObsAceptar').fadeIn(500);
+                              });
+                              MensajeObservarDetalle('Se guardó correctamente');
+                          } else {
+                              $('#btnEspere').fadeOut(500, function () {
+
+                                  $('#btnObsGuardar').fadeIn(500);
+                              });
+                              MensajeObservarDetalle('Hubo un error al guardar, intente de nuevo');
+                          }
+
+                      })
+                       .fail(function (data) {
+                           MensajeObservarDetalle('Hubo un error con el servidor');
+                       });
+            });
+
+        }
+    
+    }
+
+
+    function MostrarResolucionObs(obser, Resobs) {
+        $('#ObservacionResAnt').html(obser);
+        $('#ObserResolucion').html(Resobs);
+    }
+
+    function ResolverObservacion() {
+        $('#btnAceptarRes').fadeOut(500, function () {
+            $('#btnEspereRes').fadeIn(500);
+
+            $.post("/Presupuesto/ResolverObservacion", { idObservacion: idObservacionSel, observacion: $('#resObservacion').val() })
                   .done(function (data) {
                       if (data) {
-                          $('#btnEspere').fadeOut(500, function () {
-                              $('#btnObsAceptar').fadeIn(500);
+                          $('#btnEspereRes').fadeOut(500, function () {
+                              $('#btnObsAceptarRes').fadeIn(500);
                           });
 
                       } else {
-                          $('#btnEspere').fadeOut(500, function () {
+                          $('#btnEspereRes').fadeOut(500, function () {
 
-                              $('#btnObsGuardar').fadeIn(500);
+                              $('#btnAceptarRes').fadeIn(500);
                           });
                       }
 
                   });
         });
-
     }
-    
-}
-
-
-function MostrarResolucionObs(obser, Resobs) {
-    $('#ObservacionResAnt').html(obser);
-    $('#ObserResolucion').html(Resobs);
-}
-
-function ResolverObservacion() {
-    $('#btnAceptarRes').fadeOut(500, function () {
-        $('#btnEspereRes').fadeIn(500);
-
-        $.post("/Presupuesto/ResolverObservacion", { idObservacion: idObservacionSel, observacion: $('#resObservacion').val() })
-              .done(function (data) {
-                  if (data) {
-                      $('#btnEspereRes').fadeOut(500, function () {
-                          $('#btnObsAceptarRes').fadeIn(500);
-                      });
-
-                  } else {
-                      $('#btnEspereRes').fadeOut(500, function () {
-
-                          $('#btnAceptarRes').fadeIn(500);
-                      });
-                  }
-
-              });
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
     });
-}
-$(document).ready(function () {
-    $('[data-toggle="popover"]').popover();
-});
 

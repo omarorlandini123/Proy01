@@ -248,3 +248,5 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\AppV2\bin\es\Syst
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\AppV2\obj\Debug\AppV2.csprojResolveAssemblyReference.cache
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\AppV2\obj\Debug\AppV2.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\AppV2\obj\Debug\AppV2.pdb
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\AppV2\bin\Oracle.DataAccess.dll
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\AppV2\bin\Oracle.Web.dll

@@ -21,3 +21,4 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\bin\Debug\Or
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.pdb
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\Data\bin\Debug\Oracle.DataAccess.dll

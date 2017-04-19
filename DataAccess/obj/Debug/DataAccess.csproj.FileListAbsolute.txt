@@ -44,3 +44,5 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\DataAccess\bin\De
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\DataAccess\obj\Debug\DataAccess.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\DataAccess\obj\Debug\DataAccess.pdb
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\bin\Debug\Oracle.DataAccess.dll
+E:\Proyectos\Presupuesto Sima\Aplicativo\Proy01\DataAccess\bin\Debug\Oracle.Web.dll

@@ -193,12 +193,27 @@ namespace DataAccess
             return detalle;
         }
 
-        public bool ObservarDetalle(int idDetalle, string observacion)
+
+
+
+
+        /// <summary>
+        /// Registra una observación acerca del producto agregado en el presupuesto
+        /// </summary>
+        /// <param name="idDetalle"></param>
+        /// <param name="observacion"></param>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public bool ObservarDetalle(int idDetalle, string observacion, string usuario)
         {
+            /*
+             Falta agregar el VAR_USUREG en el procedimiento OBSERVAR_DETALLE
+            */
             Conexion con = new Conexion();
             Procedimiento proc = new Procedimiento() { nombre = "OBSERVAR_DETALLE" };
             proc.parametros.Add(new Parametro("VAR_ID_DETALLE", idDetalle, OracleDbType.Int32, Parametro.tipoIN));
             proc.parametros.Add(new Parametro("VAR_OBSERVACION", observacion, OracleDbType.Varchar2, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_USEREG", observacion, OracleDbType.Varchar2, Parametro.tipoIN));
             DataTable dt = con.EjecutarProcedimiento(proc);
 
             bool rpta = false; 
@@ -212,6 +227,7 @@ namespace DataAccess
                     }
                     catch (Exception s)
                     {
+                        Console.WriteLine("Error En ObservarDetalle ==> " + s.Message);
                         rpta = false;
                     }                                       
                 }
@@ -219,12 +235,22 @@ namespace DataAccess
             return rpta;
         }
 
-        public bool ResolverObservacion(int idObservacion, string observacion)
+        /// <summary>
+        /// Registra el comentario de la resolución de observación
+        /// </summary>
+        /// <param name="idObservacion"></param>
+        /// <param name="observacion"></param>
+        /// <returns>True, si se ha registrado la resolución </returns>
+        public bool ResolverObservacion(int idObservacion, string observacion,string usuario)
         {
+            /*
+              Falta agregar el VAR_USUREG en el procedimiento RESOLVER_OBS_DET
+             */
             Conexion con = new Conexion();
             Procedimiento proc = new Procedimiento() { nombre = "RESOLVER_OBS_DET" };
             proc.parametros.Add(new Parametro("VAR_ID_OBS", idObservacion, OracleDbType.Int32, Parametro.tipoIN));
             proc.parametros.Add(new Parametro("VAR_OBSERVACION", observacion, OracleDbType.Varchar2, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_USUREG", usuario, OracleDbType.Varchar2, Parametro.tipoIN));
             DataTable dt = con.EjecutarProcedimiento(proc);
 
             bool rpta = false;
@@ -238,6 +264,7 @@ namespace DataAccess
                     }
                     catch (Exception s)
                     {
+                        Console.WriteLine("Error En Resolver Observacion ==> " + s.Message);
                         rpta = false;
                     }
                 }

@@ -26,7 +26,7 @@ namespace Data
             }
             catch (Exception es)
             {
-                Console.WriteLine("No hay cadena de conexíon");
+                Console.WriteLine("No hay cadena de conexíon "+es.Message);
             }
         }
 
@@ -114,6 +114,7 @@ namespace Data
             catch (Exception s)
             {
                 Console.WriteLine("Error ejecutando procedimiento ==> " + s.Message);
+                dtrpta = null;
             }
             return dtrpta;
 
