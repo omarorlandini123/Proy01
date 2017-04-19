@@ -219,6 +219,13 @@ namespace AppV2.Controllers
             return Json(logicPresup.ObservarDetalle(idDetalle, observacion),JsonRequestBehavior.DenyGet);
         }
 
+        [HttpPost]
+        public JsonResult ResolverObservacion(int idObservacion, string observacion)
+        {
+            LogicPresupuesto logicPresup = new LogicPresupuesto();
+            return Json(logicPresup.ResolverObservacion(idObservacion, observacion), JsonRequestBehavior.DenyGet);
+        }
+
         public ActionResult Detalle(int idVersion)
         {
             ViewModelDetallePresup vista = new ViewModelDetallePresup();

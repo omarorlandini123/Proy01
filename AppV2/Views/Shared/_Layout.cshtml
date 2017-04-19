@@ -133,9 +133,18 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" onclick="ObservarDetalle()" id="btnObsGuardar">Guardar</button>
-                    <button type="button" class="btn btn-default" id="btnEspere" style="display:none;">Espere ...</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptar">Aceptar</button>
+                    <div class="col-sm-8">
+                        <center id="alertaObser" style="display:none; color:indianred;"><h4> <strong>Observación no puede estar en blanco</strong></h4></center>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <button type="button" class="btn btn-default" onclick="ObservarDetalle()" id="btnObsGuardar">Guardar</button>
+                        <button type="button" class="btn btn-default" id="btnEspere" style="display:none;">Espere ...</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptar">Aceptar</button>
+                    </div>
+                   
+                    
+
                 </div>
             </div>
 
@@ -165,7 +174,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="ResolverObservacion()" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+                    <button type="button" onclick="ResolverObservacion()" id="btnAceptarRes" class="btn btn-default" data-dismiss="modal">Resolver</button>
+                    <button type="button" class="btn btn-default" id="btnEspereRes" style="display:none;">Espere ...</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptarRes">Aceptar</button>
+
                 </div>
             </div>
 

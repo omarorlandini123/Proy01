@@ -11,6 +11,7 @@ namespace Entidades
         public int idObservacion { get; set; }
         public DetalleVersion detalle { get; set; }
         public string observacion { get; set; }
+        public string observacionRes { get; set; }
         public Usuario usuarioReg { get; set; }
         public DateTime fechaReg { get; set; }
         public Usuario usuarioRes { get; set; }

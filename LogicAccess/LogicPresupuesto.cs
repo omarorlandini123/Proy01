@@ -89,5 +89,11 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.ObservarDetalle(idDetalle,observacion);
         }
+
+        public bool ResolverObservacion(int idObservacion, string observacion) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.ResolverObservacion(idObservacion, observacion);
+        }
+
     }
 }

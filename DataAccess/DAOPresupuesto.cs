@@ -160,7 +160,15 @@ namespace DataAccess
                         obs.usuarioReg.ApellidoPaterno = "";
                         obs.usuarioReg.ApellidoMaterno = "";
                     }
-
+                    try
+                    {
+                        obs.observacionRes = fila["OBS_RES"].ToString();
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en getObservacionesDetalle ==> " + s.Message);
+                        obs.observacionRes = "No se Obtuvo resolución de observación";
+                    }
                     try
                     {
                         obs.usuarioRes = new Usuario();
@@ -190,7 +198,7 @@ namespace DataAccess
             Conexion con = new Conexion();
             Procedimiento proc = new Procedimiento() { nombre = "OBSERVAR_DETALLE" };
             proc.parametros.Add(new Parametro("VAR_ID_DETALLE", idDetalle, OracleDbType.Int32, Parametro.tipoIN));
-            proc.parametros.Add(new Parametro("VAR_OBSERVACION", idDetalle, OracleDbType.Int32, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_OBSERVACION", observacion, OracleDbType.Varchar2, Parametro.tipoIN));
             DataTable dt = con.EjecutarProcedimiento(proc);
 
             bool rpta = false; 
@@ -200,12 +208,38 @@ namespace DataAccess
                 {
                     try
                     {
-                        rpta = bool.Parse(fila["INSERTO_OBS"].ToString());
+                        rpta = fila["INSERTO_OBS"].ToString().Contains("1");
                     }
                     catch (Exception s)
                     {
                         rpta = false;
                     }                                       
+                }
+            }
+            return rpta;
+        }
+
+        public bool ResolverObservacion(int idObservacion, string observacion)
+        {
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "RESOLVER_OBS_DET" };
+            proc.parametros.Add(new Parametro("VAR_ID_OBS", idObservacion, OracleDbType.Int32, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_OBSERVACION", observacion, OracleDbType.Varchar2, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            bool rpta = false;
+            if (dt != null)
+            {
+                foreach (DataRow fila in dt.Rows)
+                {
+                    try
+                    {
+                        rpta = fila["ACT_OBS"].ToString().Contains("1");
+                    }
+                    catch (Exception s)
+                    {
+                        rpta = false;
+                    }
                 }
             }
             return rpta;

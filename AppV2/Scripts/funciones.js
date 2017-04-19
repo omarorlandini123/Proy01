@@ -16,6 +16,7 @@ function listarPorArea(sede,anio) {
 
 var AreaSelect = '';
 var TRSELECT = '';
+var DIVSEl = '';
 
 
 function ListarTipos(codArea) {
@@ -41,6 +42,7 @@ function listarVersiones(area, sede, anio) {
 
 function ExpandirDetalle(codDetalle) {
     $(TRSELECT).hide();
+    $(DIVSEl).html('');
     $.get("/Presupuesto/Edit", { idPresupuesto: codDetalle})
       .done(function (data) {
           $('#DETALLEDIV_' + codDetalle).hide();
@@ -51,11 +53,13 @@ function ExpandirDetalle(codDetalle) {
           });
       });
     TRSELECT = '#DETALLE_' + codDetalle;
+    DIVSEl = '#DETALLEDIV_' + codDetalle;
 }
 
 
 function ExpandirObservaciones(codDetalle) {
     $(TRSELECT).hide();
+    $(DIVSEl).html('');
     $.get("/Presupuesto/Observaciones", { idDetalle: codDetalle })
       .done(function (data) {
           $('#DETALLEDIV_' + codDetalle).hide();
@@ -66,15 +70,18 @@ function ExpandirObservaciones(codDetalle) {
           });
       });
     TRSELECT = '#DETALLE_' + codDetalle;
-
+    DIVSEl = '#DETALLEDIV_' + codDetalle;
 }
 
 function OcultarDetalle(codDetalle) {
     $('#DETALLE_' + codDetalle).hide();
 }
 
-function CambiarIdResolverObs(codDetalle,desDetalle) {
 
+
+var idObservacionSel = 0;
+function CambiarIdResolverObs(codDetalle,desDetalle) {
+    idObservacionSel = codDetalle;
     $('#ObservacionInicial').html(desDetalle);
     $('#resObservacion').val('');
 }
@@ -90,15 +97,64 @@ function CambiarIdObservarDetalle(codDetalle, desDetalle) {
 
 function ObservarDetalle() {
 
-   
+    if ($('#commentObservacion').val() == "") {
+        $('#alertaObser').fadeIn(2000, function () {
+            $('#alertaObser').fadeOut(2000);
+        });
 
-    $.post("/Presupuesto/ObservarDetalle", { idDetalle: idObservarDetalle, observacion: $('#commentObservacion').val() })
-      .done(function (data) {
-          alert(data);
-          $('#btnObsGuardar').fadeOut(500, function () {
-              $('#btnObsAceptar').html(data).fadeIn(500);
-          });
-      });
+    } else {
+
+
+        $('#btnObsGuardar').fadeOut(500, function () {
+            $('#btnEspere').fadeIn(500);
+
+            $.post("/Presupuesto/ObservarDetalle", { idDetalle: idObservarDetalle, observacion: $('#commentObservacion').val() })
+                  .done(function (data) {
+                      if (data) {
+                          $('#btnEspere').fadeOut(500, function () {
+                              $('#btnObsAceptar').fadeIn(500);
+                          });
+
+                      } else {
+                          $('#btnEspere').fadeOut(500, function () {
+
+                              $('#btnObsGuardar').fadeIn(500);
+                          });
+                      }
+
+                  });
+        });
+
+    }
+    
+}
+
+
+function MostrarResolucionObs(obser, Resobs) {
+    $('#ObservacionResAnt').html(obser);
+    $('#ObserResolucion').html(Resobs);
+}
+
+function ResolverObservacion() {
+    $('#btnAceptarRes').fadeOut(500, function () {
+        $('#btnEspereRes').fadeIn(500);
+
+        $.post("/Presupuesto/ResolverObservacion", { idObservacion: idObservacionSel, observacion: $('#resObservacion').val() })
+              .done(function (data) {
+                  if (data) {
+                      $('#btnEspereRes').fadeOut(500, function () {
+                          $('#btnObsAceptarRes').fadeIn(500);
+                      });
+
+                  } else {
+                      $('#btnEspereRes').fadeOut(500, function () {
+
+                          $('#btnAceptarRes').fadeIn(500);
+                      });
+                  }
+
+              });
+    });
 }
 $(document).ready(function () {
     $('[data-toggle="popover"]').popover();
