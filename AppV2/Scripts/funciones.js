@@ -1,4 +1,28 @@
-function mostrarPresupuestosPorSede(){
+function msgLogOut() {
+    $('#idContenidoModal').html(EsperaModal());
+    $.get("../Login/Logout", { idUsuario: 0 })
+      .done(function (data) {
+          $('#idContenidoModal').fadeOut(500, function () {
+              $('#idContenidoModal').html(data).fadeIn(500);
+          });
+      })
+    .fail(function (data) {
+        $('#idContenidoModal').fadeOut(500, function () {
+            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+        });
+    })
+    ;
+
+}
+
+function LogOut() {
+    $.post("../Login/Logout", { idUsuario: 0 })
+    .done(function (data) {
+        location.href = "../Login";
+    });
+    
+}
+function mostrarPresupuestosPorSede() {
   var jqxhr = $.post( "Presupuesto/PorSede", function(data) {
     $('#contenido-principal').html(data);
   });
@@ -66,6 +90,27 @@ function showDataObservaciones(codDetalle,data) {
     });
 }
 
+function EsperaModal() {
+    var retstring='<div class="modal-content">';
+    retstring=retstring+'<div class="modal-body">';
+    retstring=retstring+'<div class="form-group">';
+    retstring=retstring+'<center>';
+    retstring = retstring + getImgEspera();
+    retstring = retstring + '</center><br/><center><h4>Espere Por Favor</h4></center></div></div></div>';
+    return retstring;
+}
+
+function EsperaModalFAIL() {
+
+    var retstring = '<div class="modal-content">';
+    retstring = retstring + '<div class="modal-body">';
+    retstring = retstring + '<div class="form-group">';
+    retstring = retstring + '<center>';
+    retstring = retstring + '<h3>Hubo un error solicitando los datos</h3>';
+    retstring = retstring + '</center></div></div></div>';
+    return retstring;
+}
+
 function getImgEspera() {
 
     return '<div class="row" style="height: 120px;"><div class="cssload-box-loading"></div></div>';
@@ -75,7 +120,7 @@ function getErrorMesaje() {
     return '<div class="row" style="height: 120px;"><center><h5>Hubo un error al consultar la informacion </h5></center></div>';
 }
 
-function ExpandirObservaciones(codDetalle) {
+function ExpandirObservaciones(codDetalle){
     $(TRSELECT).hide();
     $(DIVSEl).html('');
 

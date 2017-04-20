@@ -95,5 +95,10 @@ namespace LogicAccess
             return dao.ResolverObservacion(idObservacion, observacion,"");
         }
 
+        public List<Presupuesto> getPresupuestos(int idSede) {
+
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestos(idSede);
+        }
     }
 }

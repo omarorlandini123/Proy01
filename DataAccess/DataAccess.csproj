@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOAcceso.cs" />
     <Compile Include="DAOMaterial.cs" />
     <Compile Include="DAOPresupuesto.cs" />
     <Compile Include="DAOSede.cs" />

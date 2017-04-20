@@ -4,6 +4,7 @@
 <createdTime>2017-04-17 04:01:08 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <ordsAlias>table_30</ordsAlias>
+<useDDLTransformationScript>true</useDDLTransformationScript>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
@@ -87,6 +88,18 @@
 <use>1</use>
 <logicalDatatype>LOGDT008</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OBS_RES" id="DBB34758-CF2D-BFE7-FB92-BBA24E3FA714">
+<createdBy>oorlandini</createdBy>
+<createdTime>2017-04-20 15:48:55 UTC</createdTime>
+<ownerDesignName>modelo back</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>500</dataTypeSize>
+<ownDataTypeParameters>500,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>

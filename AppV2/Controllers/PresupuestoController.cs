@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AppV2.Models;
 using LogicAccess;
+using Entidades;
 namespace AppV2.Controllers
 {
     public class PresupuestoController : Controller
@@ -14,31 +15,12 @@ namespace AppV2.Controllers
         {
             return View();
         }
-       
+
 
         public ActionResult PorSede() {
-            ViewModelPresupPorSede vista = new ViewModelPresupPorSede();
-            ViewPresupuestoGeneral presupGeneral = new ViewPresupuestoGeneral();
-            presupGeneral.anio="2015";
-            presupGeneral.Desde = "01/01/2015";
-            presupGeneral.Hasta = "31/01/2015";
-            presupGeneral.fechaRegistro = "2/01/2015";
-            presupGeneral.AprobadoPor = "COD_USUARIO";
-            presupGeneral.idSede = "1";
-
-            ViewPresupuestoGeneral presupGeneral2 = new ViewPresupuestoGeneral();
-            presupGeneral2.anio = "2016";
-            presupGeneral2.Desde = "01/01/2016";
-            presupGeneral2.Hasta = "31/01/2016";
-            presupGeneral2.fechaRegistro = "2/01/2016";
-            presupGeneral2.AprobadoPor = "COD_USUARIO2";
-            presupGeneral2.idSede = "1";
-
-            vista.presupuestosPorAnio = new List<ViewPresupuestoGeneral>();
-            vista.presupuestosPorAnio.Add(presupGeneral);
-            vista.presupuestosPorAnio.Add(presupGeneral2);
-
-            return View(vista);
+            LogicPresupuesto logic = new LogicPresupuesto();
+            
+            return View(logic.getPresupuestos(((Usuario)Session["usuario"]).area.sede.codSede));
         }
 
         public ActionResult PorArea(int idSede,int anio) {

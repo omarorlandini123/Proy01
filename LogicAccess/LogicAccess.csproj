@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicAcceso.cs" />
     <Compile Include="LogicMaterial.cs" />
     <Compile Include="LogicPresupuesto.cs" />
     <Compile Include="LogicSede.cs" />

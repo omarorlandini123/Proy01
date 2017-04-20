@@ -49,6 +49,8 @@
                         Sistema de Presupuestos
                     </a>
                 </div>
+                @if (Session["idUsuario"] != null)
+                {
                 <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
                     @*<ul class="nav navbar-nav">
                         <li class="active"><a onclick="mostrarPresupuestosPorSede();" href="#">Presupuesto</a></li>
@@ -101,10 +103,12 @@
                             </ul>
                         </li>
                         <li style="margin-left: 10px;">
-                            <a href="../navbar-fixed-top/">Cerrar Sesión</a>
+                        
+                            <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgLogOut()">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
+                }
             </div><!--/.container-fluid -->
         </nav>
 
@@ -116,7 +120,7 @@
 
     </div>
 
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="ModalGeneral" role="dialog">
         <div class="modal-dialog" id="idContenidoModal">
 
             <!-- Modal content-->

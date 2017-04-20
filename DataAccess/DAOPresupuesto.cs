@@ -273,5 +273,20 @@ namespace DataAccess
         }
 
 
+        public List<Presupuesto> getPresupuestos(int idSede) {
+            List<Presupuesto> listaRpta = new List<Presupuesto>();
+            Presupuesto presup1 = new Presupuesto();
+            presup1.idPresupuesto = 1;
+            presup1.nombrePresupuesto = "Presupuesto 2017 - I";
+            presup1.fechaValIni = new DateTime(2017,1,1);
+            presup1.fechaValFin = new DateTime(2017, 12, 31);
+            presup1.fechaReg = new DateTime(2016, 12, 1);
+            presup1.estadoActual = Aprobacion.estados.aprobado;
+            presup1.usuarioReg = new Usuario() { idUsuario = "consultor3" };
+            return listaRpta;
+
+        }
+
+
     }
 }
