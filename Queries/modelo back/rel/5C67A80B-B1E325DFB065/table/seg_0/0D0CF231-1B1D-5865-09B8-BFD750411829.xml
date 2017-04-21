@@ -31,18 +31,7 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="ORDEN" id="77F31BBD-C3A6-B815-C1C8-92EE6DAA3110">
-<createdBy>JHOSELYN</createdBy>
-<createdTime>2017-04-16 23:29:52 UTC</createdTime>
-<ownerDesignName>modelo back</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="N_APORB_USR_REG" id="633EE72E-1F8C-2968-09DB-2E9BA8B87EF2">
+<Column name="USR_REG" id="633EE72E-1F8C-2968-09DB-2E9BA8B87EF2">
 <createdBy>JHOSELYN</createdBy>
 <createdTime>2017-04-16 23:29:52 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
@@ -54,7 +43,7 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="FECH_VIGENCIA_INI" id="9263B4AD-B3B6-95FD-18E2-535A3877AD26">
+<Column name="FECH_REG" id="9263B4AD-B3B6-95FD-18E2-535A3877AD26">
 <createdBy>JHOSELYN</createdBy>
 <createdTime>2017-04-16 23:29:52 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
@@ -65,25 +54,15 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="FECH_VIGENCIA_FIN" id="50185234-B0E0-EF53-6EBD-5FFA565B99DD">
-<createdBy>JHOSELYN</createdBy>
-<createdTime>2017-04-16 23:29:52 UTC</createdTime>
+<Column name="ESTADO" id="CBE1240C-C364-D369-1AED-21ACD4E577E3">
+<createdBy>oorlandini</createdBy>
+<createdTime>2017-04-20 21:20:40 UTC</createdTime>
+<commentInRDBMS>1: ACTIVO, 0 : INACTIVO</commentInRDBMS>
 <ownerDesignName>modelo back</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-<autoIncrementCycle>false</autoIncrementCycle>
-</Column>
-<Column name="N_APROB_FECHA_REG" id="ED569363-F0AF-E37C-BB0F-F48C1733D95F">
-<createdBy>JHOSELYN</createdBy>
-<createdTime>2017-04-16 23:29:52 UTC</createdTime>
-<ownerDesignName>modelo back</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
+<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>

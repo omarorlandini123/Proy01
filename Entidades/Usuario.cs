@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations;
 namespace Entidades
 {
     public class Usuario
     {
         public string idUsuario { get; set; }
+        [Display(Name = "Usuario")]
+        [Required]
+        [DataType(DataType.Text)]
         public String usuario { get; set; }
+        [Display(Name = "Contraseña")]
+        [Required]
+        [DataType(DataType.Password)]
+        public String password { get; set; }
         public String Nombres { get; set; }
         public String ApellidoPaterno { get; set; }
         public String ApellidoMaterno { get; set; }
