@@ -4,6 +4,7 @@
 <createdTime>2017-04-20 21:57:40 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <ordsAlias>table_24</ordsAlias>
+<useDDLTransformationScript>true</useDDLTransformationScript>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
@@ -36,7 +37,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="8F57AF8E-92FF-9AD3-897C-1EA8606D3012" name="T_PERFIL_NIVEL_APROB_T_PERFILES_FK">
+<ind_PK_UK id="8F57AF8E-92FF-9AD3-897C-1EA8606D3012" name="T_PRF_NIVEL_APROB_T_PRFLS_FK">
 <createdBy>oorlandini</createdBy>
 <createdTime>2017-04-20 22:00:24 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
@@ -46,7 +47,7 @@
 <colUsage columnID="6216AB45-8918-CB6C-64B2-39C7974FEA28"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="E4D3A32F-553E-4814-F9A5-A34C2F717A9B" name="T_PERFIL_NIVEL_APROB_T_NIVEL_APROB_FK">
+<ind_PK_UK id="E4D3A32F-553E-4814-F9A5-A34C2F717A9B" name="T_PRF_NVL_APROB_T_NVL_APROB_FK">
 <createdBy>oorlandini</createdBy>
 <createdTime>2017-04-20 22:00:38 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
