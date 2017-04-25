@@ -31,6 +31,26 @@ function msgAprobar(idPresupuesto) {
 
 }
 
+function verAreasDisponibles(idPresup) {
+
+    $('#PresupPorArea').html(getImgEspera());
+    $.post("../Presupuesto/PorArea", { idPresupuesto: idPresup })
+    .done(function (data) {
+        $('#PresupPorArea').fadeOut(1000, function () {
+            $('#PresupPorArea').html(data).fadeIn(1000);
+        });
+        
+    })
+    .fail(function (data) {
+        $('#PresupPorArea').fadeOut(1000, function () {
+            $('#PresupPorArea').html(getErrorMesaje()).fadeIn(1000);
+        });
+        
+    });
+
+
+}
+
 function AprobarPresupuesto(idPresupuesto) {
 
     $('#idContenidoModal').html(EsperaModal());

@@ -27,8 +27,6 @@ namespace DataAccess
         public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario) {
 
             Presupuesto rpta = new Presupuesto();
-            
-
             return rpta;
         }
 
@@ -360,8 +358,7 @@ namespace DataAccess
             Procedimiento proc = new Procedimiento() { nombre = "GET_PRESUP_POR_SEDE" };
             proc.parametros.Add(new Parametro("VAR_ID_SEDE", idSede, OracleDbType.Int32, Parametro.tipoIN));
             DataTable dt = con.EjecutarProcedimiento(proc);
-
-            bool rpta = false;
+            
             if (dt != null)
             {
                 if (dt.Rows.Count > 0)
