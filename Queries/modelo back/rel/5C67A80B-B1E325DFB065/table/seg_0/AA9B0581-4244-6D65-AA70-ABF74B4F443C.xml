@@ -1,17 +1,15 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AA9B0581-4244-6D65-AA70-ABF74B4F443C" name="T_PERFIL_NIVEL_APROB">
-<createdBy>oorlandini</createdBy>
-<createdTime>2017-04-20 21:57:40 UTC</createdTime>
+<createdBy>Omar</createdBy>
+<createdTime>2017-04-25 17:06:38 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
-<ordsAlias>table_24</ordsAlias>
-<useDDLTransformationScript>true</useDDLTransformationScript>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="ID_PERFIL" id="6216AB45-8918-CB6C-64B2-39C7974FEA28">
-<createdBy>oorlandini</createdBy>
-<createdTime>2017-04-20 21:59:57 UTC</createdTime>
+<Column name="ID_PERFIL" id="CF9450CA-F942-DBC6-2DEF-02D547C537E8">
+<createdBy>Omar</createdBy>
+<createdTime>2017-04-25 17:08:26 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -19,12 +17,12 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="16E33E02-548A-A2D4-E6A4-B330FE2755F4" referredColumn="C4D31D14-3E3B-C2B7-7195-633BEB7C1973"/>
+<colAssociation fkAssociation="475852B9-DB75-15D7-28B9-B6EFA804833E" referredColumn="C4D31D14-3E3B-C2B7-7195-633BEB7C1973"/>
 </associations>
 </Column>
-<Column name="ID_NIVEL_APROB" id="472DC07E-862E-C36D-CBF6-2E633D0C1B08">
-<createdBy>oorlandini</createdBy>
-<createdTime>2017-04-20 21:59:57 UTC</createdTime>
+<Column name="ID_NIVEL_APROB" id="27338CDD-D174-AF74-5BBD-B7EC8436EA37">
+<createdBy>Omar</createdBy>
+<createdTime>2017-04-25 17:08:38 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
@@ -32,29 +30,29 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
-<colAssociation fkAssociation="E6DB5DEF-D542-0477-B6AF-1C6AFC3985A8" referredColumn="AC19C15D-EC05-B490-3C0A-B79164D35895"/>
+<colAssociation fkAssociation="B0C3B10A-F9C4-AC7D-A58A-4B6BF7E81829" referredColumn="AC19C15D-EC05-B490-3C0A-B79164D35895"/>
 </associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="8F57AF8E-92FF-9AD3-897C-1EA8606D3012" name="T_PRF_NIVEL_APROB_T_PRFLS_FK">
-<createdBy>oorlandini</createdBy>
-<createdTime>2017-04-20 22:00:24 UTC</createdTime>
+<ind_PK_UK id="2C9EA648-7C71-6C6B-A5F5-2A3D198FD5B0" name="T_PERFIL_NIVEL_PERFILES_FK">
+<createdBy>Omar</createdBy>
+<createdTime>2017-04-25 17:09:10 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="6216AB45-8918-CB6C-64B2-39C7974FEA28"/>
+<colUsage columnID="CF9450CA-F942-DBC6-2DEF-02D547C537E8"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="E4D3A32F-553E-4814-F9A5-A34C2F717A9B" name="T_PRF_NVL_APROB_T_NVL_APROB_FK">
-<createdBy>oorlandini</createdBy>
-<createdTime>2017-04-20 22:00:38 UTC</createdTime>
+<ind_PK_UK id="CDE81973-DCB7-C5AB-C44C-B6F8D1C6ED87" name="T_PERFIL_NIVEL_APROB_FK">
+<createdBy>Omar</createdBy>
+<createdTime>2017-04-25 17:09:29 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
 <indexState>Foreign Key</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="472DC07E-862E-C36D-CBF6-2E633D0C1B08"/>
+<colUsage columnID="27338CDD-D174-AF74-5BBD-B7EC8436EA37"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

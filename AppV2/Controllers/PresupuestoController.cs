@@ -23,43 +23,11 @@ namespace AppV2.Controllers
             return View(logic.getPresupuestosPorSede(((Usuario)Session["usuario"]).area.sede.codSede));
         }
 
-        public ActionResult PresupArea(int id, int sede)
+        public ActionResult PresupArea(int idPresupuesto,int idArea)
         {
-            ViewModelPresupArea vista = new ViewModelPresupArea();
-
-            List<ViewPresupuestoArea> lista = new List<ViewPresupuestoArea>();
-
-            ViewPresupuestoArea presupArea = new ViewPresupuestoArea();
-            presupArea.codArea = "S-555";
-            presupArea.nombreArea = "Sistemas";
-            presupArea.desde = "01/01/2015";
-            presupArea.hasta = "31/12/2015";
-            presupArea.fecReg = "05/01/2015";
-            presupArea.usu_apro = "Juan Aguilar";
-            presupArea.montoTotal = "45 670";
-            presupArea.idArea = 1;
-            presupArea.idSede = 1;
-            presupArea.anio = 2015;
-
-            ViewPresupuestoArea presupArea2 = new ViewPresupuestoArea();
-            presupArea2.codArea = "S-556";
-            presupArea2.nombreArea = "Sistemas";
-            presupArea2.desde = "01/01/2016";
-            presupArea2.hasta = "31/12/2016";
-            presupArea2.fecReg = "07/02/2016";
-            presupArea2.usu_apro = "Marcos Díaz";
-            presupArea2.montoTotal = "47 879";
-
-            presupArea2.idArea = 1;
-            presupArea2.idSede = 1;
-            presupArea2.anio = 2016;
-
-            lista.Add(presupArea2);
-            lista.Add(presupArea);
-
-            vista.nombreArea = "Sistemas";
-            vista.presupuestosArea = lista;
-            return View(vista);
+            LogicPresupuesto logic = new LogicPresupuesto();
+            //logic.getPresupuestosPorArea();
+            return View();
         }
 
 
@@ -180,7 +148,7 @@ namespace AppV2.Controllers
         public ActionResult PorArea(int idPresupuesto) {
             LogicPresupuesto logicpresup = new LogicPresupuesto();
             Usuario user = (Usuario)Session["usuario"];
-            Presupuesto rpta= logicpresup.getPresupuestosPorArea(idPresupuesto,user.usuario);
+            Presupuesto rpta= logicpresup.getPresupuestosPorArea(idPresupuesto, user.usuario);
             return PartialView(rpta);
         }
 

@@ -14,7 +14,7 @@
             <div href="#" class="list-group-item @item.estadoActualString ">
                 <div class="row">
                     <div class="col-sm-6 excesodiv">
-                        <a href="#" onclick="verAreasDisponibles()"><h4 class="list-group-item-heading">@item.nombrePresupuesto</h4></a>
+                        <a href="#" onclick="verAreasDisponibles(@item.idPresupuesto)"><h4 class="list-group-item-heading">@item.nombrePresupuesto</h4></a>
                     </div>
                     <div class="col-sm-2">
                         <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgAprobar(@item.idPresupuesto)" ><h5 class="list-group-item-heading">Aprobar</h5></a>

@@ -11,7 +11,7 @@ namespace AppV2.Tests
         [TestMethod]
         public void TestConexionBasica()
         {
-            Conexion con = new Conexion("192.168.237.10","orcl","SIMAUSR","1234");
+            Conexion con = new Conexion("192.168.1.10","orcl","SIMAUSR","1234");
             Assert.IsNotNull(con);
             DataTable reader = con.Ejecutar("select table_name from user_tables order by table_name");
             Assert.IsNotNull(reader);
