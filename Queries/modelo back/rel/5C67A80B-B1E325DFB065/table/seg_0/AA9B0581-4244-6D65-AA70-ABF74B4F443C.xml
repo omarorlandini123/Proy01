@@ -37,7 +37,11 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<<<<<<< HEAD
 <ind_PK_UK id="8F57AF8E-92FF-9AD3-897C-1EA8606D3012" name="T_PERFIL_T_PERFILES_FK">
+=======
+<ind_PK_UK id="8F57AF8E-92FF-9AD3-897C-1EA8606D3012" name="T_PRF_NIVEL_APROB_T_PRFLS_FK">
+>>>>>>> origin/Queries
 <createdBy>oorlandini</createdBy>
 <createdTime>2017-04-20 22:00:24 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
@@ -47,7 +51,11 @@
 <colUsage columnID="6216AB45-8918-CB6C-64B2-39C7974FEA28"/>
 </indexColumnUsage>
 </ind_PK_UK>
+<<<<<<< HEAD
 <ind_PK_UK id="E4D3A32F-553E-4814-F9A5-A34C2F717A9B" name="T_PERFIL_T_NIVEL_APROB_FK">
+=======
+<ind_PK_UK id="E4D3A32F-553E-4814-F9A5-A34C2F717A9B" name="T_PRF_NVL_APROB_T_NVL_APROB_FK">
+>>>>>>> origin/Queries
 <createdBy>oorlandini</createdBy>
 <createdTime>2017-04-20 22:00:38 UTC</createdTime>
 <ownerDesignName>modelo back</ownerDesignName>
