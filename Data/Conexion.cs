@@ -59,6 +59,7 @@ namespace Data
             catch (Exception e)
             {
                 Console.WriteLine("Error ejecutando consulta ==> " + e.Message);
+                dtrpta = null;
             }
 
             return dtrpta;

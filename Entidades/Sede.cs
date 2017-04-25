@@ -13,8 +13,11 @@ namespace Entidades
         public String desSede { get; set; }
         public List<Area> areas { get; set; }
 
+        public List<Presupuesto> presupuestos {get;set;}
+
         public Sede() {
             areas = new List<Area>();
+            presupuestos = new List<Presupuesto>();
         }
 
     }

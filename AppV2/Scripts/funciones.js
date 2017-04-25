@@ -10,11 +10,54 @@ function msgLogOut() {
         $('#idContenidoModal').fadeOut(500, function () {
             $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
         });
-    })
-    ;
+    });
 
 }
 
+function msgAprobar(idPresupuesto) {
+
+    $('#idContenidoModal').html(EsperaModal());
+    $.get("../Presupuesto/AprobarPresup", { id: idPresupuesto })
+      .done(function (data) {
+          $('#idContenidoModal').fadeOut(500, function () {
+              $('#idContenidoModal').html(data).fadeIn(500);
+          });
+      })
+    .fail(function (data) {
+        $('#idContenidoModal').fadeOut(500, function () {
+            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+        });
+    });
+
+}
+
+function AprobarPresupuesto(idPresupuesto) {
+
+    $('#idContenidoModal').html(EsperaModal());
+
+    $.post("../Presupuesto/AprobarPresup", {
+        id: idPresupuesto, observacion: $('#observacionNuevoEstado').val(), estado: $('#nuevoEstado').val()
+    })
+    .done(function (data) {
+        if (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalPERS('Se cambiado el estado con éxito')).fadeIn(500);
+            });
+        } else {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalPERS('No se ha podido cambiar el estado')).fadeIn(500);
+            });
+        }
+    })
+        .fail(function (data) {
+        $('#idContenidoModal').fadeOut(500, function () {
+            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+        });
+    });
+
+
+
+}
 function LogOut() {
     $.post("../Login/Logout", { idUsuario: 0 })
     .done(function (data) {
@@ -98,6 +141,18 @@ function EsperaModal() {
     retstring = retstring + getImgEspera();
     retstring = retstring + '</center><br/><center><h4>Espere Por Favor</h4></center></div></div></div>';
     return retstring;
+}
+
+function EsperaModalPERS(mensage) {
+
+    var retstring = '<div class="modal-content">';
+    retstring = retstring + '<div class="modal-body">';
+    retstring = retstring + '<div class="form-group">';
+    retstring = retstring + '<center>';
+    retstring = retstring + '<h3>' + mensage + '</h3>';
+    retstring = retstring + '</center></div></div></div>';
+    return retstring;
+
 }
 
 function EsperaModalFAIL() {

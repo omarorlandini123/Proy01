@@ -194,46 +194,24 @@ ALTER TABLE t_version ADD CONSTRAINT t_version_t_presup_tipo_fk FOREIGN KEY ( id
 ALTER TABLE t_observaciones ADD CONSTRAINT table_30_t_dtl_vsn_fk FOREIGN KEY ( id_det )
     REFERENCES t_det_version ( id_detalle );
 
+-- Creación de secuencias para autoincrementar los contadores de tablas
+-- ------------------------------------------------------------------------
+CREATE SEQUENCE T_PRESUP_AI START WITH 1;
+CREATE OR REPLACE TRIGGER T_PRESUP_AI_TRIG
+BEFORE INSERT ON T_PRESUP
+FOR EACH ROW
+BEGIN
+    SELECT T_PRESUP_AI.NEXTVAL
+    INTO :new.ID_PRESUPUESTO
+    FROM dual;    
+END;
 
 
--- Informe de Resumen de Oracle SQL Developer Data Modeler: 
--- 
--- CREATE TABLE                            12
--- CREATE INDEX                             0
--- ALTER TABLE                             25
--- CREATE VIEW                              0
--- ALTER VIEW                               0
--- CREATE PACKAGE                           0
--- CREATE PACKAGE BODY                      0
--- CREATE PROCEDURE                         0
--- CREATE FUNCTION                          0
--- CREATE TRIGGER                           0
--- ALTER TRIGGER                            0
--- CREATE COLLECTION TYPE                   0
--- CREATE STRUCTURED TYPE                   0
--- CREATE STRUCTURED TYPE BODY              0
--- CREATE CLUSTER                           0
--- CREATE CONTEXT                           0
--- CREATE DATABASE                          0
--- CREATE DIMENSION                         0
--- CREATE DIRECTORY                         0
--- CREATE DISK GROUP                        0
--- CREATE ROLE                              0
--- CREATE ROLLBACK SEGMENT                  0
--- CREATE SEQUENCE                          0
--- CREATE MATERIALIZED VIEW                 0
--- CREATE SYNONYM                           0
--- CREATE TABLESPACE                        0
--- CREATE USER                              0
--- 
--- DROP TABLESPACE                          0
--- DROP DATABASE                            0
--- 
--- REDACTION POLICY                         0
--- 
--- ORDS DROP SCHEMA                         0
--- ORDS ENABLE SCHEMA                       0
--- ORDS ENABLE OBJECT                       0
--- 
--- ERRORS                                   0
--- WARNINGS                                 0
+-- Datos de Prueba
+-- ------------------------------------------------------------------------
+
+INSERT INTO T_PRESUP (FECHA_REG,USUARIO_REG,ULT_MODIF_FEC,ULT_MODIF_USER,FECHA_VAL_INI,FECHA_VAL_FIN,EST_ACTUAL,NOMB_PRESUP)
+values
+(SYSDATE,'consultor3',sysdate,'consultor3','01/01/2018','31/12/2018',5,'Presupuesto 2018 - I');
+
+commit;

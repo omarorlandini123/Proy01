@@ -10,13 +10,19 @@ namespace Entidades
     {
 
         public enum estados {
-            aprobado=1,
-            desaprobado,
-            noVerficiado
+            Aprobado=1,
+            Desaprobado,
+            Inactivo,
+            Activo,
+            Edicion,
+            NoVerficiado
         }
         public int idAprobacion { get; set; }
         public NivelAprobacion nivel { get; set; }
-        public int estado { get; set; }
+        public estados estado { get; set; }
+        public Usuario usuarioApro { get; set; }
+        public int orden { get; set; }
+        public DateTime FechaApro { get; set; }
         public Usuario usuarioReg { get; set; }
         public DateTime FechaReg { get; set; }
         public string Observacion { get; set; }
@@ -24,7 +30,7 @@ namespace Entidades
         public PresupuestoTipo tipoPresup { get; set; }
         public Version version { get; set; }
         public DetalleVersion detalleVersion { get; set; }
-
+        public bool listoParaAprobar { get; set; }
 
     }
 }

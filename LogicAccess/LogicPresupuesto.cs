@@ -27,10 +27,16 @@ namespace LogicAccess
         /// <param name="sede">Sede de la cual se necesita el área</param>
         /// <param name="anio">Año del cual se quieren los presupuestos</param>
         /// <returns></returns>
-        public List<Presupuesto> getPresupuestosPorArea(Sede sede, int anio)
+        public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getPresupuestosPorArea(sede,anio);
+            return dao.getPresupuestosPorArea(idPresupuesto,usuario);
+        }
+
+        public bool AprobarPresupuesto(int id, string observacion, int estado, Usuario user)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AprobarPresupuesto(id,observacion,estado,user);
         }
 
         /// <summary>
@@ -95,10 +101,21 @@ namespace LogicAccess
             return dao.ResolverObservacion(idObservacion, observacion,"");
         }
 
-        public List<Presupuesto> getPresupuestos(int idSede) {
+        public Sede getPresupuestosPorSede(int idSede) {
 
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getPresupuestos(idSede);
+            return dao.getPresupuestosPorSede(idSede);
         }
+
+
+        public Presupuesto AprobacionesPresupuesto(int idPresupuesto) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            Presupuesto presup = dao.getPresupuesto(idPresupuesto);
+            presup.aprobaciones=dao.AprobacionesPresupuesto(idPresupuesto);
+            return presup;
+
+        }
+
+
     }
 }
