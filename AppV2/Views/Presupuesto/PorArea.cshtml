@@ -1,29 +1,46 @@
-﻿@model IEnumerable<AppV2.Models.ViewPresupuestoArea>
+﻿@using Entidades;
+@model Presupuesto
 
-<div class="list-group">
-    @foreach (var item in Model)
+
+<center><h3>Presupuestos por Área</h3></center>
+<center><h4><strong>Presupuesto Seleccionado</strong></h4></center>
+<div class="list-group">   
+    
+    @foreach (PresupuestoArea presup in Model.presupuestosArea)
     {
-        <div class="list-group-item list-group-item-action flex-column align-items-start">           
-            <div class="row">
 
-                <div class="col-sm-6">
-                    @Html.ActionLink(Html.DisplayNameFor(model => model.nombreArea).ToString() + " " + item.nombreArea, "PresupArea", new { id = item.idArea,sede=item.idSede })
-                    @*<h5> @Html.DisplayNameFor(model => model.nombreArea) @item.nombreArea </h5>*@
-                    <h5> @item.codArea </h5>
-                    <h5> @Html.ActionLink("Aprobar", "Aprobar", new { id = item.idArea }) </h5>
-                </div>
-                <div class="col-sm-6">
-                    <h5> @Html.DisplayNameFor(model => model.desde) @item.desde </h5>
-                    <h5> @Html.DisplayNameFor(model => model.hasta) @item.hasta </h5>
-                    <h5> @Html.DisplayNameFor(model => model.montoTotal) @item.montoTotal  </h5>
-
-                </div>
+    <div href="#" class="list-group-item est-edicion">
+        <div class="row">
+            <div class="col-sm-6 excesodiv">
+                <a href="#"><h4 class="list-group-item-heading">Presupuesto de <strong>@presup.area</strong></h4></a>
+            </div>
+            <div class="col-sm-3">
+                <a href="#"><h5 class="list-group-item-heading">Aprobar</h5></a>
+            </div>
+            <div class="col-sm-3">
+                <a href="#"><h5 class="list-group-item-heading"></h5></a>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-3">Codigo:</div>
+            <div class="col-sm-3">@presup.area.codArea</div>
+            <div class="col-sm-3">Monto:</div>
+            <div class="col-sm-3">S/ @presup.monto.ToString("### ### ###.##")</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Ultima Modif:</div>
+            <div class="col-sm-3">@presup.UltModifFec.ToShortDateString()</div>
+            <div class="col-sm-3">Desde:</div>
+            <div class="col-sm-3">@presup.fechaValIni.ToShortDateString()</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Aprobado por:</div>
+            <div class="col-sm-3"><a href="#">Ver</a></div>
+            <div class="col-sm-3">Hasta:</div>
+            <div class="col-sm-3">@presup.fechaValFin.ToShortDateString()</div>
+        </div>
+    </div>
     }
+   
+
 </div>
-
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-

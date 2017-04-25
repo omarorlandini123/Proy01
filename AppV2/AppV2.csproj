@@ -197,6 +197,7 @@
     <Content Include="Views\Presupuesto\TiposPresupuesto.cshtml" />
     <Content Include="Views\Presupuesto\Observaciones.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
+    <Content Include="Views\Presupuesto\AprobarPresup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

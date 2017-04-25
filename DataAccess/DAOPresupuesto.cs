@@ -23,16 +23,18 @@ namespace DataAccess
         }
 
 
-        /// <summary>
-        /// Obtiene los presupuestos generales de las áreas
-        /// </summary>
-        /// <param name="sede">Sede de la cual se necesita el área</param>
-        /// <param name="anio">Año del cual se quieren los presupuestos</param>
-        /// <returns></returns>
-        public List<Presupuesto> getPresupuestosPorArea(Sede sede, int anio) {
-            List<Presupuesto> listaRpta = new List<Presupuesto>();
 
-            return listaRpta;
+        public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario) {
+
+            Presupuesto rpta = new Presupuesto();
+            
+
+            return rpta;
+        }
+
+        public bool AprobarPresupuesto(int id, string observacion, int estado, Usuario user)
+        {
+            return true;
         }
 
         /// <summary>
@@ -56,7 +58,8 @@ namespace DataAccess
         /// <returns></returns>
         public Presupuesto getPresupuesto(int codPresupuesto) {
             Presupuesto rpta = new Presupuesto();
-
+            rpta.idPresupuesto = 1;
+            
             return rpta;
         }
 
@@ -193,6 +196,83 @@ namespace DataAccess
             return detalle;
         }
 
+        public List<Aprobacion> AprobacionesPresupuesto(int idPresupuesto)
+        {
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "APROB_PRESUP" };
+            proc.parametros.Add(new Parametro("VAR_ID_PRESUP", idPresupuesto, OracleDbType.Int32, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+            List<Aprobacion> listaRpta = new List<Aprobacion>();
+            if (dt != null)
+            {
+                foreach (DataRow fila in dt.Rows)
+                {
+                    Aprobacion aprob = new Aprobacion();
+                    try
+                    {
+                        aprob.idAprobacion = int.Parse(fila["ID_APROB_PRESUP"].ToString());
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo idAprobacion ==> " + s.Message);
+                    }
+
+                    try
+                    {
+                        aprob.orden = int.Parse(fila["ORDEN"].ToString());
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo orden ==> " + s.Message);
+                    }
+
+                    try
+                    {
+                        aprob.usuarioApro = new Usuario();
+                        aprob.usuarioApro.usuario = fila["USR_APROB"].ToString();
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo usuarioApro ==> " + s.Message);
+                    }
+
+                    try
+                    {
+                        aprob.estado = (Aprobacion.estados)int.Parse(fila["ESTADO"].ToString());
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo estado ==> " + s.Message);
+                    }
+
+                    try
+                    {
+                        aprob.FechaApro = DateTime.Parse(fila["FEC_APROB"].ToString());
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo estado ==> " + s.Message);
+                        aprob.FechaApro = new DateTime(01, 01, 01);
+                    }
+
+                    try
+                    {
+                        aprob.Observacion = fila["OBS"].ToString();
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Error en AprobacionesPresupuesto campo estado ==> " + s.Message);
+                    }
+
+
+
+                }
+            }
+
+           
+            return listaRpta;
+        }
+
 
 
 
@@ -273,17 +353,48 @@ namespace DataAccess
         }
 
 
-        public List<Presupuesto> getPresupuestos(int idSede) {
-            List<Presupuesto> listaRpta = new List<Presupuesto>();
-            Presupuesto presup1 = new Presupuesto();
-            presup1.idPresupuesto = 1;
-            presup1.nombrePresupuesto = "Presupuesto 2017 - I";
-            presup1.fechaValIni = new DateTime(2017,1,1);
-            presup1.fechaValFin = new DateTime(2017, 12, 31);
-            presup1.fechaReg = new DateTime(2016, 12, 1);
-            presup1.estadoActual = Aprobacion.estados.aprobado;
-            presup1.usuarioReg = new Usuario() { idUsuario = "consultor3" };
-            return listaRpta;
+        public Sede getPresupuestosPorSede(int idSede) {
+
+            Sede sede = null;
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_PRESUP_POR_SEDE" };
+            proc.parametros.Add(new Parametro("VAR_ID_SEDE", idSede, OracleDbType.Int32, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            bool rpta = false;
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    sede = new Sede();
+                    sede.codSede = 1;
+                    sede.desSede = "Lima";
+                    sede.presupuestos = new List<Presupuesto>();
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            Presupuesto presup = new Presupuesto();
+                            presup.estadoActual = (Aprobacion.estados)int.Parse(fila["EST_ACTUAL"].ToString());
+                            presup.nombrePresupuesto = fila["NOMB_PRESUP"].ToString();
+                            presup.idPresupuesto = int.Parse(fila["ID_PRESUPUESTO"].ToString());
+                            presup.monto = double.Parse(fila["MONTO"].ToString());
+                            presup.fechaReg = (DateTime)fila["FECHA_REG"];
+                            presup.fechaValIni = (DateTime)fila["FECHA_VAL_INI"];
+                            presup.fechaValFin = (DateTime)fila["FECHA_VAL_FIN"];
+                            presup.UltModifFec = (DateTime)fila["ULT_MODIF_FEC"];
+                            Usuario userUltModif = new Usuario();
+                            userUltModif.usuario = fila["ULT_MODIF_USER"].ToString();
+                            presup.UltModifUser = userUltModif;
+                            sede.presupuestos.Add(presup);
+                        }
+                        catch (Exception s) {
+                            Console.WriteLine("Error En getPresupuestosPorSede ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+            return sede;
 
         }
 

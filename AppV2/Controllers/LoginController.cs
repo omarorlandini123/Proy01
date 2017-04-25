@@ -15,7 +15,7 @@ namespace AppV2.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            Session["idUsuario"] = null;
+            Session["usuario"] = null;
             return View();
         }
 

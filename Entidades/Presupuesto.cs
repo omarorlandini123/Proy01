@@ -17,8 +17,33 @@ namespace Entidades
         public Usuario UltModifUser { get; set; }
         public DateTime fechaValIni { get; set; }
         public DateTime fechaValFin { get; set; }
+        public Double monto { get; set; }
         public Aprobacion.estados estadoActual { get; set; }
+        public string estadoActualString { get {
+                string rpta = "";
+                switch (estadoActual) {
+                    case Aprobacion.estados.Aprobado:
+                    case Aprobacion.estados.Activo:
+                        rpta = "est-aprobado";
+                        break;
+                    case Aprobacion.estados.Edicion:
+                        rpta = "est-edicion";
+                        break;
+                    case Aprobacion.estados.Inactivo:
+                        rpta = "est-inactivo";
+                        break;
+                }
+                return rpta;
+            } }
         public List<Aprobacion> aprobaciones { get; set; }
+        public List<PresupuestoTipo> TiposPresupuestos { get; set; }
+        public List<PresupuestoArea> presupuestosArea { get; set; }
+
+    }
+
+    public class PresupuestoArea:Presupuesto
+    {
+        public Area area { get; set; }
 
     }
 }

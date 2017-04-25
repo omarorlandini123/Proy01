@@ -21,6 +21,8 @@ namespace Entidades
         public DateTime fechaValFin { get; set; }
         public int estadoActual { get; set; }
         public List<Aprobacion> aprobaciones { get; set; }
+        public List<DetalleVersion> detalles { get; set; }
+
 
     }
 }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceso.cs" />
     <Compile Include="Aprobacion.cs" />
     <Compile Include="Archivo.cs" />
     <Compile Include="Area.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="MesEntSoli.cs" />
     <Compile Include="NivelAprobacion.cs" />
     <Compile Include="Observacion.cs" />
+    <Compile Include="Perfil.cs" />
     <Compile Include="Presupuesto.cs" />
     <Compile Include="PresupuestoTipo.cs" />
     <Compile Include="Prioridad.cs" />

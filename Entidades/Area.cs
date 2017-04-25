@@ -13,10 +13,11 @@ namespace Entidades
         public String desArea { get; set; }
         public Sede sede { get; set; } // la sede a la que el área pertenece
         public List<Usuario> usuariosArea { get; set; } // Usuarios del área
-        public List<Presupuesto> presupuestos { get; set; } // Los presupuestos (versiones) que tiene el área
+        public List<Version> versiones { get; set; } // Los presupuestos (versiones) que tiene el área
+        
         public Area() {
             usuariosArea = new List<Usuario>();
-            presupuestos = new List<Presupuesto>();
+            versiones = new List<Version>();
         }
     }
 }
