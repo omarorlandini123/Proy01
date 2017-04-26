@@ -30,7 +30,23 @@ namespace LogicAccess
         public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getPresupuestosPorArea(idPresupuesto,usuario);
+            Presupuesto pre=dao.getPresupuestosPorArea(idPresupuesto,usuario);
+            pre.presupuestosArea = new List<PresupuestoArea>();
+
+            List<PresupuestoArea> areasEncontradas = new List<PresupuestoArea>();
+            
+            foreach(PresupuestoTipo preT in pre.TiposPresupuestos)
+            {
+                List<Entidades.Version> versionesOrden = preT.versiones.OrderBy(ver => ver.numeroVersion).ToList();
+                foreach (Entidades.Version ver in versionesOrden)
+                {
+                    if (!areasEncontradas.Contains(int.Parse(ver.area.codArea)))
+                    {
+                        areasEncontradas.Add(int.Parse(ver.area.codArea));
+                    }
+                }
+            }
+            return pre;
         }
 
         public bool AprobarPresupuesto(int id, string observacion, int estado, Usuario user)

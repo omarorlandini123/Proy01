@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOAcceso.cs" />
+    <Compile Include="DAOArea.cs" />
     <Compile Include="DAOMaterial.cs" />
     <Compile Include="DAOPresupuesto.cs" />
     <Compile Include="DAOSede.cs" />
