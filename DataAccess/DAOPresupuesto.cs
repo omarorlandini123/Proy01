@@ -24,11 +24,109 @@ namespace DataAccess
 
 
 
-        public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario) {
+        public Presupuesto getPresupuestosPorArea(int idPresupuesto, string usuario) {
 
             Presupuesto rpta = new Presupuesto();
+            rpta.presupuestosArea = new List<PresupuestoArea>();
+            rpta = getPresupuesto(idPresupuesto);
+            rpta.TiposPresupuestos = getPresupuestoTipos(idPresupuesto);
+            foreach (PresupuestoTipo presup in rpta.TiposPresupuestos)
+            {
+                presup.versiones = getVersiones(presup.idPresupuestoTipo);
+            }
             return rpta;
         }
+
+        public List<PresupuestoTipo> getPresupuestoTipos(int idPresupuesto) {
+            List<PresupuestoTipo> listaRpta = null;
+
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_PRESUPUESTO_TIPO" };
+            proc.parametros.Add(new Parametro("VAR_ID_PRESUPUESTO", idPresupuesto, OracleDbType.Int32, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    listaRpta = new List<PresupuestoTipo>();
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            PresupuestoTipo presupTipo = new PresupuestoTipo();
+                            presupTipo.idPresupuestoTipo = int.Parse(fila["ID_PRESUPUESTO_TIPO"].ToString());
+                            presupTipo.FechaReg = (DateTime)fila["PRE_T_FECHA_REG"];
+                            presupTipo.UltModifReg = (DateTime)fila["PRE_T_ULT_MODIF_FEC"];
+                            presupTipo.fechaValIni = (DateTime)fila["PRE_T_FECHA_VAL_INI"];
+                            presupTipo.fechaValFin = (DateTime)fila["PRE_T_FECHA_VAL_FIN"];
+                            presupTipo.estadoActual = (Aprobacion.estados)int.Parse(fila["PRE_T_EST_ACTUAL"].ToString());
+                            presupTipo.tipoPresupuesto = new TipoPresupuesto();
+                            presupTipo.tipoPresupuesto.idTipoPresupuesto = int.Parse(fila["ID_TIPO_PRESUP"].ToString());
+                            presupTipo.tipoPresupuesto.nombrePresupuesto = fila["NOMBRE"].ToString();
+
+                            DAOAcceso daoAcceso = new DAOAcceso();
+                            presupTipo.UltModifUser = daoAcceso.getUsuario(fila["PRE_T_MODIF_USR"].ToString());
+                            listaRpta.Add(presupTipo);
+
+
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getPresupuestosPorSede ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+            return listaRpta;
+        }
+
+        public List<Entidades.Version> getVersiones(int idPresupuestoTipo)
+        {
+            List<Entidades.Version> listaRpta = null;
+
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_VERSIONES_PRESUPUESTO_TIPO" };
+            proc.parametros.Add(new Parametro("VAR_ID_PRESUP_TIPO", idPresupuestoTipo, OracleDbType.Int32, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    listaRpta = new List<Entidades.Version>();
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            Entidades.Version vers = new Entidades.Version();
+                            vers.idVersion = int.Parse(fila["ID_VERSION"].ToString());
+                            vers.numeroVersion = int.Parse(fila["NRO"].ToString());
+                            vers.fechaReg = (DateTime)fila["v_fecha_reg"];
+                            vers.fechaValIni = (DateTime)fila["v_fecha_val_ini"];
+                            vers.fechaValFin = (DateTime)fila["v_fecha_val_fin"];
+                            vers.UltModifFec = (DateTime)fila["v_ult_modif_fec"];
+                            vers.estadoActual = (Aprobacion.estados)int.Parse(fila["est_actual"].ToString());
+                            
+                            DAOAcceso daoAcceso = new DAOAcceso();
+                            vers.usuarioReg = daoAcceso.getUsuario(fila["v_usuario_reg"].ToString());
+                           
+                            DAOArea daoArea = new DAOArea();
+                            vers.area=daoArea.getArea(int.Parse(fila["id_area"].ToString()));
+
+                            listaRpta.Add(vers);
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getPresupuestosPorSede ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+            return listaRpta;
+        }
+
+
 
         public bool AprobarPresupuesto(int id, string observacion, int estado, Usuario user)
         {
@@ -55,10 +153,45 @@ namespace DataAccess
         /// <param name="codPresupuesto">El código del presupuesto</param>
         /// <returns></returns>
         public Presupuesto getPresupuesto(int codPresupuesto) {
-            Presupuesto rpta = new Presupuesto();
-            rpta.idPresupuesto = 1;
-            
-            return rpta;
+            Presupuesto presup = null;
+          
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_PRESUPUESTO" };
+            proc.parametros.Add(new Parametro("VAR_ID_PRESUPUESTO", codPresupuesto, OracleDbType.Int32, Parametro.tipoIN));
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            presup = new Presupuesto();
+                            presup.estadoActual = (Aprobacion.estados)int.Parse(fila["EST_ACTUAL"].ToString());
+                            presup.nombrePresupuesto = fila["NOMB_PRESUP"].ToString();
+                            presup.idPresupuesto = int.Parse(fila["ID_PRESUPUESTO"].ToString());
+                            presup.fechaReg = (DateTime)fila["FECHA_REG"];
+                            presup.fechaValIni = (DateTime)fila["FECHA_VAL_INI"];
+                            presup.fechaValFin = (DateTime)fila["FECHA_VAL_FIN"];
+                            presup.UltModifFec = (DateTime)fila["ULT_MODIF_FEC"];
+                            try
+                            {
+                                presup.UltModifUser = DAOAcceso.getUsuario(fila["ULT_MODIF_USER"].ToString());
+                            }
+                            catch (Exception ex) {
+                                Console.WriteLine("Error En consiguiendo usuario para getPresupuestosPorSede  ==> " + s.Message);
+                            }
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getPresupuestosPorSede ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+            return presup;
         }
 
   

@@ -19,7 +19,7 @@ namespace Entidades
         public Usuario UltModifUser { get; set; }
         public DateTime fechaValIni { get; set; }
         public DateTime fechaValFin { get; set; }
-        public int estadoActual { get; set; }
+        public Aprobacion.estados estadoActual { get; set; }
         public List<Aprobacion> aprobaciones { get; set; }
         public List<DetalleVersion> detalles { get; set; }
 

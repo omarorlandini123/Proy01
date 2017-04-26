@@ -16,5 +16,11 @@ namespace DataAccess
             return user;
         }
 
+        public Usuario getUsuario(String usuario)
+        {
+            Usuario user = new Usuario();
+
+            return user;
+        }
     }
 }
