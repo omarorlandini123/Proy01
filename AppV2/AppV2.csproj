@@ -190,7 +190,6 @@
     <Content Include="Views\Presupuesto\AgregarDetalle.cshtml" />
     <Content Include="Views\Presupuesto\PorSede.cshtml" />
     <Content Include="Views\Presupuesto\PorArea.cshtml" />
-    <Content Include="Views\Presupuesto\PresupArea.cshtml" />
     <Content Include="Views\Presupuesto\Versiones.cshtml" />
     <Content Include="Views\Presupuesto\Detalle.cshtml" />
     <Content Include="Views\Presupuesto\Edit.cshtml" />
@@ -198,6 +197,7 @@
     <Content Include="Views\Presupuesto\Observaciones.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
     <Content Include="Views\Presupuesto\AprobarPresup.cshtml" />
+    <Content Include="Views\Presupuesto\PresupArea.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

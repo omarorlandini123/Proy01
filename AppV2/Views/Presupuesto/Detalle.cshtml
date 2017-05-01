@@ -1,9 +1,11 @@
-﻿@model  AppV2.Models.ViewModelDetallePresup
+﻿@using Entidades;
+@model  Entidades.Version
 
 
 
 
-<h3>@Model.nombrePresup</h3>
+
+<h3>Detalle de Version </h3>
 <br />
 <div class="panel panel-default">
     <div class="panel-body">
@@ -77,12 +79,12 @@
                     {
                         <tr class="success">
                             <td>@item.idDetalle</td>
-                            <td>@Html.DisplayFor(modelItem => item.codigoMaterial)</td>
-                            <td>@Html.DisplayFor(modelItem => item.descMaterial)</td>
-                            <td>@Html.DisplayFor(modelItem => item.unidadMedida)</td>
-                            <td>@Html.DisplayFor(modelItem => item.precioUnit)</td>
-                            <td>@Html.DisplayFor(modelItem => item.cantidad)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                            <td>@Html.DisplayFor(modelItem => item.mat.codProducto )</td>
+                            <td>@Html.DisplayFor(modelItem => item.mat.desc )</td>
+                            <td>@Html.DisplayFor(modelItem => item.uniSoli)</td>
+                            <td>@Html.DisplayFor(modelItem => item.precioSoli)</td>
+                            <td>@Html.DisplayFor(modelItem => item.cantidadSoli )</td>
+                            <td>@Html.DisplayFor(modelItem => item.totalSoli)</td>
                             <td>
                                 <button type="button" class="btn btn-success btn-xs">Aprobar</button>
                                 <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>

@@ -29,7 +29,7 @@ namespace Entidades
         public DateTime FechaReg { get; set; }
         public Usuario UsuarioReg { get; set; }
         public DateTime FechaUltModif { get; set; }
-        public DateTime UsuarioUltModif { get; set; }
+        public Usuario UsuarioUltModif { get; set; }
         public List<Observacion> observaciones { get; set; }
         public List<Archivo> archivosSustento { get; set; }
         public List<MesEntSoli> mesesSoli {get;set;}

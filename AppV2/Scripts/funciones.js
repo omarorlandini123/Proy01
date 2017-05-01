@@ -106,20 +106,20 @@ var TRSELECT = '';
 var DIVSEl = '';
 
 
-function ListarTipos(codArea) {
+function ListarTipos(idPresupuesto) {
     $(AreaSelect).hide();
-    $.get("/Presupuesto/TiposPresupuesto", {  })
+    $.get("/Presupuesto/TiposPresupuesto/" + idPresupuesto, {})
       .done(function (data) {
-          $('#TiposPresup_' + codArea).fadeOut(500, function () {
-              $('#TiposPresup_' + codArea).show();
-              $('#TiposPresup_' + codArea).html(data).fadeIn(500);
+          $('#TiposPresup_' + idPresupuesto).fadeOut(500, function () {
+              $('#TiposPresup_' + idPresupuesto).show();
+              $('#TiposPresup_' + idPresupuesto).html(data).fadeIn(500);
           });
       });
-    AreaSelect = '#TiposPresup_' + codArea;
+    AreaSelect = '#TiposPresup_' + idPresupuesto;
 }
 
-function listarVersiones(area, sede, anio) {
-    $.get("/Presupuesto/Versiones", { idArea: area, idSede: sede, anio: anio })
+function listarVersiones(idPresupTipo) {
+    $.get("/Presupuesto/Versiones/" + idPresupTipo, { idArea: VAR_AREA_SEL, })
       .done(function (data) {
           $('#VersionesArea').fadeOut(500, function () {
               $('#VersionesArea').html(data).fadeIn(500);

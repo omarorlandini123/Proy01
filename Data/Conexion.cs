@@ -69,12 +69,14 @@ namespace Data
         public DataTable EjecutarProcedimiento(Procedimiento proc) {
 
             DataTable dtrpta = null ;
-            OracleDataReader reader ;
+            OracleDataReader reader=null ;
+            OracleConnection conn=null;
+            OracleCommand command = null;
             try
             {
-                OracleConnection conn = new OracleConnection(conectionString);
+                conn = new OracleConnection(conectionString);
                 
-                OracleCommand command = new OracleCommand(proc.nombre, conn);
+                command = new OracleCommand(proc.nombre, conn);
                 command.CommandType = CommandType.StoredProcedure;
 
                 foreach (Parametro param in proc.parametros)

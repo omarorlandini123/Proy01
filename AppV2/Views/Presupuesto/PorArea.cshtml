@@ -15,7 +15,11 @@
             <div href="#" class="list-group-item est-edicion">
                 <div class="row">
                     <div class="col-sm-6 excesodiv">
-                        @Html.ActionLink("<h4 class=\"list - group - item - heading\">Presupuesto de <strong>"+presup.area+"</strong></h4>", "PresupArea","Presupuesto")
+                        <a href="../Presupuesto/PresupArea/@presup.area.codArea">
+                            <h4 class="list-group-item-heading">
+                                Presupuesto de <strong>@(presup.area.desArea) </strong>
+                            </h4>
+                        </a>                     
                        
                     </div>
                     <div class="col-sm-3">
@@ -29,7 +33,16 @@
                     <div class="col-sm-3">Codigo:</div>
                     <div class="col-sm-3">@presup.area.codArea</div>
                     <div class="col-sm-3">Monto:</div>
-                    <div class="col-sm-3">S/ @presup.monto.ToString("### ### ###.##")</div>
+                    @if (presup.monto > 0)
+                    {
+                    <div class="col-sm-3">S/ @string.Format("{0:0.00}",presup.monto )</div>
+                    }
+                    else
+                    {
+                               
+
+                            <div class="col-sm-3">S/ 0.00</div>
+                    }
                 </div>
                 <div class="row">
                     <div class="col-sm-3">Ultima Modif:</div>
@@ -46,7 +59,17 @@
             </div>
             }
         }
-    
+        else
+        {
+            <div  class="list-group-item">
+                <div class="row">
+                    <center><h3>No se encontraron áreas disponibles</h3></center>
+                </div>
+                
+            </div>
+
+        }
+
 </div>
 }
 else

@@ -1,34 +1,59 @@
-﻿@using AppV2.Models;
-@model  IEnumerable<AppV2.Models.ViewTipoPresupuesto>
+﻿@using Entidades
+@model Presupuesto
 
 
 <div class="list-group">
-
-    @foreach (ViewTipoPresupuesto preArea in Model)
+    @if (Model.TiposPresupuestos != null)
     {
+        foreach (PresupuestoTipo preArea in Model.TiposPresupuestos)
+        {
 
-        <a href="#" onclick="listarVersiones(1,1,1);" class="list-group-item list-group-item-action flex-column align-items-start ">
-
-            <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-1"><strong>@preArea.nomTipoPresup </strong> </h4>
+            <div href="#" class="list-group-item est-edicion">
+                <div class="row">
+                    <div class="col-sm-6 excesodiv">
+                        <a href="#" onclick="listarVersiones(@preArea.idPresupuestoTipo);">
+                            <h4 class="list-group-item-heading">
+                                <span class="glyphicon glyphicon-info-sign color-indicador" aria-hidden="true">&nbsp</span>
+                                @preArea.tipoPresupuesto.nombrePresupuesto
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#"><h5 class="list-group-item-heading">Aprobar</h5></a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#"><h5 class="list-group-item-heading">Desaprobar</h5></a>
+                    </div>
+                </div>
+                <div class="row">
+                
+                    <div class="col-sm-3 col-sm-offset-6">Monto:</div>
+                    @if (preArea.monto > 0)
+                    {
+                        <div class="col-sm-3">S/ @string.Format("{0:0.00}", preArea.monto)</div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-3">S/ 0.00</div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Ultima Modif:</div>
+                    <div class="col-sm-3">01/01/2015</div>
+                    <div class="col-sm-3">Desde:</div>
+                    <div class="col-sm-3">En edición</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Verificado por:</div>
+                    <div class="col-sm-3"><a href="#">Ver</a></div>
+                    <div class="col-sm-3">Hasta:</div>
+                    <div class="col-sm-3">En edición</div>
+                </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-6 ">
-                    <h5>@Html.LabelFor(model => preArea.desde) @preArea.ultimaModif</h5>
-                    <h5>@Html.LabelFor(model => preArea.hasta) @preArea.codTipoPresup </h5>
-                    <h5>Verificado Por: </h5>
-                </div>
-                <div class="col-sm-6 ">
-                    <h5>@Html.LabelFor(model => preArea.desde) @preArea.monto</h5>
-                    <h5>@Html.LabelFor(model => preArea.desde) @preArea.desde</h5>
-                    <h5>@Html.LabelFor(model => preArea.hasta) @preArea.hasta </h5>
-                </div>
-            </div>
-        </a>
-
+        }
     }
-
+    
 
 </div>
 

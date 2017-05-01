@@ -19,17 +19,27 @@ namespace AppV2.Controllers
         #region "Acciones"
 
         public ActionResult PorSede() {
-            LogicPresupuesto logic = new LogicPresupuesto();            
+            LogicPresupuesto logic = new LogicPresupuesto();
             return View(logic.getPresupuestosPorSede(((Usuario)Session["usuario"]).area.sede.codSede));
         }
 
-        public ActionResult PresupArea(int idPresupuesto,int idArea)
+        public ActionResult Detalle(int id)
         {
             LogicPresupuesto logic = new LogicPresupuesto();
-            //logic.getPresupuestosPorArea();
-            return View();
+            Entidades.Version version = logic.getDetalleDeVersion(id);
+            return View(version);
         }
 
+        public ActionResult PresupArea(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            LogicArea logArea = new LogicArea();
+            Area area = logArea.getArea(id);
+            area.presupuestos = logic.getPresupuestosPorSedeLista(((Usuario)Session["usuario"]).area.sede.codSede);
+            return View(area);
+        }
+
+     
 
         #endregion
 
@@ -68,80 +78,22 @@ namespace AppV2.Controllers
             return PartialView(vista);
         }
 
-        public ActionResult Versiones(int idArea, int idSede, int anio)
+        public ActionResult Versiones(int id, int idArea)
         {
 
-            List<ViewPresupuestoArea> lista = new List<ViewPresupuestoArea>();
-            ViewPresupuestoArea presup1 = new ViewPresupuestoArea();
-            presup1.version = "3";
-            presup1.codArea = "S-655";
-            presup1.desde = "01/01/2016";
-            presup1.hasta = "31/12/2016";
-            presup1.fecReg = "05/01/2016";
-            presup1.idPresupuesto = 45;
-            presup1.idArea = 1;
-            presup1.idSede = 1;
-            presup1.anio = 2016;
+            LogicPresupuesto logic = new LogicPresupuesto();
+            PresupuestoTipo presTip=logic.getVersiones(id, idArea);
 
-
-            ViewPresupuestoArea presup2 = new ViewPresupuestoArea();
-            presup2.version = "2";
-            presup2.codArea = "S-656";
-            presup2.desde = "01/01/2016";
-            presup2.hasta = "31/12/2016";
-            presup2.fecReg = "07/01/2016";
-            presup2.idPresupuesto = 44;
-            presup2.idArea = 1;
-            presup2.idSede = 1;
-            presup2.anio = 2016;
-
-            ViewPresupuestoArea presup3 = new ViewPresupuestoArea();
-            presup3.version = "1";
-            presup3.codArea = "S-657";
-            presup3.desde = "01/01/2016";
-            presup3.hasta = "31/12/2016";
-            presup3.fecReg = "09/01/2016";
-            presup3.idPresupuesto = 43;
-            presup3.idArea = 1;
-            presup3.idSede = 1;
-            presup3.anio = 2016;
-
-            lista.Add(presup1);
-            lista.Add(presup2);
-            lista.Add(presup3);
-
-            return PartialView(lista);
+            return PartialView(presTip);
 
         }
 
-        public ActionResult TiposPresupuesto()
+        public ActionResult TiposPresupuesto(int id)
         {
-            List<ViewTipoPresupuesto> lista = new List<ViewTipoPresupuesto>();
-
-            ViewTipoPresupuesto tipo1 = new ViewTipoPresupuesto();
-
-            tipo1.codTipoPresup = "COD_235";
-            tipo1.nomTipoPresup = "Gasto de Capital";
-            tipo1.ultimaModif = "10/04/2017";
-
-            tipo1.monto = "S/ 45 000";
-            tipo1.desde = "En Edicion";
-            tipo1.hasta = "En Edicion";
-
-            ViewTipoPresupuesto tipo2 = new ViewTipoPresupuesto();
-
-            tipo2.codTipoPresup = "COD_235";
-            tipo2.nomTipoPresup = "Gasto de Funcionamiento";
-            tipo2.ultimaModif = "05/04/2017";
-
-            tipo2.monto = "S/ 48 589";
-            tipo2.desde = "En Edicion";
-            tipo2.hasta = "En Edicion";
-
-            lista.Add(tipo1);
-            lista.Add(tipo2);
-
-            return PartialView(lista);
+            LogicPresupuesto logic = new LogicPresupuesto();
+            Presupuesto presup = logic.getPresupuesto(id);
+            presup.TiposPresupuestos = logic.getPresupuestoTipos(id);
+            return PartialView(presup);
 
         }
 

@@ -16,5 +16,13 @@ namespace DataAccess
             return listaRpta;
         }
 
+        public Material getMaterial(string codMaterial)
+        {
+            Material mat = new Material();
+            mat.codProducto = codMaterial;
+            mat.desc = "Sin conexion a Materiales";
+            return mat;
+        }
+
     }
 }

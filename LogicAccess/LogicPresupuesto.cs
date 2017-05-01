@@ -21,6 +21,12 @@ namespace LogicAccess
             return  dao.getPresupuestosPorSede(sede);
         }
 
+        public Entidades.Version getDetalleDeVersion(int id)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getDetalleDeVersion(id);
+        }
+
         /// <summary>
         /// Obtiene los presupuestos generales de las áreas
         /// </summary>
@@ -30,22 +36,8 @@ namespace LogicAccess
         public Presupuesto getPresupuestosPorArea(int idPresupuesto,string usuario)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
-            Presupuesto pre=dao.getPresupuestosPorArea(idPresupuesto,usuario);
-            pre.presupuestosArea = new List<PresupuestoArea>();
-
-            List<PresupuestoArea> areasEncontradas = new List<PresupuestoArea>();
-            
-            foreach(PresupuestoTipo preT in pre.TiposPresupuestos)
-            {
-                List<Entidades.Version> versionesOrden = preT.versiones.OrderBy(ver => ver.numeroVersion).ToList();
-                foreach (Entidades.Version ver in versionesOrden)
-                {
-                    if (!areasEncontradas.Contains(int.Parse(ver.area.codArea)))
-                    {
-                        areasEncontradas.Add(int.Parse(ver.area.codArea));
-                    }
-                }
-            }
+            Presupuesto pre=dao.getPresupuestosPorArea(idPresupuesto,usuario);          
+           
             return pre;
         }
 
@@ -77,6 +69,12 @@ namespace LogicAccess
         {
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getPresupuesto(codPresupuesto);
+        }
+
+        public PresupuestoTipo getVersiones(int idPresupTipo, int idArea)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getVersiones(idPresupTipo,idArea);
         }
 
 
@@ -112,6 +110,12 @@ namespace LogicAccess
             return dao.ObservarDetalle(idDetalle,observacion,"");
         }
 
+        public List<PresupuestoTipo> getPresupuestoTipos(int id)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestosTipos(id);
+        }
+
         public bool ResolverObservacion(int idObservacion, string observacion) {
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.ResolverObservacion(idObservacion, observacion,"");
@@ -122,7 +126,11 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getPresupuestosPorSede(idSede);
         }
+        public List<Presupuesto> getPresupuestosPorSedeLista(int idSede) {
 
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestosPorSedeLista(idSede);
+        }
 
         public Presupuesto AprobacionesPresupuesto(int idPresupuesto) {
             DAOPresupuesto dao = new DAOPresupuesto();

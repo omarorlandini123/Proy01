@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogicAcceso.cs" />
+    <Compile Include="LogicArea.cs" />
     <Compile Include="LogicMaterial.cs" />
     <Compile Include="LogicPresupuesto.cs" />
     <Compile Include="LogicSede.cs" />
