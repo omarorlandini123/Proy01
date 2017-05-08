@@ -21,10 +21,25 @@ namespace LogicAccess
             return  dao.getPresupuestosPorSede(sede);
         }
 
-        public Entidades.Version getDetalleDeVersion(int id)
+        public Entidades.Version getVersionDetallada(int id,int idTipo)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getDetalleDeVersion(id);
+            return dao.getVersionDetallada(id,idTipo);
+        }
+
+        public DetalleVersion getArchivosDetalle(int idDetalle) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getArchivosDetalle(idDetalle);
+        }
+
+        public DetalleVersion DetalleDeVersion(int idDetalleVersion) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.DetalleDeVersion(idDetalleVersion);
+        }
+
+        public List<DetalleVersion> DetallesDeVersion(string cond,int idVersion, int idTipo) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.DetallesDeVersion(cond,idVersion, idTipo);
         }
 
         /// <summary>
@@ -40,6 +55,34 @@ namespace LogicAccess
            
             return pre;
         }
+
+        public int EliminarArchivo(int idArchivo)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.EliminarArchivo(idArchivo);
+        }
+
+        public int subirArchivoaDetalle(int idDetalle,string nombre, string tipo, string ruta, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.subirArchivoaDetalle(idDetalle,nombre,tipo,ruta,usuario);
+        }
+
+        public Archivo getArchivo(int idArchivo)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getArchivo(idArchivo);
+        }
+
+        public Presupuesto getPresupuestosPorTipo(int idPresupuesto)
+        {
+
+            DAOPresupuesto dao = new DAOPresupuesto();
+            Presupuesto pre = dao.getPresupuestosPorTipo(idPresupuesto);
+            return pre;
+        }
+
+
 
         public bool AprobarPresupuesto(int id, string observacion, int estado, Usuario user)
         {
@@ -71,12 +114,26 @@ namespace LogicAccess
             return dao.getPresupuesto(codPresupuesto);
         }
 
-        public PresupuestoTipo getVersiones(int idPresupTipo, int idArea)
+        
+
+        public DetallePresupuesto getVersiones(int idPresupTipo, int idArea)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getVersiones(idPresupTipo,idArea);
         }
 
+        public int agregarDetalleVersion(DetalleVersion detVersion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.agregarDetalleVersion(detVersion);
+        }
+
+
+        public int actualizarDetalleVersion(DetalleVersion detVersion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.actualizarDetalleVersion(detVersion);
+        }
 
         /// <summary>
         /// Permite enviar el borrador de presupuesto al siguiente Nivel 
@@ -105,20 +162,27 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getObservacionesDetalle(idDetalle);
         }
-        public bool ObservarDetalle(int idDetalle, string observacion) {
+
+        public List<Prioridad> getPrioridades()
+        {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.ObservarDetalle(idDetalle,observacion,"");
+            return dao.getPrioridades();
         }
 
-        public List<PresupuestoTipo> getPresupuestoTipos(int id)
+        public bool ObservarDetalle(int idDetalle, string observacion,string usuario) {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.ObservarDetalle(idDetalle,observacion, usuario);
+        }
+
+        public List<DetallePresupuesto> getPresupuestoTipos(int id)
         {
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getPresupuestosTipos(id);
         }
 
-        public bool ResolverObservacion(int idObservacion, string observacion) {
+        public bool ResolverObservacion(int idObservacion, string observacion,string usuario) {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.ResolverObservacion(idObservacion, observacion,"");
+            return dao.ResolverObservacion(idObservacion, observacion, usuario);
         }
 
         public Sede getPresupuestosPorSede(int idSede) {
@@ -140,6 +204,28 @@ namespace LogicAccess
 
         }
 
+        public Observacion getObservacion(int idObservacion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getObservacion(idObservacion);
+        }
 
+        public int EliminarDetalle(int idDetalle)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.EliminarDetalle(idDetalle);
+        }
+
+        public int CrearPresup(string nombre, int idSede, string usuario, int mesDesde, int anioDesde, int mesHasta, int anioHasta)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.CrearPresup(nombre,idSede,usuario,mesDesde,anioDesde,mesHasta,anioHasta);
+        }
+
+        public List<Sede> getSedes()
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getSedes();
+        }
     }
 }

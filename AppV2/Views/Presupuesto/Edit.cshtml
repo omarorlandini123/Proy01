@@ -1,82 +1,99 @@
-﻿@model AppV2.Models.ViewModelEditPresup
+﻿@using Entidades
+@model DetalleVersion
 <div class="row">
     <div class="col-sm-12">
         <br />
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6" >Código Material:</div>
-                <div class="col-sm-6">
-                <input class="form-control" type="text" name="" value="@Model.Detalle.codigoMaterial"></div>
+                <div class="col-sm-6" id="contCodMaterial">
+                    <input class="form-control" id="codMaterial" value="@Model.mat.codProducto" onkeyup="getMateriales()" type="text" name="codMaterial" placeholder="Ingrese un código">
+                    <div class="list-group autocompletar" id="ListarMateriales" style="display:none;">
+                        <a href="#" class="list-group-item">
+                            <p class="list-group-item-text"> No se encuentra el material</p>
+                        </a>
+                    </div>
+
+                </div>
             </div>
             <div class="col-sm-8">
                 <div class="col-sm-2">Descripción:</div>
-                <div class="col-sm-10"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.descMaterial"></div>
+                <div class="col-sm-10"><input disabled="disabled" class="form-control" type="text" name="desMaterial" id="desMaterial" value="@Model.NombreMaterialSoli "></div>
             </div>
         </div><br>
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">Clase:</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.Clase"></div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.mat.subClase.clase.desClase"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Precio Unit.</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.precioUnit"></div>
+                <div class="col-sm-6" style="display: inline-flex;">S/. <input disabled="disabled" class="form-control" type="text" name="" value="@Model.mat.precioUnit" id="precioUnit"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Unidad de Medida:</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.unidadMedida"></div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.mat.unidad" id="unidMedida"></div>
             </div><br>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">Sub-Clase:</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.subClase"></div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.mat.subClase.desSubClase"  id="desSubClase"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6"> Cantidad:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.cantidad"></div>
+                <div class="col-sm-6"><input class="form-control solo-decimal" type="text" name=""  onkeypress="return NumCheck(event, this)" onkeyup="$('#totalsolic').val($('#cantidad').val() * $('#precioUnit').val())" value="@Model.cantidadSoli" id="cantidad"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Unidad Solicitada:</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.UnidadSoli" ></div>
+                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.uniSoli" ></div>
             </div>
         </div><br>
         <div class="row">
             <div class="col-sm-4">
                 <div class="col-sm-6">Criticidad:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.criticidad"></div>
+                <div class="col-sm-6"><input class="form-control solo-numero" type="text" name="" value="@Model.criticidad" id="desCriticidad"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Total:</div>
-                <div class="col-sm-6"><input disabled="disabled" class="form-control" type="text" name="" value="@Model.Detalle.Total"></div>
+                <div class="col-sm-6 " style="display: inline-flex;">S/. <input disabled="disabled" class="form-control" type="text" name="" value="@Model.totalSoli" id="totalsolic"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Largo:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.largo"></div>
+                <div class="col-sm-6"><input class="form-control" type="text" onkeypress="return NumCheck(event, this)" name="" value="@Model.largo" id="largo"></div>
             </div>
         </div><br>
         <div class="row">
             <div class="col-sm-4">
-                <div class="col-sm-6">Prioridad:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.prioridad"></div>
+                <div class="col-sm-6">Prioridad:</div>                
+                <div class="col-sm-6">
+                    <div class="form-group">                        
+                        <select class="form-control" id="prioridad">
+                            @foreach (Prioridad prio in ViewBag.prioridades)
+                            {
+                                <option @(Model.prioridad.idPrioridad == prio.idPrioridad?"selected":"") value="@prio.idPrioridad">@prio.nombre</option>
+                            }
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Alto:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.alto"></div>
+                <div class="col-sm-6"><input class="form-control" type="text" onkeypress="return NumCheck(event, this)" name="" value="@Model.alto" id="alto"></div>
             </div>
             <div class="col-sm-4">
                 <div class="col-sm-6">Ancho:</div>
-                <div class="col-sm-6"><input class="form-control" type="text" name="" value="@Model.Detalle.ancho"></div>
+                <div class="col-sm-6"><input class="form-control" type="text" onkeypress="return NumCheck(event, this)" name="" value="@Model.ancho" id="ancho"></div>
             </div>
         </div><br>
         <div class="row">
             <div class="col-sm-12">
                 <div class="col-sm-2">Sustento:</div>
-                <div class="col-sm-10"><textarea class="form-control" rows="3" value="@Model.Detalle.sustento"></textarea></div>
+                <div class="col-sm-10"><textarea class="form-control" id="desSustento" rows="3" value="@Html.Encode(Model.sustento)">@Html.Encode(Model.sustento)</textarea></div>
             </div>
-            <div class="col-sm-4 col-sm-offset-8" style="float:right;">
-                <input type="file" class="btn btn-success btn-xs "  />
+            <div class="col-sm-4 col-sm-offset-2" style="margin-top: 5px;">
+                <button   style="margin-left: 10px;" type="button" class="btn btn-success btn-xs" onclick="MostrarArchivos(@Model.idDetalle)" >Ver Archivos</button>
             </div>
             <br>
         </div><br>
@@ -87,18 +104,12 @@
             <div class="col-sm-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ene</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Feb</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Mar</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Abr</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">May</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jun</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jul</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ago</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Sep</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Oct</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Nov</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Dic</div>
+                        @for (int a = 1; a <= 12; a++)
+                        {
+                            <div class="col-sm-4"><input type="checkbox" name="messoli" id="cbox@(a)" @(Model.contieneMesSoli(a) ? "checked=\"checked\"":"") value="@(a)">@MesEntSoli.getMesCorto((MesEntSoli.Meses)a)</div>
+
+                        }
+                                              
                     </div>
                 </div>
                 
@@ -110,18 +121,11 @@
             <div class="col-sm-4">
                 <div class="panel panel-default">
                     <div class="panel-body" disabled="disabled">
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ene</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Feb</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Mar</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Abr</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">May</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jun</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Jul</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Ago</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Sep</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Oct</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Nov</div>
-                        <div class="col-sm-4"><input type="checkbox" id="cbox1" value="first_checkbox">Dic</div>
+                       @for (int a = 1; a <= 12; a++)
+                       {
+                        <div class="col-sm-4"><input type="checkbox"  name="mesent" id="cbox@(a)" @(Model.contieneMesEnt(a) ? "checked=\"checked\"" : "") value="@(a)">@MesEntSoli.getMesCorto((MesEntSoli.Meses)a)</div>
+
+                       }
                     </div>
                 </div>
             </div>
@@ -134,8 +138,8 @@
 <div class="row">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-            <input type="button" value="Guardar" class="btn btn-default" />
-            <input type="button" value="Cancelar" onclick="OcultarDetalle('@(Model.Detalle.idDetalle)')" class="btn btn-danger" />
+            <input type="button" value="Guardar" class="btn btn-default" onclick="ActualizarDetalle(@(Model.idDetalle))"/>
+            <input type="button" value="Cancelar" onclick="OcultarDetalle('@(Model.idDetalle)')" class="btn btn-danger" />
 
         </div>
     </div>

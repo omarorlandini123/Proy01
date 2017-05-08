@@ -1,0 +1,27 @@
+﻿@using Entidades;
+@model Observacion
+<!-- Modal content-->
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Cómo se resolvió esta observacion?</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <center>
+                <label for="ObservacionInicial">Observación:</label>
+                <p id="ObservacionInicial"> @Model.observacion </p>
+            </center>
+            <center>
+                <label for="resObservacion">Resolución:</label>
+                <textarea class="form-control" rows="5" id="resObservacion"></textarea>
+            </center>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" onclick="ResolverObservacion(@Model.idObservacion,@Model.detalle.idDetalle)" id="btnAceptarRes" class="btn btn-default" >Resolver</button>
+        <button type="button" class="btn btn-default" id="btnEspereRes" style="display:none;">Espere ...</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ExpandirObservaciones('@Model.detalle.idDetalle')" style="display:none;" id="btnObsAceptarRes">Aceptar</button>
+
+    </div>
+</div>

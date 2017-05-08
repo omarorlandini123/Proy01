@@ -1,0 +1,25 @@
+﻿@using Entidades;
+@model Observacion
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <center><h4 class="modal-title">Resolucion de Observación</h4></center>
+    </div>
+    <div class="modal-body">
+        <center><strong>Observación</strong></center><br />
+        <center>
+            <div class="row">
+                <p id="ObservacionResAnt">@Model.observacion</p>
+            </div>
+        </center><br /><br />
+        <center><strong>Resolución</strong></center><br />
+        <center>
+            <div class="row">
+                <p id="ObserResolucion">@Model.observacionRes</p>
+            </div>
+        </center>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+    </div>
+</div>

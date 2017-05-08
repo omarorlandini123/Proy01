@@ -11,7 +11,7 @@ namespace Entidades
 
         public int idVersion { get; set; }
         public int numeroVersion { get; set; }
-        public PresupuestoTipo presupuestoTipo {get;set;}
+        public DetallePresupuesto presupuestoTipo {get;set;}
         public Area area { get; set; }
         public DateTime fechaReg { get; set; }
         public Usuario usuarioReg { get; set; }

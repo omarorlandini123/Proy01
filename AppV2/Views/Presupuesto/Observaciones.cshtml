@@ -23,14 +23,14 @@
                             <td>                    
                                 @if (obs.isResuelta)
                                 {
-                                    
-                                    <button type="button" data-toggle="modal" data-target="#ObservacionRes"onclick="MostrarResolucionObs('@Html.Encode(obs.observacion)', '@Html.Encode(obs.observacionRes)')" class="btn btn-info btn-xs">
+
+                                    <button type="button" onclick="MostrarResolucionObs(@obs.idObservacion)" class="btn btn-info btn-xs">
                                         Observación Resuelta
                                     </button>
                                 }
                                 else
                                 {
-                                    <button type="button" data-toggle="modal" data-target="#ModalResolverObs" onclick="CambiarIdResolverObs(@obs.idObservacion,'@obs.observacion');" class="btn btn-success btn-xs">
+                                    <button type="button" onclick="MostrarResolverObservacion(@obs.idObservacion);" class="btn btn-success btn-xs">
                                         Resolver
                                     </button>
                                 }
@@ -40,6 +40,12 @@
                 </table>
             </div>
         }
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <center><h5>No hay Observaciones</h5></center>
+        </div>
     }
 }
 else
@@ -52,76 +58,12 @@ else
 </div>
 
 <div class="col-sm-12" style="text-align: right;">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Observar</button>
-    <button type="button" value="Cancelar" onclick="OcultarDetalle('@Model.idDetalle')" class="btn btn-danger">Cancelar</button>
+    <button type="button" class="btn btn-info btn-xs" onclick="MostrarObservarDetalle(@Model.idDetalle)">Observar</button>
+    <button type="button" value="Cancelar" onclick="OcultarDetalle('@Model.idDetalle')" class="btn btn-danger btn-xs">Cancelar</button>
 </div>
 
-<!-- Modal Nueva Observacion-->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog" id="idContenidoNuevaObservacion">
+@*
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" onclick="$('#commentObservacion').val('')" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Observación de <strong> @Html.Encode(Model.mat.desc) </strong></h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <center>
-                        <label for="comment">Detalle:</label>
-                        <textarea class="form-control" rows="5" id="commentObservacion"></textarea>
-                    </center>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="col-sm-8">
-                    <center id="alertaObser" style="display:none; color:indianred;"><h4> <strong id="contObser">Observación no puede estar en blanco</strong></h4></center>
-                </div>
-                <div class="col-sm-4">
-                    <button type="button" class="btn btn-default" onclick="ObservarDetalle(@Html.Encode(Model.idDetalle))" id="btnObsGuardar">Guardar</button>
-                    <button type="button" class="btn btn-default" id="btnEspere" style="display:none;">Espere ...</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptar">Aceptar</button>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Modal ResolverObservaciones-->
-<div class="modal fade" id="ModalResolverObs" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">¿Cómo se resolvió esta observacion?</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <center>
-                        <label for="ObservacionInicial">Observación:</label>
-                        <p id="ObservacionInicial"> </p>
-                    </center>
-                    <center>
-                        <label for="resObservacion">Resolución:</label>
-                        <textarea class="form-control" rows="5" id="resObservacion"></textarea>
-                    </center>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="ResolverObservacion()" id="btnAceptarRes" class="btn btn-default" data-dismiss="modal">Resolver</button>
-                <button type="button" class="btn btn-default" id="btnEspereRes" style="display:none;">Espere ...</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptarRes">Aceptar</button>
-
-            </div>
-        </div>
-
-    </div>
-</div>
 <!-- Modal Nueva Observacion-->
 <div class="modal fade" id="ObservacionRes" role="dialog">
     <div class="modal-dialog">
@@ -152,4 +94,4 @@ else
         </div>
 
     </div>
-</div>
+</div>*@

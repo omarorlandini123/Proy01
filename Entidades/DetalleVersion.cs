@@ -15,6 +15,7 @@ namespace Entidades
         public int idDetalle { get; set; }
         public Version version { get; set; }
         public Material mat { get; set; }
+        public string NombreMaterialSoli {get;set;}
         public double cantidadSoli { get; set; }
         public double precioSoli { get; set; }
         public double totalSoli { get; set; }
@@ -35,5 +36,31 @@ namespace Entidades
         public List<MesEntSoli> mesesSoli {get;set;}
         public List<MesEntSoli> mesesEnt { get; set;}
         public List<Aprobacion> aprobaciones { get; set; }
+
+        public string messoli { get; set; }
+        public string mesent { get; set; }
+
+        public bool contieneMesEnt(int Mes)
+        {
+            foreach (MesEntSoli mesentsoli in mesesEnt)
+            {
+                if (((int)mesentsoli.Mes) == Mes)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+        public bool contieneMesSoli(int Mes) {
+            foreach (MesEntSoli mesentsoli in mesesSoli) {
+                if (((int)mesentsoli.Mes) == Mes) {
+                    return true;
+                }
+
+            }
+            return false;
+        }
     }
 }

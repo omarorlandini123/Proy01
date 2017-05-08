@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Entidades.Material>
+
+
+@if (Model != null && Model.Count()>0)
+{
+    
+    foreach (var item in Model)
+    {
+    <a role="button" class="list-group-item" onclick="setMaterial('@(item.codProducto)');"> 
+        <span class="badge">S/ @(item.precioUnit)</span>
+        <h4 class="list-group-item-heading">@(item.codProducto)</h4>
+        <p class="list-group-item-text">Producto: @(item.desc)</p>
+        
+    </a>
+
+
+    }
+
+}
+else
+{
+    <a class="list-group-item">
+        <p class="list-group-item-text"> No se encuentra el material</p>
+    </a>
+}

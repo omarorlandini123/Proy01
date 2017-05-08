@@ -198,6 +198,23 @@
     <Content Include="Views\Login\Logout.cshtml" />
     <Content Include="Views\Presupuesto\AprobarPresup.cshtml" />
     <Content Include="Views\Presupuesto\PresupArea.cshtml" />
+    <Content Include="Views\Presupuesto\PorTipo.cshtml" />
+    <Content Include="Views\Presupuesto\Nuevo.cshtml" />
+    <Content Include="Views\Presupuesto\DetallesVersion.cshtml" />
+    <Content Include="Views\Presupuesto\getMateriales.cshtml" />
+    <Content Include="Views\Presupuesto\FileUpload.cshtml" />
+    <Content Include="Views\Presupuesto\NuevoDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\VerArchivos.cshtml" />
+    <Content Include="Views\Presupuesto\SubirArchivo.cshtml" />
+    <Content Include="Views\Presupuesto\ActualizarDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\EliminarArchivo.cshtml" />
+    <Content Include="Views\Presupuesto\MostrarObservarDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\MostrarResolverObservacion.cshtml" />
+    <Content Include="Views\Presupuesto\MostrarResolucionObs.cshtml" />
+    <Content Include="Views\Presupuesto\MostrarEliminarDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\EliminarDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\MostrarCrearPresup.cshtml" />
+    <Content Include="Views\Presupuesto\CrearPresup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

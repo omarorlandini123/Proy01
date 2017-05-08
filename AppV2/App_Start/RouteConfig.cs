@@ -18,7 +18,14 @@ namespace AppV2
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
-            
+
+            routes.MapRoute(
+                name: "Presupuesto/Detalle",
+                url: "{controller}/{action}/{id}/{idTipo}",
+                defaults: new { controller = "Presupuesto", action = "Detalle", id = UrlParameter.Optional,idTipo=UrlParameter.Optional }
+            );
+
+
         }
     }
 }

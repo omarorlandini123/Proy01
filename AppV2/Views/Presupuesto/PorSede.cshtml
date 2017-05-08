@@ -5,8 +5,8 @@
     <br />
     <div class="col-sm-6 panel-principal">
         <h3>Presupuestos de Sede: <strong>@Model.desSede</strong></h3>
-      
-
+        <button type="button" class="btn btn-success btn-xs" onclick="MostrarCrearPresup(@Model.codSede)">Crear Presupuesto</button>
+        <br /><br />
         <div class="list-group">
             @foreach (var item in Model.presupuestos)
             {
@@ -24,18 +24,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">Registro:</div>
-                    <div class="col-sm-3">@item.fechaReg.ToShortDateString()</div>
-                    <div class="col-sm-2">Monto:</div>
+                    <div class="col-sm-3"> Registro: </div>
+                    <div class="col-sm-3"> @item.fechaReg.ToShortDateString() </div>
+                    <div class="col-sm-2"> Monto: </div>
                      @if (item.monto > 0)
                     {
-                    <div class="col-sm-3">S/ @string.Format("{0:0.00}", item.monto)</div>
-                            }
-                            else
-                            {
-                               
-
-                                   <div class="col-sm-3">S/ 0.00</div>
+                        <div class="col-sm-3">S/ @string.Format("{0:0.00}", item.monto) </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-3">S/ 0.00</div>
                     }
                 </div>
                 <div class="row">

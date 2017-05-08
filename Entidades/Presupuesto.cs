@@ -36,9 +36,10 @@ namespace Entidades
                 return rpta;
             } }
         public List<Aprobacion> aprobaciones { get; set; }
-        public List<PresupuestoTipo> TiposPresupuestos { get; set; }
+        public List<DetallePresupuesto> TiposPresupuestos { get; set; }
         public List<PresupuestoArea> presupuestosArea { get; set; }
 
+        public Sede sede { get; set; }
     }
 
     public class PresupuestoArea:Presupuesto

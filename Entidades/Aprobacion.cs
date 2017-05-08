@@ -27,7 +27,7 @@ namespace Entidades
         public DateTime FechaReg { get; set; }
         public string Observacion { get; set; }
         public Presupuesto presupAplica { get; set; }
-        public PresupuestoTipo tipoPresup { get; set; }
+        public DetallePresupuesto tipoPresup { get; set; }
         public Version version { get; set; }
         public DetalleVersion detalleVersion { get; set; }
         public bool listoParaAprobar { get; set; }
