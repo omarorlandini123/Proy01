@@ -32,14 +32,14 @@
                     </button>
                     <div class="row hidden-xs" style="width: 370px;">
                         <div class="col-md-3 hidden-sm">
-                            <a href="/Presupuesto/PorSede" class="thumbnail" style="margin-top: 20px;background-color: rgba(255, 255, 255, 0);border: 1px solid rgba(221, 221, 221, 0);">
+                            <a href="#" class="thumbnail" style="margin-top: 20px;background-color: rgba(255, 255, 255, 0);border: 1px solid rgba(221, 221, 221, 0);">
                                 <img alt="40%x50%" style="width: 100%;" src="~/Images/Sima_Escudo.png">
                             </a>
                         </div>
                         <div class="col-md-9 " style="margin-top: 20px;">
                             <div class="row">
 
-                                <a class="navbar-brand" style="font-size: 30px;" href="/Presupuesto/PorSede">
+                                <a class="navbar-brand" style="font-size: 30px;" href="#">
                                     SIMA<br>
                                     <span style="font-size: 20px;">Sistema de Presupuestos</span>
                                 </a>
@@ -52,52 +52,63 @@
                 </div>
                 @if (Session["usuario"] != null)
                 {
-                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
-                        @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ConfiguracionGeneral)) { 
-                       <ul class="nav navbar-nav">
-                                <li class="">@Html.ActionLink("Configuracion","Configuracion","Login")</li>
+                <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
+                    @*<ul class="nav navbar-nav">
+                        <li class="active"><a onclick="mostrarPresupuestosPorSede();" href="#">Presupuesto</a></li>
+                    </ul>*@
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-xs hidden-sm" style="width: 130px;margin: -20px;">
+
+                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 90px;color:#c7c7c7;"></span>
+
+
+                        </li>
+                        <li class="hidden-xs" style="margin: -25px;">
+                            <a href="../navbar-static-top/" style="padding: 5px;">@(((Usuario)Session["usuario"]).Nombres)</a>
+                            <div class="dropdown clearfix" style="text-align: center;margin: 5px;">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 1px;width: 120px;">
+                                    Lima
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Lima</a></li>
+                                    <li><a href="#">Chimbote</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown clearfix" style="text-align: center;margin: 5px;">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 1px;width: 120px;">
+                                    Sistemas
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Contabilidad</a></li>
+                                    <li><a href="#">Logística</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="hidden-sm hidden-md hidden-lg"><a href="#">Omar Orlandini Vera</a></li>
+                        <li class="dropdown hidden-sm hidden-md hidden-lg">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lima <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Lima</a></li>
+                                <li><a href="#">Chimbote</a></li>
                             </ul>
-                        }
-                        <ul class="nav navbar-nav navbar-right">
-
-
-
-                            <li class="hidden-xs hidden-sm" style="width: 130px;margin: -20px;">
-
-                                <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 90px;color:#c7c7c7;"></span>
-
-
-                            </li>
-                            <li class="hidden-xs" style="">
-                                <a href="#" style="">@(((Usuario)Session["usuario"]).Nombres)</a>
-                                
-                            </li>
-
-
-                            <li class="hidden-sm hidden-md hidden-lg"><a href="#">@(((Usuario)Session["usuario"]).Nombres)</a></li>
-                            
-                            <li style="margin-left: 10px;">
-
-                                <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgLogOut()">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                    </div>
-                }
-                else
-                {
-
-                    <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
-                        @*<ul class="nav navbar-nav">
-                                <li class="active"><a onclick="mostrarPresupuestosPorSede();" href="#">Presupuesto</a></li>
-                            </ul>*@
-                        <ul class="nav navbar-nav navbar-right">
-                           
-                            <li style="margin-left: 10px;">
-
-                                @Html.ActionLink("Iniciar Session", "Index", "Login");
-                            </li>
-                        </ul>
-                    </div>
+                        </li>
+                        <li class="dropdown hidden-sm hidden-md hidden-lg">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sistemas <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Contabilidad</a></li>
+                                <li><a href="#">Logística</a></li>
+                            </ul>
+                        </li>
+                        <li style="margin-left: 10px;">
+                        
+                            <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgLogOut()">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
                 }
             </div><!--/.container-fluid -->
         </nav>
@@ -115,30 +126,30 @@
 
             <!-- Modal content-->
             @*<div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" onclick="$('#commentObservacion').val('')" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Observación de <strong> @Html.Encode(Model.mat.desc) </strong></h4>
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="$('#commentObservacion').val('')" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Observación de <strong> @Html.Encode(Model.mat.desc) </strong></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <center>
+                            <label for="comment">Detalle:</label>
+                            <textarea class="form-control" rows="5" id="commentObservacion"></textarea>
+                        </center>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <center>
-                                <label for="comment">Detalle:</label>
-                                <textarea class="form-control" rows="5" id="commentObservacion"></textarea>
-                            </center>
-                        </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-8">
+                        <center id="alertaObser" style="display:none; color:indianred;"><h4> <strong id="contObser">Observación no puede estar en blanco</strong></h4></center>
                     </div>
-                    <div class="modal-footer">
-                        <div class="col-sm-8">
-                            <center id="alertaObser" style="display:none; color:indianred;"><h4> <strong id="contObser">Observación no puede estar en blanco</strong></h4></center>
-                        </div>
-                        <div class="col-sm-4">
-                            <button type="button" class="btn btn-default" onclick="ObservarDetalle(@Html.Encode(Model.idDetalle))" id="btnObsGuardar">Guardar</button>
-                            <button type="button" class="btn btn-default" id="btnEspere" style="display:none;">Espere ...</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptar">Aceptar</button>
-                        </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-default" onclick="ObservarDetalle(@Html.Encode(Model.idDetalle))" id="btnObsGuardar">Guardar</button>
+                        <button type="button" class="btn btn-default" id="btnEspere" style="display:none;">Espere ...</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;" id="btnObsAceptar">Aceptar</button>
+                    </div>
 
-                    </div>
-                </div>*@
+                </div>
+            </div>*@
 
         </div>
     </div>

@@ -2,7 +2,7 @@
 @model Presupuesto
 @if (Session["usuario"] != null)
 {
-if (Model != null && !string.IsNullOrEmpty(Model.nombrePresupuesto))
+@if (Model != null && !string.IsNullOrEmpty(Model.nombrePresupuesto))
 {
     <center><h3>Presupuestos por Área <a href="#" onclick="verTiposDisponibles(@Model.idPresupuesto)"> <span class="glyphicon glyphicon-resize-vertical"></span> </a></h3></center>
     <center><h4><strong>@Model.nombrePresupuesto</strong></h4></center>

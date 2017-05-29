@@ -23,10 +23,16 @@
 
                         </div>
                         <div class="col-sm-2">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarPresupuesto))
+{
                             <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgAprobar(@item.idPresupuesto)"><h5 class="list-group-item-heading">Aprobar</h5></a>
+}
                         </div>
                         <div class="col-sm-4">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerReporte))
+{
                             <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgVerReportes(@item.idPresupuesto)"><h5 class="list-group-item-heading">Ver Reportes</h5></a>
+}
                         </div>
                     </div>
                     <div class="row">

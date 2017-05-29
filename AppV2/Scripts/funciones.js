@@ -103,23 +103,7 @@ function MostrarCrearPresup(idSede)
     });
 
 }
-function CrearPerfil() {
-    var nombre = $('#nombrePresupuesto').val();
-    var codigoPerfil = $('#codigoPresupuesto').val();
-    $('#idContenidoModal').html(EsperaModal());
-    $('#ModalGeneral').modal('show');
-    $.get("/Login/CrearPerfil", { nombre: nombre, codPerfil: codigoPerfil })
-      .done(function (data) {
-          $('#idContenidoModal').fadeOut(500, function () {
-              $('#idContenidoModal').html(data).fadeIn(500);
-          });
-      })
-    .fail(function (data) {
-        $('#idContenidoModal').fadeOut(500, function () {
-            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
-        });
-    });
-}
+
 function CrearPresup() {
     var nombre = $('#nombrePresupuesto').val();
     var idSede = $('#idSede').val();
@@ -746,35 +730,6 @@ function ExpandirObservaciones(codDetalle){
         });
     }
 
-    function GuardarAccesos(varidperfil) {
-        var data = new FormData();       
-        var accesos = getChecksComoString('accperfil');
-
-        data.append('accesos', accesos);
-        data.append('codPerfil', varidperfil);
-        $('#idContenidoModal').html(EsperaModal());
-        $('#ModalGeneral').modal('show');
-        // Make Ajax request with the contentType = false, and procesDate = false 
-        var ajaxRequest = $.ajax({
-            type: 'POST',
-            url: "/Login/GuardarAccesos",
-            contentType: false,
-            processData: false,
-            data: data
-        });
-        ajaxRequest.done(function (xhr, textStatus) {
-            $('#ModalGeneral').modal('show');
-            $('#idContenidoModal').html(xhr).fadeIn(500);
-
-        });
-        ajaxRequest.fail(function (xhr, textStatus) {
-            $('#idContenidoModal').fadeOut(500, function () {
-                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
-            });
-        });
-
-    }
-
     function MostrarArchivos(varidDetalle)
     {        
         $('#idContenidoModal').html(EsperaModal());
@@ -836,68 +791,6 @@ function ExpandirObservaciones(codDetalle){
         $('#ModalGeneral').modal('show');
         $.get("/Presupuesto/MostrarEliminarDetalle", { idDetalle: idDetalle,idTipo : $('#idTipo').val() })
           .done(function (data) {
-              $('#idContenidoModal').fadeOut(500, function () {
-                  $('#idContenidoModal').html(data).fadeIn(500);
-              });
-          })
-        .fail(function (data) {
-            $('#idContenidoModal').fadeOut(500, function () {
-                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
-            });
-        });
-
-    }
-    function getAccesosDePerfil(varidperfil) {
-       
-        $('#listaAccesos').html(EsperaDiv());
-        $('#listaAccesos').fadeIn(500, function () {
-
-            $.get("/Login/getAccesosDePerfil", { idPerfil: varidperfil })
-             .done(function (data) {
-                 $('#listaAccesos').fadeOut(500, function () {
-                     $('#listaAccesos').html(data).fadeIn(500);
-                 });
-             })
-           .fail(function (data) {
-               $('#listaAccesos').fadeOut(500, function () {
-                   $('#listaAccesos').html(EsperaModalFAIL()).fadeIn(500);
-               });
-           });
-
-        });
-       
-
-    }
-
-    function EliminarPerfil(varidperfil) {
-        $('#idContenidoModal').html(EsperaModal());
-        $('#ModalGeneral').modal('show');
-        $.get("/Login/EliminarPerfil", { codPerfil: varidperfil })
-          .done(function (data) {
-
-              //$('#ModalGeneral').modal('hide');
-              getListaDetalle('');
-              $('#idContenidoModal').fadeOut(500, function () {
-                  $('#idContenidoModal').html(data).fadeIn(500);
-              });
-          })
-        .fail(function (data) {
-            $('#idContenidoModal').fadeOut(500, function () {
-                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
-            });
-        });
-
-    }
-
-
-    function MostrarCrearPerfil() {
-        $('#idContenidoModal').html(EsperaModal());
-        $('#ModalGeneral').modal('show');
-        $.get("/Login/MostrarCrearPerfil", { })
-          .done(function (data) {
-
-              //$('#ModalGeneral').modal('hide');
-              getListaDetalle('');
               $('#idContenidoModal').fadeOut(500, function () {
                   $('#idContenidoModal').html(data).fadeIn(500);
               });

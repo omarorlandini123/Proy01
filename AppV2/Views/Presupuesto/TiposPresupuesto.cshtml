@@ -49,7 +49,10 @@
                     }
                 </div>
                 <div class="row">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.NuevaVersion))
+{
                     <div class="col-sm-6"><center><a href="javascript:NuevaVersion(@preArea.idPresupuestoTipo)">Nueva Version</a></center></div>
+}
                     <div class="col-sm-3">Desde:</div>
                     <div class="col-sm-3">@preArea.fechaValIni.ToShortDateString()</div>
                 </div>

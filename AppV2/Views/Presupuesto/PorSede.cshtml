@@ -5,7 +5,10 @@
     <br />
     <div class="col-sm-6 panel-principal">
         <h3>Presupuestos de Sede: <strong>@Model.desSede</strong></h3>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.CrearPresup))
+{
         <button type="button" class="btn btn-success btn-xs" onclick="MostrarCrearPresup(@Model.codSede)">Crear Presupuesto</button>
+}
         <br /><br />
         <div class="list-group">
             @foreach (var item in Model.presupuestos)
@@ -17,10 +20,16 @@
                         <a href="#" onclick="verAreasDisponibles(@item.idPresupuesto)"><h4 class="list-group-item-heading">@item.nombrePresupuesto</h4></a>
                     </div>
                     <div class="col-sm-2">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarPresupuesto))
+{
                         <button style="margin-left: 10px;" type="button" class="btn btn-warning btn-xs" onclick="AprobarPresupuesto(@item.idPresupuesto)">Aprobar</button>
+}
                     </div>
                     <div class="col-sm-2">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.DesAprobarPresupuesto))
+{
                         <button style="margin-left: 10px;" type="button" class="btn btn-danger btn-xs" onclick="DesAprobarPresupuesto(@item.idPresupuesto)">DesAprobar</button>
+}
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +53,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">Aprobado por:</div>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerAprobacionesPresupuesto))
+{
                     <div class="col-sm-3"><a href="javascript:MostrarAprobacionesPresupuesto(@item.idPresupuesto)">Ver</a></div>
+}
                     <div class="col-sm-2">Hasta:</div>
                     <div class="col-sm-4">@item.fechaValFin.ToShortDateString()</div>
                 </div>

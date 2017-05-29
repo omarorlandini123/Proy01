@@ -78,7 +78,10 @@
         <div class="modal-footer">
             <div class="col-sm-6 contenido-derecha">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.NuevoAprobadorPresup))
+{
                 <button type="button" class="btn btn-info"onclick="NuevoAprobadorPresup(@Model.idPresupuesto)">Agregar</button>
+}
             </div>
 
         </div>

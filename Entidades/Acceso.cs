@@ -9,6 +9,7 @@ namespace Entidades
     public class Acceso
     {
 
+        
 
         public Accesos codigo { get; set; }
         public string descripcion { get; set; }

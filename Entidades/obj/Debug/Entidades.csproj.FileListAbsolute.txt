@@ -22,3 +22,8 @@ D:\Presupuestos\Proy01\Entidades\bin\Debug\Entidades.pdb
 D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
 D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.dll
 D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.pdb
+D:\sima\Proy01\Entidades\bin\Debug\Entidades.dll
+D:\sima\Proy01\Entidades\bin\Debug\Entidades.pdb
+D:\sima\Proy01\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+D:\sima\Proy01\Entidades\obj\Debug\Entidades.dll
+D:\sima\Proy01\Entidades\obj\Debug\Entidades.pdb

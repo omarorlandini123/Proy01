@@ -22,7 +22,10 @@
         </div>
     </div>
     <div class="modal-footer">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ResolverObservacion))
+{
         <button type="button" onclick="ResolverObservacion(@Model.idObservacion,@Model.detalle.idDetalle)" id="btnAceptarRes" class="btn btn-default" >Resolver</button>
+}
         <button type="button" class="btn btn-default" id="btnEspereRes" style="display:none;">Espere ...</button>
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ExpandirObservaciones('@Model.detalle.idDetalle')" style="display:none;" id="btnObsAceptarRes">Aceptar</button>
 
