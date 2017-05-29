@@ -11,6 +11,8 @@
         </div>
         <div class="modal-body">
             <div class="form-group">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerTablaAprobacionesVesion))
+{
                 <table class="table">
                     <tr>
                         <th>
@@ -47,6 +49,8 @@
                             <td>
                                 @item.usuarioReg.usuario
                             </td>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerDetalleAprobacion))
+{
                             <td>
                                 <a href="javascript:VerDetalleAprobacion(@item.idAprobacion)">
                                     @if (item.detalles != null)
@@ -67,19 +71,22 @@
                                 </a>
 
                             </td>
-
+}
 
                         </tr>
                     }
 
                 </table>
+}
             </div>
         </div>
         <div class="modal-footer">
             <div class="col-sm-6 contenido-derecha">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.NuevoAprobadorVersion)){
                 <button type="button" class="btn btn-info" onclick="NuevoAprobadorVersion(@Model.idVersion)">Agregar</button>
-            </div>
+                    }
+             </div>
 
         </div>
     </div>
@@ -98,7 +105,10 @@ else
         <div class="modal-footer">
             <div class="col-sm-6 contenido-derecha">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.NuevoAprobadorVersion))
+                    {
                 <button type="button" class="btn btn-info" onclick="NuevoAprobadorVersion(@Model.idVersion)">Agregar</button>
+                    }
             </div>
 
         </div>

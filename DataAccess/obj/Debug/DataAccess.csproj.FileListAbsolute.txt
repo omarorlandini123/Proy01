@@ -59,3 +59,14 @@ D:\Presupuestos\Proy01\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyRefe
 D:\Presupuestos\Proy01\DataAccess\obj\Debug\DataAccess.dll
 D:\Presupuestos\Proy01\DataAccess\obj\Debug\DataAccess.pdb
 D:\Presupuestos\Proy01\DataAccess\bin\Debug\DataAccess.dll.config
+D:\sima\Proy01\DataAccess\bin\Debug\DataAccess.dll.config
+D:\sima\Proy01\DataAccess\bin\Debug\DataAccess.dll
+D:\sima\Proy01\DataAccess\bin\Debug\DataAccess.pdb
+D:\sima\Proy01\DataAccess\bin\Debug\Data.dll
+D:\sima\Proy01\DataAccess\bin\Debug\Entidades.dll
+D:\sima\Proy01\DataAccess\bin\Debug\Oracle.ManagedDataAccess.dll
+D:\sima\Proy01\DataAccess\bin\Debug\Data.pdb
+D:\sima\Proy01\DataAccess\bin\Debug\Entidades.pdb
+D:\sima\Proy01\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+D:\sima\Proy01\DataAccess\obj\Debug\DataAccess.dll
+D:\sima\Proy01\DataAccess\obj\Debug\DataAccess.pdb

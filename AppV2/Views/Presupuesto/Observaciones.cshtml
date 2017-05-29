@@ -24,14 +24,18 @@
                             <td>                    
                                 @if (obs.isResuelta)
                                 {
-
+                                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.MostrarResolucionObs))
+                                    {
                                     <button type="button" onclick="MostrarResolucionObs(@obs.idObservacion)" class="btn btn-info btn-xs">
                                         Observación Resuelta
                                     </button>
-                                }
-                                else
-                                {
+                                    }
+                                    else
+                                    {
+                                        @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ResolverObservacion))
+                                        {
                                     <button type="button" onclick="MostrarResolverObservacion(@obs.idObservacion);" class="btn btn-success btn-xs">
+                                        }
                                         Resolver
                                     </button>
                                 }

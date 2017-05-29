@@ -26,10 +26,16 @@
                     <a href="/Presupuesto/Detalle/@(item.idVersion)/1"><h4 class="list-group-item-heading"><span class="glyphicon glyphicon-info-sign color-indicador" aria-hidden="true">&nbsp</span>Version #@(item.numeroVersion)</h4></a>
                 </div>
                 <div class="col-sm-3">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarVersion))
+{
                     <a href="javascript:AprobarVersion(@item.idVersion)"><h5 class="list-group-item-heading">Aprobar</h5></a>
+}
                 </div>
                 <div class="col-sm-3">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.RechazarVersion))
+{
                     <a href="javascript:RechazarVersion(@item.idVersion)"><h5 class="list-group-item-heading">Desaprobar</h5></a>
+}
                 </div>
             </div>
             <div class="row">
@@ -55,7 +61,10 @@
             </div>
             <div class="row">
                 <div class="col-sm-3">Verificado por:</div>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerAprobacionesPresupuesto))
+{
                 <div class="col-sm-3"><a href="javascript:MostrarAprobacionesVersion(@(item.idVersion))">Ver</a></div>
+}
                 <div class="col-sm-3">Hasta:</div>
                 <div class="col-sm-3">@item.fechaValFin.ToShortDateString()</div>
             </div>

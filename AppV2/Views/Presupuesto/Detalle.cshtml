@@ -25,10 +25,12 @@ else
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-6">
-                <button type="button" class="btn btn-success btn-sm" onclick="AprobarVersion(@Model.idVersion)"> Aprobar </button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="RechazarVersion(@Model.idVersion)" > Rechazar Todo </button>
-                <button type="button" class="btn btn-info btn-sm" onclick="EnviarAprobacion(@Model.idVersion)" > Enviar Aprobación </button>
-
+                @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarVersion)){
+                <button type="button" class="btn btn-success btn-sm" onclick="AprobarVersion(@Model.idVersion)"> Aprobar </button>}
+                @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.RechazarVersion){  
+                <button type="button" class="btn btn-danger btn-sm" onclick="RechazarVersion(@Model.idVersion)" > Rechazar Todo </button>}
+                @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.EnviarAprobacion)){
+                <button type="button" class="btn btn-info btn-sm" onclick="EnviarAprobacion(@Model.idVersion)" > Enviar Aprobación </button>}
             </div>
             <div class="col-sm-6 " role="group" aria-label="...">
                 <div class="dropdown" style="float: right;">
@@ -38,15 +40,20 @@ else
                     </button>
                     
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                       
-                        <li> @Html.ActionLink("Materiales y Suministros" , "Detalle" , "Presupuesto" , new { id = Model.idVersion , idTipo = 1 }, null) </li>
-                        <li> @Html.ActionLink("Servicios" , "Detalle" , "Presupuesto", new { id = Model.idVersion , idTipo = 2 }, null) </li>
+                       @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.SeleccionMaterialesSuministro))
+                       {
+                        <li> @Html.ActionLink("Materiales y Suministros", "Detalle", "Presupuesto", new { id = Model.idVersion, idTipo = 1 }, null) </li>
+                        <li> @Html.ActionLink("Servicios", "Detalle", "Presupuesto", new { id = Model.idVersion, idTipo = 2 }, null) </li>
+                       }
                     </ul>
 
                 </div>
                 
                 <div style="float: right;margin-right:5px;">
+                        @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AgregarNuevoItem))
+                        {
                      <button type="button" class="btn btn-warning btn-sm" onclick="MostrarPanelNuevo(@ViewBag.idTipo)" > Agregar Ítem </button>
+                        }
                 </div>
             </div>
             
@@ -69,12 +76,15 @@ else
 
             </div>
             <div class="col-sm-4 col-sm-offset-2">
-                <div class="input-group">
+               @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.BuscarItem))
+               {
+                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Buscar ... " id="cond_buscar" >
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" onclick="getListaDetalle($('#cond_buscar').val())">Buscar</button>
                     </span>
                 </div>
+               }
             </div>
         </div><br/>
         <div class="row" id="DIV_NEW_ITEM" >
@@ -83,6 +93,8 @@ else
         
         <div class="row" id="ListaDetalle">
             <div class="col-sm-12">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerListarDetalleVersion))
+{
                 <table class="table table-hover">
                     <tr>
                         <td><b>#</b></td>
@@ -116,11 +128,21 @@ else
                                 <td>@Html.DisplayFor(modelItem => item.cantidadSoli)</td>
                                 <td>@Html.DisplayFor(modelItem => item.totalSoli)</td>
                                 <td>
+                                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarDetalle))
+                                    {
                                     <button type="button" class="btn btn-success btn-xs" onclick="AprobarDetalle(@item.idDetalle)">Aprobar</button>
-                                    <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
+                                    }
+                                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ExpandirDetalle))
+                                    {
+                                        <but<button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
+                                        }
+                                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ExpandirObservaciones))
+                                    {
                                     <button type="button" class="btn btn-primary btn-xs" onclick="ExpandirObservaciones('@item.idDetalle')">Obser</button>
+                                    @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ExpandirObservaciones))
+                                    {
                                     <button type="button" class="btn btn-danger btn-xs" onclick="MostrarEliminarDetalle('@item.idDetalle')">Eliminar</button>
-
+                                    }
                                 </td>
                             </tr>
                         <tr style="display:none;" id="DETALLE_@item.idDetalle">
@@ -142,6 +164,7 @@ else
 
 
                 </table>
+                       }
             </div>
         </div>
        

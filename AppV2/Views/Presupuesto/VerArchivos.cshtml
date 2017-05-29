@@ -50,8 +50,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.UsuarioReg.usuario)
                         </td>
-                        <td>                         
+                        <td>       
+                            @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.EliminarArchivo))
+                            {
                              <button type="button" class="btn btn-danger btn-xs" onclick="EliminarArchivo(@item.idArchivo,@Model.idDetalle)">Eliminar</button>                            
+                            }
                         </td>
                     </tr>
                                     }
@@ -72,7 +75,10 @@
 
             </div>
             <div class="form-group">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.subirArchivo))
+{
                 <button style="margin-left: 10px;" type="button" class="btn btn-info btn-xs" onclick="subirArchivo(@Model.idDetalle)">Subir Archivo</button>
+}
             </div>
         </div>
     </div>

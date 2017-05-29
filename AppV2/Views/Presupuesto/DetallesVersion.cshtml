@@ -1,8 +1,12 @@
-﻿@model IEnumerable<Entidades.DetalleVersion>
+﻿@using Entidades;
+@model IEnumerable<Entidades.DetalleVersion>
 @if (Session["usuario"] != null)
 {
 <div class="col-sm-12">
-    <table class="table table-hover">
+        VerListarDetalleVersion
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.VerListarDetalleVersion))
+{
+        <table class="table table-hover">
         <tr>
             <td><b>#</b></td>
             <td><b>Código</b></td>
@@ -35,10 +39,22 @@
                     <td>@Html.DisplayFor(modelItem => item.cantidadSoli)</td>
                     <td>@Html.DisplayFor(modelItem => item.totalSoli)</td>
                     <td>
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.AprobarDetalle))
+{
                         <button type="button" class="btn btn-success btn-xs" onclick="AprobarDetalle(@item.idDetalle)">Aprobar</button>
+}
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ExpandirDetalle))
+{
                         <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
+}
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ExpandirObservaciones))
+{
                         <button type="button" class="btn btn-primary btn-xs" onclick="ExpandirObservaciones('@item.idDetalle')">Obser</button>
+}
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.MostrarEliminarDetalle))
+{
                         <button type="button" class="btn btn-danger btn-xs" onclick="MostrarEliminarDetalle('@item.idDetalle')">Eliminar</button>
+        }?
 
                     </td>
                 </tr>
@@ -61,6 +77,7 @@
 
 
     </table>
+}
 </div>
 }
 else

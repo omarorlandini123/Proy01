@@ -16,7 +16,10 @@
     </div>
     <div class="modal-footer">
         <div class="col-sm-6 contenido-derecha">
+@if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.EliminarDetalle))
+{
             <button type="button" class="btn btn-warning" onclick="EliminarDetalle(@Model.idDetalle)" id="btnAceptar">Sí, Eliminar</button>
+}
             <button type="button" class="btn btn-default" data-dismiss="modal" id="btnObsAceptar">Cancelar</button>
         </div>
 

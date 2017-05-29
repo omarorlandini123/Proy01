@@ -354,7 +354,6 @@ namespace AppV2.Controllers
         public ActionResult MostrarCrearPresup(int idSede)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
-           
             ViewBag.sedes = logicPresup.getSedes();
             return PartialView();
         }
@@ -449,6 +448,7 @@ namespace AppV2.Controllers
         }
 
         public ActionResult PorArea(int idPresupuesto) {
+
             LogicPresupuesto logicpresup = new LogicPresupuesto();
             Usuario user = (Usuario)Session["usuario"];
             Presupuesto rpta = logicpresup.getPresupuestosPorArea(idPresupuesto, user.usuario);
@@ -467,7 +467,8 @@ namespace AppV2.Controllers
         public ActionResult getMateriales(string cond)
         {
             LogicMaterial logicMaterial = new LogicMaterial();
-            return PartialView(logicMaterial.getMateriales(cond));
+            List<Material> rpta = logicMaterial.getMateriales(cond);
+            return PartialView(rpta);
 
         }
 

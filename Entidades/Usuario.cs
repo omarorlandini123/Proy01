@@ -42,23 +42,6 @@ namespace Entidades
         public GrupoCentroCosto grupoCentroCosto { get; set; }
 
         public bool tieneAccesoA(Accesos acc) {
-            if (perfiles != null)
-            {
-                foreach (Perfil per in perfiles)
-                {
-                    if (per.accesos != null)
-                    {
-                        foreach (Acceso acces in per.accesos)
-                        {
-                            if (acces.codigo == acc)
-                            {
-                                return true;
-                            }
-
-                        }
-                    }
-                }
-            }
             return false;
         }
 

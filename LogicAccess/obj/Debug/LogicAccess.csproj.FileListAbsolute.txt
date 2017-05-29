@@ -58,3 +58,15 @@ D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Data.pdb
 D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
 D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.dll
 D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.pdb
+D:\sima\Proy01\LogicAccess\bin\Debug\LogicAccess.dll
+D:\sima\Proy01\LogicAccess\bin\Debug\LogicAccess.pdb
+D:\sima\Proy01\LogicAccess\bin\Debug\DataAccess.dll
+D:\sima\Proy01\LogicAccess\bin\Debug\Entidades.dll
+D:\sima\Proy01\LogicAccess\bin\Debug\Data.dll
+D:\sima\Proy01\LogicAccess\bin\Debug\Oracle.DataAccess.dll
+D:\sima\Proy01\LogicAccess\bin\Debug\DataAccess.pdb
+D:\sima\Proy01\LogicAccess\bin\Debug\Entidades.pdb
+D:\sima\Proy01\LogicAccess\bin\Debug\Data.pdb
+D:\sima\Proy01\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
+D:\sima\Proy01\LogicAccess\obj\Debug\LogicAccess.dll
+D:\sima\Proy01\LogicAccess\obj\Debug\LogicAccess.pdb
