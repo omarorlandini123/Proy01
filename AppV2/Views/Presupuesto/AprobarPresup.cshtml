@@ -1,24 +1,46 @@
 ﻿@using Entidades;
 @model Presupuesto
-@{
-    Aprobacion rpta = null;
-    bool requiereAnterior = false;
-    foreach (Aprobacion aprob in Model.aprobaciones)
-    {
-        if (aprob.usuarioApro.usuario == ((Usuario)Session["usuario"]).usuario)
-        {
-            rpta = aprob;
+@if (Session["usuario"] != null)
+{
 
-            foreach (Aprobacion aprob2 in Model.aprobaciones)
+@{
+        Aprobacion rpta = null;
+        bool requiereAnterior = false;
+        foreach (Aprobacion aprob in Model.aprobaciones)
+        {
+            if (aprob.usuarioApro.usuario == ((Usuario)Session["usuario"]).usuario)
             {
-                if (aprob.orden > aprob2.orden && aprob2.estado != Aprobacion.estados.Aprobado)
+                rpta = aprob;
+
+                foreach (Aprobacion aprob2 in Model.aprobaciones)
                 {
-                    rpta = aprob2;
-                    requiereAnterior = true;
+                    if (aprob.orden > aprob2.orden && aprob2.estado != Aprobacion.estados.Aprobado)
+                    {
+                        rpta = aprob2;
+                        requiereAnterior = true;
+                    }
                 }
             }
         }
+ else
+                                {
+                                    < div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <center>
+                                                    <h3>Su sesión ha expirado, ingrese nuevamente.</h3>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-sm-6 contenido-derecha">
+                                                <button type = "button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            </div>
 
+                                        </div>
+                                    </div>
+
+                                }
     }
 }
 

@@ -237,6 +237,11 @@
     <Content Include="Views\Presupuesto\nuevaVersion.cshtml" />
     <Content Include="Views\Presupuesto\getServicios.cshtml" />
     <Content Include="Views\Login\Configuracion.cshtml" />
+    <Content Include="Views\Login\getAccesosDePerfil.cshtml" />
+    <Content Include="Views\Login\MostrarCrearPerfil.cshtml" />
+    <Content Include="Views\Login\CrearPerfil.cshtml" />
+    <Content Include="Views\Login\EliminarPerfil.cshtml" />
+    <Content Include="Views\Login\GuardarAccesos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

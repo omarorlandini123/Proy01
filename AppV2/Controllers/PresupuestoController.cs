@@ -354,6 +354,7 @@ namespace AppV2.Controllers
         public ActionResult MostrarCrearPresup(int idSede)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
+           
             ViewBag.sedes = logicPresup.getSedes();
             return PartialView();
         }

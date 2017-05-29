@@ -1,6 +1,7 @@
 ﻿@using Entidades;
 @model DetalleVersion
-
+@if (Session["usuario"] != null)
+{
 <!-- Modal content-->
 <div class="modal-content">
     <div class="modal-header">
@@ -27,3 +28,23 @@
 
     </div>
 </div>
+}
+else
+{
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-group">
+                <center>
+                    <h3>Su sesión ha expirado, ingrese nuevamente.</h3>
+                </center>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-sm-6 contenido-derecha">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+}

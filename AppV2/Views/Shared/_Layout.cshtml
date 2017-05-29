@@ -32,14 +32,14 @@
                     </button>
                     <div class="row hidden-xs" style="width: 370px;">
                         <div class="col-md-3 hidden-sm">
-                            <a href="#" class="thumbnail" style="margin-top: 20px;background-color: rgba(255, 255, 255, 0);border: 1px solid rgba(221, 221, 221, 0);">
+                            <a href="/Presupuesto/PorSede" class="thumbnail" style="margin-top: 20px;background-color: rgba(255, 255, 255, 0);border: 1px solid rgba(221, 221, 221, 0);">
                                 <img alt="40%x50%" style="width: 100%;" src="~/Images/Sima_Escudo.png">
                             </a>
                         </div>
                         <div class="col-md-9 " style="margin-top: 20px;">
                             <div class="row">
 
-                                <a class="navbar-brand" style="font-size: 30px;" href="#">
+                                <a class="navbar-brand" style="font-size: 30px;" href="/Presupuesto/PorSede">
                                     SIMA<br>
                                     <span style="font-size: 20px;">Sistema de Presupuestos</span>
                                 </a>
@@ -53,9 +53,11 @@
                 @if (Session["usuario"] != null)
                 {
                     <div id="navbar" class="navbar-collapse collapse" style="margin-top: 30px;">
+                        @if (((Usuario)Session["usuario"]).tieneAccesoA(Accesos.ConfiguracionGeneral)) { 
                        <ul class="nav navbar-nav">
-                                <li class=""><a onclick="mostrarPresupuestosPorSede();" href="#">Configuración</a></li>
+                                <li class="">@Html.ActionLink("Configuracion","Configuracion","Login")</li>
                             </ul>
+                        }
                         <ul class="nav navbar-nav navbar-right">
 
 

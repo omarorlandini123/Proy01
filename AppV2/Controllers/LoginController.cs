@@ -59,12 +59,68 @@ namespace AppV2.Controllers
         {
             if (Session["usuario"] != null)
             {
-                return View();
+                LogicAcceso logic = new LogicAcceso();
+                List<Perfil> rpta= logic.getPerfiles();
+                if (rpta != null)
+                {
+                    return View(rpta);
+                }else
+                {
+
+                    return RedirectToAction("Index", "Login");
+                }
 
             }
             else {
                 return RedirectToAction("Index", "Login");
             }
+
+        }
+
+        public ActionResult getAccesosDePerfil(int idPerfil) {
+           
+                LogicAcceso logic = new LogicAcceso();
+                List<Acceso> rpta = logic.getAccesos();
+                List<Acceso> rpta2 = logic.getAccesosDePerfil(idPerfil);
+            if (rpta != null )
+            {
+                ViewBag.AccesosPerfil = rpta2;
+                ViewBag.idPerfil = idPerfil;
+                return PartialView(rpta);
+            }
+            
+            return PartialView();
+
+
+        }
+
+        public ActionResult MostrarCrearPerfil() {
+            
+            return PartialView();
+
+        }
+
+        public ActionResult CrearPerfil(string nombre, string codPerfil) {
+            LogicAcceso login = new LogicAcceso();
+           int rpta= login.crearPrefil(nombre,codPerfil);
+
+            return PartialView(rpta);
+        }
+
+        public ActionResult EliminarPerfil(string codPerfil) {
+            LogicAcceso login = new LogicAcceso();
+            int rpta = login.EliminarPerfil(codPerfil);
+
+            return PartialView(rpta);
+
+        }
+
+        public ActionResult GuardarAccesos(string codPerfil,string accesos)
+        {
+            LogicAcceso login = new LogicAcceso();
+            int rpta = login.GuardarAccesos(codPerfil, accesos);
+            ViewBag.idPerfil = codPerfil;
+            return PartialView(rpta);
 
         }
 

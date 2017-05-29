@@ -12,9 +12,9 @@ namespace Entidades
         verArchivos,
         descargarArchivo,
         subirArchivo,
-
-
-
-
+        MostrarCrearPerfil,
+        VerPerfilesPanel,
+        VerAccesos,
+        ConfiguracionGeneral,
     }
 }

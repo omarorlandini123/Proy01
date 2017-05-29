@@ -1,7 +1,8 @@
 ﻿@using Entidades;
 @model DetalleVersion
-
-<div class="modal-content">
+@if (Session["usuario"] != null)
+{
+    <div class="modal-content">
     <div class="modal-body">
         <h4>Archivos</h4>
         <div class="form-group">
@@ -26,7 +27,8 @@
                                 try
                                 {
                                     nombreArchivo = item.nombre;
-                                    if (String.IsNullOrEmpty(nombreArchivo)) {
+                                    if (String.IsNullOrEmpty(nombreArchivo))
+                                    {
                                         nombreArchivo = "Sin Nombre";
                                     }
                                 }
@@ -52,15 +54,15 @@
                              <button type="button" class="btn btn-danger btn-xs" onclick="EliminarArchivo(@item.idArchivo,@Model.idDetalle)">Eliminar</button>                            
                         </td>
                     </tr>
-                    }
-                }
-                else
-                {
+                                    }
+                                }
+                                else
+                                {
                     <tr>
                         <td colspan="5">No hay archivos</td>
                     </tr>
 
-                }
+                                }
             </table>
 
         </div>
@@ -82,5 +84,25 @@
     </div>
 </div>
 
+                                }
+                                else
+                                {
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <center>
+                                                    <h3>Su sesión ha expirado, ingrese nuevamente.</h3>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="col-sm-6 contenido-derecha">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                }
 
 

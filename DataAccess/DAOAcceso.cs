@@ -75,6 +75,219 @@ namespace DataAccess
             return userRpta;
         }
 
+        public int GuardarAccesos(string codPerfil, string accesos)
+        {
+            try
+            {
+                int t = int.Parse(codPerfil);
+            }
+            catch (Exception s)
+            {
+                return 18;
+            }
+
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "INS_ACCESO_PERFIL" };
+            proc.parametros.Add(new Parametro("VAR_ID_PERFIL", codPerfil, OracleDbType.Int32, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_ACCESOS", accesos, OracleDbType.Varchar2, Parametro.tipoIN));
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+
+                        if (int.Parse(fila["RPTA"].ToString()) > 0)
+                        {
+
+                            return 1;
+                        }
+                        else
+                        {
+
+                            return 2;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return 3;
+            }
+
+            return 4;
+        }
+
+        public int EliminarPerfil(string codPerfil)
+        {
+            try
+            {
+                int t = int.Parse(codPerfil);
+            }
+            catch (Exception s)
+            {
+                return 18;
+            }
+
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "DEL_PERFIL" };
+            proc.parametros.Add(new Parametro("VAR_ID_PERFIL", codPerfil, OracleDbType.Int32, Parametro.tipoIN));
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+
+                        if (int.Parse(fila["RPTA"].ToString()) > 0)
+                        {
+
+                            return 1;
+                        }
+                        else
+                        {
+
+                            return 2;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return 3;
+            }
+
+            return 4;
+        }
+
+        public int crearPrefil(string nombre, string codPerfil)
+        {
+
+            try
+            {
+                int t = int.Parse(codPerfil);
+            }
+            catch (Exception s) {
+                return 18;
+            }
+
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "NEW_PERFIL" };
+            proc.parametros.Add(new Parametro("VAR_NOMBRE", nombre, OracleDbType.Varchar2, Parametro.tipoIN));
+            proc.parametros.Add(new Parametro("VAR_ID_PERFIL", codPerfil, OracleDbType.Int32, Parametro.tipoIN));
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+
+                        if (int.Parse(fila["RPTA"].ToString()) > 0)
+                        {
+
+                            return 1;
+                        }
+                        else
+                        {
+
+                            return 2;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return 3;
+            }
+
+            return 4;
+        }
+
+        public List<Acceso> getAccesos()
+        {
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_ACCESOS" };
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            List<Acceso> listaRpta = null;
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    listaRpta = new List<Acceso>();
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            Acceso acc = new Acceso();
+                            acc.codigo = (Accesos)int.Parse(fila["ACCESO"].ToString());
+                            acc.descripcion = fila["DESC"].ToString();
+                            listaRpta.Add(acc);
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getAccesos ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+
+            return listaRpta;
+        }
+
+        public List<Perfil> getPerfiles()
+        {
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_PERFILES" };
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            List<Perfil> listaRpta = null;
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    listaRpta = new List<Perfil>();
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            Perfil acc = new Perfil();
+                            acc.idPerfil = int.Parse(fila["ID_PERFIL"].ToString());
+                            acc.nombre = fila["NOMBRE"].ToString();
+                            listaRpta.Add(acc);
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getAccesos ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+
+            return listaRpta;
+        }
+
         public List<Acceso> getAccesos(int idPerfil) {
             Conexion con = new Conexion();
             Procedimiento proc = new Procedimiento() { nombre = "GET_ACCESO_PERFIL" };

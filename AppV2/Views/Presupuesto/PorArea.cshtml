@@ -1,7 +1,8 @@
 ﻿@using Entidades;
 @model Presupuesto
-
-@if (Model != null && !string.IsNullOrEmpty(Model.nombrePresupuesto))
+@if (Session["usuario"] != null)
+{
+if (Model != null && !string.IsNullOrEmpty(Model.nombrePresupuesto))
 {
     <center><h3>Presupuestos por Área <a href="#" onclick="verTiposDisponibles(@Model.idPresupuesto)"> <span class="glyphicon glyphicon-resize-vertical"></span> </a></h3></center>
     <center><h4><strong>@Model.nombrePresupuesto</strong></h4></center>
@@ -77,3 +78,23 @@
 
     <div class="row" style="height: 120px;"><center><h3>No se encontró datos del presupuesto </h3></center></div>
     }
+}
+else
+{
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-group">
+                <center>
+                    <h3>Su sesión ha expirado, ingrese nuevamente.</h3>
+                </center>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-sm-6 contenido-derecha">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+}

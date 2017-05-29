@@ -1,6 +1,7 @@
 ﻿@using Entidades
 @model Presupuesto
-
+@if (Session["usuario"] != null)
+{
 @if (Model != null && !string.IsNullOrEmpty(Model.nombrePresupuesto))
 {
     <center><h3>Presupuestos por Tipo <a href="#" onclick="verAreasDisponibles(@Model.idPresupuesto)"> <span class="glyphicon glyphicon-resize-vertical"></span> </a></h3></center>
@@ -60,6 +61,25 @@
 
     </div>
 }
+}
+else
+{
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="form-group">
+                <center>
+                    <h3>Su sesión ha expirado, ingrese nuevamente.</h3>
+                </center>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-sm-6 contenido-derecha">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
 
+        </div>
+    </div>
+
+}
 
 
