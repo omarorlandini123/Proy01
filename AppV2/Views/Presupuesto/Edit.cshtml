@@ -1,5 +1,7 @@
 ﻿@using Entidades
 @model DetalleVersion
+    @if (Model.mat != null)
+    {
 <div class="row">
     <div class="col-sm-12">
         <br />
@@ -7,8 +9,8 @@
             <div class="col-sm-4">
                 <div class="col-sm-6" >Código Material:</div>
                 <div class="col-sm-6" id="contCodMaterial">
-                    <input class="form-control" id="codMaterial" value="@Model.mat.codProducto" onkeyup="getMateriales()" type="text" name="codMaterial" placeholder="Ingrese un código">
-                    <div class="list-group autocompletar" id="ListarMateriales" style="display:none;">
+                    <input class="form-control" id="codMaterial" value="@Model.mat.codProducto" type="text" name="codMaterial" placeholder="Ingrese un código">
+                    <div class="list-group autocompletar" id="ListarMateriales" style="display:none; ">
                         <a href="#" class="list-group-item">
                             <p class="list-group-item-text"> No se encuentra el material</p>
                         </a>
@@ -72,7 +74,7 @@
                         <select class="form-control" id="prioridad">
                             @foreach (Prioridad prio in ViewBag.prioridades)
                             {
-                                <option @(Model.prioridad.idPrioridad == prio.idPrioridad?"selected":"") value="@prio.idPrioridad">@prio.nombre</option>
+                                <option @(Model.prioridad.idPrioridad == prio.idPrioridad ? "selected" : "") value="@prio.idPrioridad">@prio.nombre</option>
                             }
                         </select>
                     </div>
@@ -106,7 +108,7 @@
                     <div class="panel-body">
                         @for (int a = 1; a <= 12; a++)
                         {
-                            <div class="col-sm-4"><input type="checkbox" name="messoli" id="cbox@(a)" @(Model.contieneMesSoli(a) ? "checked=\"checked\"":"") value="@(a)">@MesEntSoli.getMesCorto((MesEntSoli.Meses)a)</div>
+                            <div class="col-sm-4"><input type="checkbox" name="messoli" id="cbox@(a)" @(Model.contieneMesSoli(a) ? "checked=\"checked\"" : "") value="@(a)">@MesEntSoli.getMesCorto((MesEntSoli.Meses)a)</div>
 
                         }
                                               
@@ -144,3 +146,12 @@
         </div>
     </div>
 </div>
+    }
+    else
+    {
+
+        <div class="row">
+            <center><h4>El material no se encuentra en la Base de Datos </h4></center>
+        </div>
+
+    }

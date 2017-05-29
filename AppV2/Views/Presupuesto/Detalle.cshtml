@@ -46,7 +46,7 @@ else
                 </div>
                 
                 <div style="float: right;margin-right:5px;">
-                     <button type="button" class="btn btn-warning btn-sm" onclick="MostrarPanelNuevo()" > Agregar Ítem </button>
+                     <button type="button" class="btn btn-warning btn-sm" onclick="MostrarPanelNuevo(@ViewBag.idTipo)" > Agregar Ítem </button>
                 </div>
             </div>
             
@@ -98,7 +98,16 @@ else
                     {
                         foreach (var item in Model.detalles)
                         {
-                            <tr class="success">
+                            var claseFila = "";
+                            if (item.estado == Aprobacion.estados.Aprobado)
+                            {
+                                claseFila = "success";
+                            }
+                            else if (item.estado == Aprobacion.estados.Desaprobado)
+                            {
+                                claseFila = "danger";
+                            }
+                            <tr class="@claseFila">
                                 <td>@item.idDetalle</td>
                                 <td>@Html.DisplayFor(modelItem => item.mat.codProducto)</td>
                                 <td>@Html.DisplayFor(modelItem => item.mat.desc)</td>
@@ -111,7 +120,7 @@ else
                                     <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
                                     <button type="button" class="btn btn-primary btn-xs" onclick="ExpandirObservaciones('@item.idDetalle')">Obser</button>
                                     <button type="button" class="btn btn-danger btn-xs" onclick="MostrarEliminarDetalle('@item.idDetalle')">Eliminar</button>
-                                
+
                                 </td>
                             </tr>
                         <tr style="display:none;" id="DETALLE_@item.idDetalle">

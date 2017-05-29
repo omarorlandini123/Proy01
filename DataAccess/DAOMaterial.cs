@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using Data;
+using System.Data;
 
 namespace DataAccess
 {
@@ -47,33 +49,127 @@ namespace DataAccess
             List<Material> listaRpta = new List<Material>();
             try
             {
-                foreach (Material mat in getPrueba())
+                ServicioMateriales.Material cli = new ServicioMateriales.Material();
+                ServicioMateriales.material[] materiales = cli.getMaterial(cond, "0");
+                
+                foreach (ServicioMateriales.material mat in materiales)
                 {
-                    if (mat.codProducto.ToUpper().StartsWith(cond.ToUpper()) || mat.desc.Contains(cond))
-                    {
-                        listaRpta.Add(mat);
-                    }
+
+                    Material ma = new Material();
+                    ma.codProducto = mat.codigoMaterial;
+                    ma.desc = mat.descMaterial;
+                    ma.precioUnit = mat.precioMaterial;
+                    ma.unidad = mat.unidad;
+                    ma.subClase = new SubClase();
+                    ma.subClase.clase = new Clase();
+                    ma.subClase.codSubClase = mat.subclase.codSubClase.ToString();
+                    ma.subClase.desSubClase = mat.subclase.desSubClase;
+                    ma.subClase.clase.codClase = mat.subclase.clase.codClase.ToString();
+                    ma.subClase.clase.desClase = mat.subclase.clase.desClase;
+                    listaRpta.Add(ma);
                 }
             }
             catch (Exception s) {
 
             }
+            
             return listaRpta;
         }
 
         public Material getMaterial(string codMaterial)
         {
-           
-            foreach (Material mat in getPrueba())
+            try
             {
-                if (mat.codProducto.Equals(codMaterial))
+                ServicioMateriales.Material cli = new ServicioMateriales.Material();
+                ServicioMateriales.material[] materiales = cli.getMaterial(codMaterial, "1");
+                List<Material> listaRpta = new List<Material>();
+                foreach (ServicioMateriales.material mat in materiales)
                 {
-                    return mat;
+
+                    Material ma = new Material();
+                    ma.codProducto = mat.codigoMaterial;
+                    ma.desc = mat.descMaterial;
+                    ma.precioUnit = mat.precioMaterial;
+                    ma.unidad = mat.unidad;
+                    ma.subClase = new SubClase();
+                    ma.subClase.clase = new Clase();
+                    ma.subClase.codSubClase = mat.subclase.codSubClase.ToString();
+                    ma.subClase.desSubClase = mat.subclase.desSubClase;
+                    ma.subClase.clase.codClase = mat.subclase.clase.codClase.ToString();
+                    ma.subClase.clase.desClase = mat.subclase.clase.desClase;
+                    return ma;
                 }
             }
+            catch (Exception s) {
+            }
 
-            return new Material() {codProducto=codMaterial};
-            
+            return null;
+
+            }
+
+        public List<Material> getServicios(string cond)
+        {
+            List<Material> listaRpta = new List<Material>();
+            try
+            {
+                ServicioMateriales.Material cli = new ServicioMateriales.Material();
+                ServicioMateriales.material[] materiales = cli.getServicio(cond, "0");
+
+                foreach (ServicioMateriales.material mat in materiales)
+                {
+
+                    Material ma = new Material();
+                    ma.codProducto = mat.codigoMaterial;
+                    ma.desc = mat.descMaterial;
+                    ma.precioUnit = mat.precioMaterial;
+                    ma.unidad = mat.unidad;
+                    ma.subClase = new SubClase();
+                    ma.subClase.clase = new Clase();
+                    ma.subClase.codSubClase = mat.subclase.codSubClase.ToString();
+                    ma.subClase.desSubClase = mat.subclase.desSubClase;
+                    ma.subClase.clase.codClase = mat.subclase.clase.codClase.ToString();
+                    ma.subClase.clase.desClase = mat.subclase.clase.desClase;
+                    listaRpta.Add(ma);
+                }
+            }
+            catch (Exception s)
+            {
+
+            }
+
+            return listaRpta;
+        }
+
+        public Material getServicio(string codMaterial)
+        {
+            try
+            {
+                ServicioMateriales.Material cli = new ServicioMateriales.Material();
+                ServicioMateriales.material[] materiales = cli.getServicio(codMaterial, "1");
+                List<Material> listaRpta = new List<Material>();
+                foreach (ServicioMateriales.material mat in materiales)
+                {
+
+                    Material ma = new Material();
+                    ma.codProducto = mat.codigoMaterial;
+                    ma.desc = mat.descMaterial;
+                    ma.precioUnit = mat.precioMaterial;
+                    ma.unidad = mat.unidad;
+                    ma.subClase = new SubClase();
+                    ma.subClase.clase = new Clase();
+                    ma.subClase.codSubClase = mat.subclase.codSubClase.ToString();
+                    ma.subClase.desSubClase = mat.subclase.desSubClase;
+                    ma.subClase.clase.codClase = mat.subclase.clase.codClase.ToString();
+                    ma.subClase.clase.desClase = mat.subclase.clase.desClase;
+                    return ma;
+                }
+            }
+            catch (Exception s)
+            {
+            }
+
+            return null;
+
         }
 
     }

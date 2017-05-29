@@ -17,10 +17,10 @@
                         <a href="#" onclick="verAreasDisponibles(@item.idPresupuesto)"><h4 class="list-group-item-heading">@item.nombrePresupuesto</h4></a>
                     </div>
                     <div class="col-sm-2">
-                        <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgAprobar(@item.idPresupuesto)" ><h5 class="list-group-item-heading">Aprobar</h5></a>
+                        <button style="margin-left: 10px;" type="button" class="btn btn-warning btn-xs" onclick="AprobarPresupuesto(@item.idPresupuesto)">Aprobar</button>
                     </div>
-                    <div class="col-sm-4">
-                        <a href="#" data-toggle="modal" data-target="#ModalGeneral" onclick="msgVerReportes(@item.idPresupuesto)" ><h5 class="list-group-item-heading">Ver Reportes</h5></a>
+                    <div class="col-sm-2">
+                        <button style="margin-left: 10px;" type="button" class="btn btn-danger btn-xs" onclick="DesAprobarPresupuesto(@item.idPresupuesto)">DesAprobar</button>
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-3">Aprobado por:</div>
-                    <div class="col-sm-3"><a href="#">Ver</a></div>
+                    <div class="col-sm-3"><a href="javascript:MostrarAprobacionesPresupuesto(@item.idPresupuesto)">Ver</a></div>
                     <div class="col-sm-2">Hasta:</div>
                     <div class="col-sm-4">@item.fechaValFin.ToShortDateString()</div>
                 </div>

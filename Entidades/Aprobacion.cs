@@ -10,12 +10,13 @@ namespace Entidades
     {
 
         public enum estados {
-            Aprobado=1,
-            Desaprobado,
-            Inactivo,
-            Activo,
-            Edicion,
-            NoVerficiado
+            Desaprobado=0,
+            Aprobado =1,
+            Inactivo=2,
+            Activo=3,
+            Edicion=4,
+            NoVerficiado=5,
+            Enviado=6
         }
         public int idAprobacion { get; set; }
         public NivelAprobacion nivel { get; set; }
@@ -31,6 +32,16 @@ namespace Entidades
         public Version version { get; set; }
         public DetalleVersion detalleVersion { get; set; }
         public bool listoParaAprobar { get; set; }
+        public List<DetalleAprobacion> detalles { get; set; }
+    }
+
+    public class DetalleAprobacion {
+
+        public DetalleAprobacion() { }
+        public Aprobacion aprobacion { get; set; }
+        public int idDetalleAprobacion { get; set; }
+        public Aprobacion.estados estado { get; set; }
+        public DateTime fecReg { get; set; }
 
     }
 }

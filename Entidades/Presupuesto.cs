@@ -33,6 +33,20 @@ namespace Entidades
                         rpta = "est-inactivo";
                         break;
                 }
+
+                if (aprobaciones != null) {
+                    Boolean todoAprobado = true ;
+                    
+                    foreach (Aprobacion apro in aprobaciones) {
+                        if (apro.estado != Aprobacion.estados.Aprobado) {
+                            todoAprobado = false;
+                        }
+                    }
+                    if (todoAprobado) rpta = "est-aprobado";
+                    if (!todoAprobado) rpta = "est-edicion";
+
+                }
+
                 return rpta;
             } }
         public List<Aprobacion> aprobaciones { get; set; }

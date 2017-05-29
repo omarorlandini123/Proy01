@@ -45,7 +45,6 @@
     <Compile Include="LogicMaterial.cs" />
     <Compile Include="LogicPresupuesto.cs" />
     <Compile Include="LogicSede.cs" />
-    <Compile Include="LogicUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

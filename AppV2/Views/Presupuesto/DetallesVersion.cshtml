@@ -16,7 +16,16 @@
         {
             foreach (var item in Model)
             {
-                <tr class="success">
+                var claseFila = "";
+                if (item.estado == Entidades.Aprobacion.estados.Aprobado)
+                {
+                    claseFila = "success";
+                }
+                else if (item.estado == Entidades.Aprobacion.estados.Desaprobado)
+                {
+                    claseFila = "danger";
+                }
+                <tr class="@claseFila">
                     <td>@item.idDetalle</td>
                     <td>@Html.DisplayFor(modelItem => item.mat.codProducto)</td>
                     <td>@Html.DisplayFor(modelItem => item.NombreMaterialSoli)</td>
@@ -25,21 +34,21 @@
                     <td>@Html.DisplayFor(modelItem => item.cantidadSoli)</td>
                     <td>@Html.DisplayFor(modelItem => item.totalSoli)</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-xs" >Aprobar</button>
+                        <button type="button" class="btn btn-success btn-xs" onclick="AprobarDetalle(@item.idDetalle)">Aprobar</button>
                         <button type="button" class="btn btn-warning btn-xs" onclick="ExpandirDetalle('@item.idDetalle')">Editar</button>
                         <button type="button" class="btn btn-primary btn-xs" onclick="ExpandirObservaciones('@item.idDetalle')">Obser</button>
                         <button type="button" class="btn btn-danger btn-xs" onclick="MostrarEliminarDetalle('@item.idDetalle')">Eliminar</button>
 
                     </td>
                 </tr>
-                            <tr style="display:none;" id="DETALLE_@item.idDetalle">
-                                <td colspan="8">
-                                    <div class="col-sm-12" id="DETALLEDIV_@item.idDetalle">
+                <tr style="display:none;" id="DETALLE_@item.idDetalle">
+                    <td colspan="8">
+                        <div class="col-sm-12" id="DETALLEDIV_@item.idDetalle">
 
-                                    </div>
+                        </div>
 
-                                </td>
-                            </tr>
+                    </td>
+                </tr>
             }
         }
         else

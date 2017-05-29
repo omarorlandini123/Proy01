@@ -46,3 +46,15 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\LogicAccess\bin\D
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\LogicAccess\obj\Debug\LogicAccess.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\LogicAccess\obj\Debug\LogicAccess.pdb
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\LogicAccess.dll
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\LogicAccess.pdb
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\DataAccess.dll
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Entidades.dll
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Data.dll
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Oracle.DataAccess.dll
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\DataAccess.pdb
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Entidades.pdb
+D:\Presupuestos\Proy01\LogicAccess\bin\Debug\Data.pdb
+D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.csprojResolveAssemblyReference.cache
+D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.dll
+D:\Presupuestos\Proy01\LogicAccess\obj\Debug\LogicAccess.pdb

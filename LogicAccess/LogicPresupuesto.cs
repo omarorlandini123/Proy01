@@ -32,9 +32,9 @@ namespace LogicAccess
             return dao.getArchivosDetalle(idDetalle);
         }
 
-        public DetalleVersion DetalleDeVersion(int idDetalleVersion) {
+        public DetalleVersion DetalleDeVersion(int idDetalleVersion, int idTipo) {
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.DetalleDeVersion(idDetalleVersion);
+            return dao.DetalleDeVersion(idDetalleVersion, idTipo);
         }
 
         public List<DetalleVersion> DetallesDeVersion(string cond,int idVersion, int idTipo) {
@@ -89,6 +89,26 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.AprobarPresupuesto(id,observacion,estado,user);
         }
+
+        public Presupuesto getPresupuestoReporteGeneral(int codPresupuesto)
+        {
+            Presupuesto presup = getPresupuesto(codPresupuesto);
+
+            presup.TiposPresupuestos = getPresupuestosTipos(presup.idPresupuesto);
+            foreach (DetallePresupuesto detPresup in presup.TiposPresupuestos)
+            {
+                detPresup.detalleDeVersiones = getDetallesDeUltimaVersion(detPresup.idPresupuestoTipo);
+
+            }
+
+            return presup;
+        }
+
+
+
+
+
+
 
         /// <summary>
         /// Obtiene las versiones de los presupuestos del área 
@@ -179,7 +199,11 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getPresupuestosTipos(id);
         }
-
+        public List<DetallePresupuesto> getPresupuestoTiposArea(int id,int idArea)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestosTiposArea(id,idArea);
+        }
         public bool ResolverObservacion(int idObservacion, string observacion,string usuario) {
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.ResolverObservacion(idObservacion, observacion, usuario);
@@ -190,10 +214,24 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getPresupuestosPorSede(idSede);
         }
-        public List<Presupuesto> getPresupuestosPorSedeLista(int idSede) {
+
+        public List<DetalleVersion> getDetallesDeUltimaVersion(int DetallePresup) {
 
             DAOPresupuesto dao = new DAOPresupuesto();
-            return dao.getPresupuestosPorSedeLista(idSede);
+            return dao.getDetallesDeUltimaVersion(DetallePresup);
+        }
+
+        public List<DetallePresupuesto> getPresupuestosTipos(int idPresupuesto)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestosTipos(idPresupuesto);
+
+        }
+
+        public List<Presupuesto> getPresupuestosPorSedeLista(int idSede,int idArea) {
+
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getPresupuestosPorSedeLista(idSede,idArea);
         }
 
         public Presupuesto AprobacionesPresupuesto(int idPresupuesto) {
@@ -227,5 +265,91 @@ namespace LogicAccess
             DAOPresupuesto dao = new DAOPresupuesto();
             return dao.getSedes();
         }
+
+        public int AprobarDetalle(int idDetalle, Aprobacion.estados aprobado, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AprobarDetalle(idDetalle,aprobado,usuario);
+        }
+
+        public List<DetalleAprobacion> getDetallesAprobacion(int idAprobacion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getDetallesAprobacion(idAprobacion);
+
+        }
+
+        public int EnviarAprobacion(int id, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.EnviarAprobacion(id,  usuario);
+        }
+
+        public int AprobarVersion(int id, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AprobarVersion(id, usuario);
+        }
+
+        public int RechazarVersion(int id, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.RechazarVersion(id, usuario);
+        }
+
+        public DetalleVersion getAprobacionesDetalleVersion(int idDetalleVersion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getAprobacionesDetalleVersion(idDetalleVersion);
+        }
+
+        public Entidades.Version getAprobacionesVersion(int idVersion)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getAprobacionesVersion(idVersion);
+        }
+
+        public DetallePresupuesto getAprobacionesDetallePresupuesto(int idDetallePresupuesto)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getAprobacionesDetallePresupuesto(idDetallePresupuesto);
+
+        }
+        public Presupuesto getAprobacionesPresupuesto(int idPresupuesto)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.getAprobacionesPresupuesto(idPresupuesto);
+        }
+
+        public int AgregarAprobPresup(int id, int idOrden, string idUsuario, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AgregarAprobPresup(id,idOrden,idUsuario,usuario);
+        }
+
+        public int AprobarPresupuesto(int id,  string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AprobarPresupuesto(id,  usuario);
+        }
+
+        public int DesAprobarPresupuesto(int id, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.DesAprobarPresupuesto(id, usuario);
+        }
+
+        public int AgregarAprobVersion(int id, int idOrden, string idUsuario, string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.AgregarAprobVersion(id, idOrden, idUsuario, usuario);
+        }
+
+        public int nuevaVersion(int id, int idArea,string usuario)
+        {
+            DAOPresupuesto dao = new DAOPresupuesto();
+            return dao.nuevaVersion(id, idArea,usuario);
+        }
     }
-}
+    }
+

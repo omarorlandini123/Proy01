@@ -22,7 +22,18 @@ namespace AppV2.Controllers
 
         public ActionResult PorSede() {
             LogicPresupuesto logic = new LogicPresupuesto();
-            return View(logic.getPresupuestosPorSede(((Usuario)Session["usuario"]).area.sede.codSede));
+            Usuario user = (Usuario)Session["usuario"];
+            if (user == null)
+            {
+                Session.Clear();
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
+            {
+                return View(logic.getPresupuestosPorSede(user.area.sede.codSede));
+            }
+
         }
 
 
@@ -49,9 +60,20 @@ namespace AppV2.Controllers
         {
             LogicPresupuesto logic = new LogicPresupuesto();
             LogicArea logArea = new LogicArea();
-            Area area = logArea.getArea(id);
-            area.presupuestos = logic.getPresupuestosPorSedeLista(((Usuario)Session["usuario"]).area.sede.codSede);
-            return View(area);
+
+            Usuario user = (Usuario)Session["usuario"];
+            if (user == null)
+            {
+                Session.Clear();
+                return RedirectToAction("Index", "Login");
+
+            }
+            else
+            {
+                Area area = logArea.getArea(id);
+                area.presupuestos = logic.getPresupuestosPorSedeLista(user.area.sede.codSede, id);
+                return View(area);
+            }
         }
 
 
@@ -77,6 +99,30 @@ namespace AppV2.Controllers
             var FileVirtualPath = "~/App_Data/uploads/" + Path.GetFileName(arc.ruta);
             return File(FileVirtualPath, "application/force-download", arc.nombre);
 
+        }
+
+        public FileResult getDetalleGeneral(int codPresupuesto)
+        {
+            var folder = Server.MapPath("~/App_Data/reportes/plantilla_reporte/");
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            var folderdestino = Server.MapPath("~/App_Data/reportes/"+((Usuario)Session["usuario"]).usuario+"/");
+            if (!Directory.Exists(folderdestino))
+            {
+                Directory.CreateDirectory(folderdestino);
+            }
+
+            LogicPresupuesto logic = new LogicPresupuesto();
+            Presupuesto presup = logic.getPresupuestoReporteGeneral(codPresupuesto);
+
+            ReporteGeneralPorSede rp = new ReporteGeneralPorSede(folder+ "repoteGeneral.xlsx", folderdestino+ "repoteGeneral.xlsx", presup);
+            rp.CreateReport();
+
+            //var FileVirtualPath = "~/App_Data/reportes/" + Path.GetFileName("reporte_sede.xls");
+            return File(folderdestino+ "repoteGeneral.xlsx", "application/force-download", "ReporteGeneralPresupuesto.xlsx");
         }
 
         public ActionResult SubirArchivo(int idDetalle)
@@ -144,7 +190,7 @@ namespace AppV2.Controllers
             string nombreAleatorio = GenerarCodigo();
 
 
-
+            DetalleVersion detVersion = new DetalleVersion();
             foreach (string upload in Request.Files)
             {
                 if (Request.Files[upload].FileName != "")
@@ -156,7 +202,8 @@ namespace AppV2.Controllers
                 }
             }
 
-            DetalleVersion detVersion = new DetalleVersion();
+
+
             detVersion.version = new Entidades.Version();
             detVersion.version.idVersion = int.Parse(Request.Form["idVersion"].ToString());
             detVersion.tipo = int.Parse(Request.Form["idTipo"].ToString());
@@ -166,17 +213,19 @@ namespace AppV2.Controllers
             detVersion.largo = double.Parse(Request.Form["largo"].ToString());
             detVersion.ancho = double.Parse(Request.Form["ancho"].ToString());
             detVersion.alto = double.Parse(Request.Form["alto"].ToString());
-            detVersion.sustento = Request.Form["sustento"].ToString();
+            String sust = Request.Form["sustento"].ToString();
+            detVersion.sustento = sust.Length > 500 ? sust.Substring(0, 499) : sust;
             detVersion.messoli = Request.Form["messoli"].ToString();
             detVersion.mesent = Request.Form["mesent"].ToString();
             detVersion.precioSoli = double.Parse(Request.Form["preciosoli"].ToString());
             detVersion.uniSoli = Request.Form["uniSoli"].ToString();
             detVersion.mat = new Material();
             detVersion.mat.codProducto = Request.Form["codMaterial"].ToString();
-            detVersion.mat.desc = Request.Form["nomMaterial"].ToString();
+            String nomMat = Request.Form["nomMaterial"].ToString();
+            detVersion.mat.desc = nomMat.Length > 200 ? nomMat.Substring(0, 199) : nomMat;
+            detVersion.UsuarioReg = (Usuario)Session["usuario"];
             detVersion.archivosSustento = new List<Archivo>();
             detVersion.archivosSustento.Add(new Archivo() { ruta = Path.Combine(path, nombreAleatorio + typeFile), nombre = filename, tipo = typeFile });
-            detVersion.UsuarioReg = (Usuario)Session["usuario"];
 
             LogicPresupuesto logic = new LogicPresupuesto();
             int rpta = logic.agregarDetalleVersion(detVersion);
@@ -187,6 +236,106 @@ namespace AppV2.Controllers
         #endregion
 
         #region "Vistas parciales"
+        public ActionResult AprobacionesPresupuesto(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            return PartialView(logic.getAprobacionesPresupuesto(id));
+        }
+
+        public ActionResult AprobarDetalle(int idDetalle)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            int rpta = logic.AprobarDetalle(idDetalle, Aprobacion.estados.Aprobado, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+
+        public ActionResult EnviarAprobacion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            int rpta = logic.EnviarAprobacion(id, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+
+        public ActionResult AprobarVersion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            int rpta = logic.AprobarVersion(id, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+        public ActionResult RechazarVersion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            int rpta = logic.RechazarVersion(id, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+        public ActionResult AprobacionesDetallePresupuesto(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            return PartialView(logic.getAprobacionesDetallePresupuesto(id));
+        }
+
+        public ActionResult AprobacionesVersion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            return PartialView(logic.getAprobacionesVersion(id));
+        }
+
+        public ActionResult AprobacionesDetalleVersion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            return PartialView(logic.getAprobacionesDetalleVersion(id));
+        }
+
+        public ActionResult NuevoAprobadorPresup(int id)
+        {
+
+            ViewBag.idPresupuesto = id;
+            return PartialView();
+
+        }
+        public ActionResult NuevoAprobadorVersion(int id)
+        {
+
+            ViewBag.idVersion = id;
+            return PartialView();
+
+        }
+        public ActionResult AgregarAprobPresup(int id, int idOrden, string idUsuario)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            ViewBag.idPresupuesto = id;
+            int rpta = logic.AgregarAprobPresup(id, idOrden, idUsuario, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+        public ActionResult AgregarAprobVersion(int id, int idOrden, string idUsuario)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            ViewBag.idVersion = id;
+            int rpta = logic.AgregarAprobVersion(id, idOrden, idUsuario, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+        public ActionResult AprobarPresupuesto(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            ViewBag.idPresupuesto = id;
+            int rpta = logic.AprobarPresupuesto(id, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+        public ActionResult DesAprobarPresupuesto(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            ViewBag.idPresupuesto = id;
+            int rpta = logic.DesAprobarPresupuesto(id, ((Usuario)Session["usuario"]).usuario);
+            return PartialView(rpta);
+        }
+
+
+        public ActionResult DetalleAprobacion(int id)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            List<DetalleAprobacion> rpta = logic.getDetallesAprobacion(id);
+            return PartialView(rpta);
+        }
 
         public ActionResult Observaciones(int idDetalle)
         {
@@ -194,11 +343,11 @@ namespace AppV2.Controllers
             return PartialView(logicPresup.getObservacionesDetalle(idDetalle));
         }
 
-        public ActionResult MostrarObservarDetalle(int idDetalle)
+        public ActionResult MostrarObservarDetalle(int idDetalle,int idTipo)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
 
-            return PartialView(logicPresup.DetalleDeVersion(idDetalle));
+            return PartialView(logicPresup.DetalleDeVersion(idDetalle, idTipo));
 
         }
 
@@ -210,11 +359,11 @@ namespace AppV2.Controllers
         }
 
 
-        public ActionResult CrearPresup(string nombre, int idSede,int mesDesde, int anioDesde,int mesHasta,int anioHasta)
+        public ActionResult CrearPresup(string nombre, int idSede, int mesDesde, int anioDesde, int mesHasta, int anioHasta)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
-            
-            return PartialView(logicPresup.CrearPresup(nombre,idSede,((Usuario)Session["usuario"]).usuario,mesDesde,anioDesde,mesHasta,anioHasta));
+
+            return PartialView(logicPresup.CrearPresup(nombre, idSede, ((Usuario)Session["usuario"]).usuario, mesDesde, anioDesde, mesHasta, anioHasta));
         }
 
         public ActionResult MostrarResolucionObs(int idObservacion)
@@ -224,10 +373,10 @@ namespace AppV2.Controllers
 
         }
 
-        public ActionResult MostrarEliminarDetalle(int idDetalle) {
+        public ActionResult MostrarEliminarDetalle(int idDetalle,int idTipo) {
 
-            LogicPresupuesto logicPresup = new LogicPresupuesto();            
-            return PartialView(logicPresup.DetalleDeVersion(idDetalle));
+            LogicPresupuesto logicPresup = new LogicPresupuesto();
+            return PartialView(logicPresup.DetalleDeVersion(idDetalle, idTipo));
         }
 
         public ActionResult EliminarDetalle(int idDetalle) {
@@ -245,27 +394,28 @@ namespace AppV2.Controllers
 
         }
 
-        public ActionResult DetallesVersion(string cond,int idVersion,int idTipo)
+        public ActionResult DetallesVersion(string cond, int idVersion, int idTipo)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
-            return PartialView(logicPresup.DetallesDeVersion(cond,idVersion,idTipo));
+            return PartialView(logicPresup.DetallesDeVersion(cond, idVersion, idTipo));
         }
 
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id,int idTipo)
         {
             LogicPresupuesto logic = new LogicPresupuesto();
             ViewBag.prioridades = (List<Prioridad>)logic.getPrioridades();
-            return PartialView(logic.DetalleDeVersion(id));
+            return PartialView(logic.DetalleDeVersion(id, idTipo));
         }
 
 
-       
 
-        public ActionResult Nuevo()
+
+        public ActionResult Nuevo(int idTipo)
         {
             LogicPresupuesto logic = new LogicPresupuesto();
             ViewBag.prioridades = (List<Prioridad>)logic.getPrioridades();
+            ViewBag.idTipo = idTipo;
             return PartialView();
         }
 
@@ -273,17 +423,26 @@ namespace AppV2.Controllers
         {
 
             LogicPresupuesto logic = new LogicPresupuesto();
-            DetallePresupuesto presTip=logic.getVersiones(id, idArea);
+            DetallePresupuesto presTip = logic.getVersiones(id, idArea);
 
             return PartialView(presTip);
 
         }
 
-        public ActionResult TiposPresupuesto(int id)
+        public ActionResult nuevaVersion(int id, int idArea)
+        {
+            LogicPresupuesto logic = new LogicPresupuesto();
+            Usuario user = (Usuario)Session["usuario"];
+            int rpta = logic.nuevaVersion(id, idArea, user.usuario);
+            return PartialView(rpta);
+
+        }
+
+        public ActionResult TiposPresupuesto(int id, int idArea)
         {
             LogicPresupuesto logic = new LogicPresupuesto();
             Presupuesto presup = logic.getPresupuesto(id);
-            presup.TiposPresupuestos = logic.getPresupuestoTipos(id);
+            presup.TiposPresupuestos = logic.getPresupuestoTiposArea(id, idArea);
             return PartialView(presup);
 
         }
@@ -291,7 +450,7 @@ namespace AppV2.Controllers
         public ActionResult PorArea(int idPresupuesto) {
             LogicPresupuesto logicpresup = new LogicPresupuesto();
             Usuario user = (Usuario)Session["usuario"];
-            Presupuesto rpta= logicpresup.getPresupuestosPorArea(idPresupuesto, user.usuario);
+            Presupuesto rpta = logicpresup.getPresupuestosPorArea(idPresupuesto, user.usuario);
             return PartialView(rpta);
         }
 
@@ -311,6 +470,13 @@ namespace AppV2.Controllers
 
         }
 
+        public ActionResult getServicios(string cond)
+        {
+            LogicMaterial logicMaterial = new LogicMaterial();
+            return PartialView(logicMaterial.getServicios(cond));
+
+        }
+
         #endregion
 
         #region "Modales"
@@ -325,7 +491,7 @@ namespace AppV2.Controllers
         #region "JSon POST"
 
         [HttpPost]
-        public JsonResult AprobarPresup(int id, string observacion,int estado) {
+        public JsonResult AprobarPresup(int id, string observacion, int estado) {
             LogicPresupuesto logic = new LogicPresupuesto();
             Usuario user = (Usuario)Session["usuario"];
             bool rpta = logic.AprobarPresupuesto(id, observacion, estado, user);
@@ -336,7 +502,7 @@ namespace AppV2.Controllers
         public JsonResult ObservarDetalle(int idDetalle, string observacion)
         {
             LogicPresupuesto logicPresup = new LogicPresupuesto();
-            return Json(logicPresup.ObservarDetalle(idDetalle, observacion,((Usuario)Session["usuario"]).usuario), JsonRequestBehavior.DenyGet);
+            return Json(logicPresup.ObservarDetalle(idDetalle, observacion, ((Usuario)Session["usuario"]).usuario), JsonRequestBehavior.DenyGet);
         }
 
         [HttpPost]
@@ -351,6 +517,13 @@ namespace AppV2.Controllers
         {
             LogicMaterial logicMaterial = new LogicMaterial();
             return Json(logicMaterial.getMaterial(cond), JsonRequestBehavior.DenyGet);
+
+        }
+        [HttpPost]
+        public JsonResult getServicio(string cond)
+        {
+            LogicMaterial logicMaterial = new LogicMaterial();
+            return Json(logicMaterial.getServicio(cond), JsonRequestBehavior.DenyGet);
 
         }
 

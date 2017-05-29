@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>C:\Users\consultor3\Desktop\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +97,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -155,8 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ExcelEditor.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PresupuestoController.cs" />
+    <Compile Include="Controllers\ReporteGeneralPorSede.cs" />
     <Compile Include="Controllers\SedeController.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,6 +221,22 @@
     <Content Include="Views\Presupuesto\EliminarDetalle.cshtml" />
     <Content Include="Views\Presupuesto\MostrarCrearPresup.cshtml" />
     <Content Include="Views\Presupuesto\CrearPresup.cshtml" />
+    <Content Include="Views\Presupuesto\AprobacionesPresupuesto.cshtml" />
+    <Content Include="Views\Presupuesto\NuevoAprobadorPresup.cshtml" />
+    <Content Include="Views\Presupuesto\AgregarAprobPresup.cshtml" />
+    <Content Include="Views\Presupuesto\AprobarPresupuesto.cshtml" />
+    <Content Include="Views\Presupuesto\DetalleAprobacion.cshtml" />
+    <Content Include="Views\Presupuesto\DesAprobarPresupuesto.cshtml" />
+    <Content Include="Views\Presupuesto\AprobarDetalle.cshtml" />
+    <Content Include="Views\Presupuesto\EnviarAprobacion.cshtml" />
+    <Content Include="Views\Presupuesto\AprobacionesVersion.cshtml" />
+    <Content Include="Views\Presupuesto\NuevoAprobadorVersion.cshtml" />
+    <Content Include="Views\Presupuesto\AgregarAprobVersion.cshtml" />
+    <Content Include="Views\Presupuesto\AprobarVersion.cshtml" />
+    <Content Include="Views\Presupuesto\RechazarVersion.cshtml" />
+    <Content Include="Views\Presupuesto\nuevaVersion.cshtml" />
+    <Content Include="Views\Presupuesto\getServicios.cshtml" />
+    <Content Include="Views\Login\Configuracion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -234,6 +256,9 @@
       <Project>{57e542f6-4661-4574-9cd0-18e7ca348b65}</Project>
       <Name>LogicAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

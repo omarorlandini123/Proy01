@@ -72,33 +72,7 @@ function verTiposDisponibles(idPresup) {
 
 }
 
-function AprobarPresupuesto(idPresupuesto) {
 
-    $('#idContenidoModal').html(EsperaModal());
-
-    $.post("../Presupuesto/AprobarPresup", {
-        id: idPresupuesto, observacion: $('#observacionNuevoEstado').val(), estado: $('#nuevoEstado').val()
-    })
-    .done(function (data) {
-        if (data) {
-            $('#idContenidoModal').fadeOut(500, function () {
-                $('#idContenidoModal').html(EsperaModalPERS('Se cambiado el estado con éxito')).fadeIn(500);
-            });
-        } else {
-            $('#idContenidoModal').fadeOut(500, function () {
-                $('#idContenidoModal').html(EsperaModalPERS('No se ha podido cambiar el estado')).fadeIn(500);
-            });
-        }
-    })
-        .fail(function (data) {
-        $('#idContenidoModal').fadeOut(500, function () {
-            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
-        });
-    });
-
-
-
-}
 function LogOut() {
     $.post("/Login/Logout", { idUsuario: 0 })
     .done(function (data) {
@@ -169,7 +143,7 @@ var DIVSEl = '';
 
 function ListarTipos(idPresupuesto) {
     $(AreaSelect).hide();
-    $.get("/Presupuesto/TiposPresupuesto/" + idPresupuesto, {})
+    $.get("/Presupuesto/TiposPresupuesto", { id: idPresupuesto, idArea: VAR_AREA_SEL })
       .done(function (data) {
           $('#TiposPresup_' + idPresupuesto).fadeOut(500, function () {
               $('#TiposPresup_' + idPresupuesto).show();
@@ -188,19 +162,49 @@ function listarVersiones(idPresupTipo) {
       });
 }
 
+function NuevaVersion(idPresupTipo) {
+    $('#idContenidoModal').html(EsperaModal());
+    $('#ModalGeneral').modal('show');
+    $.get("/Presupuesto/nuevaVersion", { id: idPresupTipo, idArea: VAR_AREA_SEL })
+      .done(function (data) {
+          $('#idContenidoModal').fadeOut(500, function () {
+              $('#idContenidoModal').html(data).fadeIn(500);
+          });
+      })
+    .fail(function (data) {
+        $('#idContenidoModal').fadeOut(500, function () {
+            $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+        });
+    });
+
+}
+
+
+
 function ExpandirDetalle(codDetalle) {
     $(TRSELECT).hide();
     $(DIVSEl).html('');
 
     $('#DETALLEDIV_' + codDetalle).html(getImgEspera());
     $('#DETALLE_' + codDetalle).fadeIn(1000, function () {
-        $.get("/Presupuesto/Edit", { id: codDetalle})
+        $.get("/Presupuesto/Edit", { id: codDetalle, idTipo: $('#idTipo').val() })
               .done(function (data) {
                   $('#DETALLEDIV_' + codDetalle).hide();
                   $('#DETALLEDIV_' + codDetalle).html(data);
                   $('#DETALLE_' + codDetalle).show();
                   $('#DETALLEDIV_' + codDetalle).fadeOut(500, function () {
                       $('#DETALLEDIV_' + codDetalle).html(data).fadeIn(500);
+
+                      $('#codMaterial').keypress(function (e) {
+                          if (e.which == 13) {//Enter key pressed
+                              if ($('#idTipo').val() == 1) {
+                                  getMateriales();
+                              }
+                              if ($('#idTipo').val() == 2) {
+                                  getServicios();
+                              }
+                          }
+                      });
                   });
                   $('.solo-numero').keyup(function () {
                       this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -400,10 +404,10 @@ function ExpandirObservaciones(codDetalle){
     }
   
 
-    function MostrarPanelNuevo() {
+    function MostrarPanelNuevo(varidTipo) {
         $('#DIV_NEW_ITEM').html(EsperaDiv());
         $('#DIV_NEW_ITEM').fadeIn(500);
-        $.post("/Presupuesto/Nuevo",{ })
+        $.post("/Presupuesto/Nuevo", { idTipo: varidTipo })
                   .done(function (data) {
                      
                           $('#DIV_NEW_ITEM').fadeOut(500, function() {
@@ -411,8 +415,20 @@ function ExpandirObservaciones(codDetalle){
                               $('.solo-numero').keyup(function () {
                                   this.value = (this.value + '').replace(/[^0-9]/g, '');
                               });
+
                               $('#DIV_NEW_ITEM').fadeIn(500);
+                              $('#codMaterial').keypress(function (e) {
+                                  if (e.which == 13) {//Enter key pressed
+                                      if (varidTipo == 1) {
+                                          getMateriales();
+                                      }
+                                      if (varidTipo == 2) {
+                                          getServicios();
+                                      }
+                                  }
+                              });
                           });
+
 
                       
 
@@ -460,9 +476,9 @@ function ExpandirObservaciones(codDetalle){
             $('#desSubClase').val('Cargando ...');
             $('#cantidad').val(0);
             $('#unidSolicitada').val('Cargando ...');
-        
+
             $('#totalsolic').val(0);
-        
+
             $('#alto').val(0);
             $('#ancho').val(0);
             $('#largo').val(0);
@@ -487,37 +503,102 @@ function ExpandirObservaciones(codDetalle){
             $('#cantidad').val(0);
             $('#totalsolic').val(0);
             $('#unidSolicitada').val('Busque un Material');
-        
+
             $('#ListarMateriales').html('<a href="#" class="list-group-item"> <p class="list-group-item-text"> Buscando ... </p></a>');
             $('#ListarMateriales').show(500);
             $.get("/Presupuesto/getMateriales", { cond: $('#codMaterial').val() })
                   .done(function (data) {
 
-                      $('#ListarMateriales').html(data);                         
+                      $('#ListarMateriales').html(data);
 
                       $("#codMaterial")
                       .focusout(function () {
                           window.setTimeout(function () { $('#ListarMateriales').hide(250); }, 500);
-                             
+
                       })
-                          
+
 
                   })
-                .fail(function() {
+                .fail(function () {
                     $('#ListarMateriales').html('<a href="#" class="list-group-item"> <p class="list-group-item-text"> No se puede conectar </p></a>');
                     $("#codMaterial")
                      .focusout(function () {
                          window.setTimeout(function () { $('#ListarMateriales').hide(250); }, 500);
                      })
-                         
+
                 });
-            
-        
+
+
+        }
+
+        function setServicio(idMaterial) {
+            $('#ListarMateriales').hide(250);
+            $('#codMaterial').val(idMaterial);
+            $('#desMaterial').val('Cargando ...');
+            $('#desClase').val('Cargando ...');
+            $('#precioUnit').val('Cargando ...');
+            $('#unidMedida').val('Cargando ...');
+            $('#desSubClase').val('Cargando ...');
+            $('#cantidad').val(0);
+            $('#unidSolicitada').val('Cargando ...');
+
+            $('#totalsolic').val(0);
+
+            $('#alto').val(0);
+            $('#ancho').val(0);
+            $('#largo').val(0);
+            $.post("/Presupuesto/getServicio", { cond: idMaterial })
+            .done(function (data) {
+                $('#codMaterial').val(data.codProducto);
+                $('#desMaterial').val(data.desc);
+                $('#desClase').val(data.subClase.clase.desClase);
+                $('#precioUnit').val(data.precioUnit);
+                $('#unidMedida').val(data.unidad);
+                $('#desSubClase').val(data.subClase.desSubClase);
+                $('#unidSolicitada').val(data.unidad);
+            });
+        }
+
+        function getServicios() {
+            $('#desMaterial').val('Busque un Servicio');
+            $('#desClase').val('Busque un Servicio');
+            $('#precioUnit').val(0);
+            $('#unidMedida').val('Busque un Servicio');
+            $('#desSubClase').val('Busque un Servicio');
+            $('#cantidad').val(0);
+            $('#totalsolic').val(0);
+            $('#unidSolicitada').val('Busque un Servicio');
+
+            $('#ListarMateriales').html('<a href="#" class="list-group-item"> <p class="list-group-item-text"> Buscando ... </p></a>');
+            $('#ListarMateriales').show(500);
+            $.get("/Presupuesto/getServicios", { cond: $('#codMaterial').val() })
+                  .done(function (data) {
+
+                      $('#ListarMateriales').html(data);
+
+                      $("#codMaterial")
+                      .focusout(function () {
+                          window.setTimeout(function () { $('#ListarMateriales').hide(250); }, 500);
+
+                      })
+
+
+                  })
+                .fail(function () {
+                    $('#ListarMateriales').html('<a href="#" class="list-group-item"> <p class="list-group-item-text"> No se puede conectar </p></a>');
+                    $("#codMaterial")
+                     .focusout(function () {
+                         window.setTimeout(function () { $('#ListarMateriales').hide(250); }, 500);
+                     })
+
+                });
+
+
         }
 
         function GuardarSustento()
         {
-        
+            
             var data = new FormData(); 
             var files = $('#archivoSustento').get(0).files;
             var codMaterial = $('#codMaterial').val();
@@ -668,11 +749,47 @@ function ExpandirObservaciones(codDetalle){
       
     }
 
+    function MostrarAprobacionesVersion(varidVersion) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/AprobacionesVersion", { id: varidVersion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+
+    }
+
+    function MostrarAprobacionesPresupuesto(varIdPresupuesto) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/AprobacionesPresupuesto", { id: varIdPresupuesto })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+
+    }
+
     function MostrarEliminarDetalle(idDetalle) {
 
         $('#idContenidoModal').html(EsperaModal());
         $('#ModalGeneral').modal('show');
-        $.get("/Presupuesto/MostrarEliminarDetalle", { idDetalle: idDetalle })
+        $.get("/Presupuesto/MostrarEliminarDetalle", { idDetalle: idDetalle,idTipo : $('#idTipo').val() })
           .done(function (data) {
               $('#idContenidoModal').fadeOut(500, function () {
                   $('#idContenidoModal').html(data).fadeIn(500);
@@ -695,7 +812,7 @@ function ExpandirObservaciones(codDetalle){
           .done(function (data) {
 
               //$('#ModalGeneral').modal('hide');
-              //getListaDetalle('');
+              getListaDetalle('');
               $('#idContenidoModal').fadeOut(500, function () {
                   $('#idContenidoModal').html(data).fadeIn(500);
               });
@@ -725,6 +842,193 @@ function ExpandirObservaciones(codDetalle){
         });
 
     }
+
+    function NuevoAprobadorVersion(varidVersion) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/NuevoAprobadorVersion", { id: varidVersion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+    }
+
+    function NuevoAprobadorPresup(varidPresupuesto) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/NuevoAprobadorPresup", { id: varidPresupuesto })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+    }
+
+    function AgregarAprobVersion(varidVersion) {
+        var orden = $('#idOrden').val();
+        var usrApro = $('#idUserApro').val();
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/AgregarAprobVersion", { id: varidVersion, idOrden: orden, idUsuario: usrApro })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+    }
+
+    function AgregarAprobPresup(varidPresupuesto)
+    {
+        var orden= $('#idOrden').val();
+        var usrApro=$('#idUserApro').val();
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+        $.get("/Presupuesto/AgregarAprobPresup", { id: varidPresupuesto, idOrden: orden, idUsuario: usrApro })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+    }
+
+
+    function DesAprobarPresupuesto(varidPresupuesto) {
+
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/DesAprobarPresupuesto", { id: varidPresupuesto })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+    }
+
+    function EnviarAprobacion(varidVersion) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/EnviarAprobacion", { id: varidVersion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+    }
+
+    function AprobarVersion(varidVersion) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/AprobarVersion", { id: varidVersion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+    }
+
+    function RechazarVersion(varidVersion) {
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/RechazarVersion", { id: varidVersion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+
+    }
+
+    function AprobarPresupuesto(varidPresupuesto) {
+
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/AprobarPresupuesto", { id: varidPresupuesto })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+    }
+
+    function VerDetalleAprobacion(varidAprobacion) {
+
+        $('#idContenidoModal').html(EsperaModal());
+        $('#ModalGeneral').modal('show');
+
+        $.get("/Presupuesto/DetalleAprobacion", { id: varidAprobacion })
+          .done(function (data) {
+              $('#idContenidoModal').fadeOut(500, function () {
+                  $('#idContenidoModal').html(data).fadeIn(500);
+              });
+          })
+
+        .fail(function (data) {
+            $('#idContenidoModal').fadeOut(500, function () {
+                $('#idContenidoModal').html(EsperaModalFAIL()).fadeIn(500);
+            });
+        });
+    }
+
 
     function EliminarArchivo(idArchivo,idDetalle) {
 
@@ -760,7 +1064,13 @@ function ExpandirObservaciones(codDetalle){
         $('#idContenidoModal').html(EsperaModal());
         $('#ModalGeneral').modal('show');
         // Make Ajax request with the contentType = false, and procesDate = false 
-        
+        var ajaxRequest = $.ajax({
+            type: 'POST',
+            url: "/Presupuesto/SubirArchivo",
+            contentType: false,
+            processData: false,
+            data: data
+        });
         ajaxRequest.done(function (xhr, textStatus) {
             $('#idContenidoModal').fadeOut(500, function () {
                 $('#idContenidoModal').html(xhr).fadeIn(500);
@@ -782,6 +1092,7 @@ function ExpandirObservaciones(codDetalle){
 
         var data = new FormData();
         data.append('idDetalle', idDetalle);
+        data.append('idTipo', $('#idTipo').val());
 
          $('#idContenidoModal').html(EsperaModal());
          $('#ModalGeneral').modal('show');
@@ -811,7 +1122,7 @@ function ExpandirObservaciones(codDetalle){
 
         var data = new FormData();
         data.append('idObservacion', idObservacion);
-
+        data.append('idTipo', $('#idTipo').val());
         $('#idContenidoModal').html(EsperaModal());
         $('#ModalGeneral').modal('show');
         var ajaxRequest = $.ajax({
@@ -845,6 +1156,15 @@ function ExpandirObservaciones(codDetalle){
                 getListaDetalle($('#cond_buscar').val());
             }
         });
+
+        $('#codMaterial').keypress(function (e) {
+             if (e.which == 13) {//Enter key pressed
+                getMateriales();
+            }
+        });
+        setTimeout(function () {
+            LogOut();
+        }, 300000);
      
      });
 

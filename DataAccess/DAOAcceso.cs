@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using Data;
+using System.Data;
+using Oracle.DataAccess.Client;
+
 namespace DataAccess
 {
     public class DAOAcceso
@@ -14,21 +17,57 @@ namespace DataAccess
         {
             Usuario userRpta = null;
 
-            //*********** DATA DE PRUEBA **********
+            try
+            {
+                AutenticarService.Autenticar aut = new AutenticarService.Autenticar();
 
-            userRpta = new Usuario();
-            userRpta.idUsuario = "420";
-            userRpta.usuario = "consultor3";
-            userRpta.password = "1234";
-            userRpta.area = new Area();
-            userRpta.area.codArea = "4";
-            userRpta.area.desArea = "Sistemas";
-            userRpta.area.sede = new Sede();
-            userRpta.area.sede.codSede= 1;
-            userRpta.area.sede.desSede = "Lima";
-            userRpta.Nombres = "Juan Miguel";
-            userRpta.ApellidoMaterno = "Paredes";
-            userRpta.ApellidoPaterno = "Diaz";
+                AutenticarService.RespuestaBE rpta = aut.LogOn(usuario, password, false);
+                if (rpta.IdUsuario > 0)
+                {
+                    DataTable st = aut.GetOptionsByProfile(1, rpta.IdUsuario);
+                }
+                else {
+                   rpta = aut.LogOn(usuario, password, true);
+
+                }
+                if (rpta != null)
+                {
+                    DataTable rptaperfil = rpta.MiPerfil;
+
+                    userRpta = new Usuario();
+                    userRpta.perfiles = new List<Perfil>();
+                    foreach (DataRow fila in rptaperfil.Rows)
+                    {
+                        userRpta.idUsuario = fila["IdUsuario"].ToString();
+                        userRpta.usuario = fila["Login"].ToString();
+                        userRpta.Nombres = fila["ApellidosyNombres"].ToString();
+                        userRpta.numeroPersonal = fila["NroPersonal"].ToString();
+                        userRpta.area = new Area();
+                        userRpta.area.codArea = fila["idArea"].ToString();
+                        userRpta.area.desArea = fila["NombreArea"].ToString();
+                        userRpta.area.sede = new Sede();
+                        userRpta.area.sede.codSede = int.Parse(fila["idCentroOperativo"].ToString());
+                        userRpta.area.sede.desSede = fila["NombreCentroOperativo"].ToString();
+                        userRpta.centroCosto = new CentroCosto();
+                        userRpta.centroCosto.idCentro = int.Parse(fila["idCentroCosto"].ToString());
+                        userRpta.centroCosto.nroCentro = fila["NroCentroCosto"].ToString();
+                        userRpta.centroCosto.nombre = fila["NombreCentroCosto"].ToString();
+                        userRpta.grupoCentroCosto = new GrupoCentroCosto();
+                        userRpta.grupoCentroCosto.idGrupoCentro = int.Parse(fila["idGrupoCentroCosto"].ToString());
+                        userRpta.grupoCentroCosto.nombre = fila["NombreGrupoCentroCosto"].ToString();
+                        Perfil perfil = new Perfil();
+                        perfil.idPerfil = int.Parse(fila["IdPerfil"].ToString());
+                        perfil.nombre = fila["Perfil"].ToString();
+                        perfil.accesos = getAccesos(perfil.idPerfil);
+                        userRpta.perfiles.Add(perfil);
+
+
+                    }
+                }
+            }
+            catch (Exception s) {
+
+            }
             //userRpta.nivelesAprobacion;
 
             //*************************************
@@ -36,25 +75,61 @@ namespace DataAccess
             return userRpta;
         }
 
+        public List<Acceso> getAccesos(int idPerfil) {
+            Conexion con = new Conexion();
+            Procedimiento proc = new Procedimiento() { nombre = "GET_ACCESO_PERFIL" };
+            proc.parametros.Add(new Parametro("VAR_ID_PERFIL", idPerfil, OracleDbType.Int32, Parametro.tipoIN));
+
+            DataTable dt = con.EjecutarProcedimiento(proc);
+
+            List<Acceso> listaRpta = null;
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    listaRpta = new List<Acceso>();
+
+                    foreach (DataRow fila in dt.Rows)
+                    {
+                        try
+                        {
+                            Acceso acc = new Acceso();
+                            acc.codigo = (Accesos)int.Parse(fila["acceso"].ToString());
+                            acc.descripcion = Enum.GetName(typeof(Accesos),acc.codigo);
+                            listaRpta.Add(acc);
+                        }
+                        catch (Exception s)
+                        {
+                            Console.WriteLine("Error En getAccesos ==> " + s.Message);
+                        }
+                    }
+                }
+            }
+
+            return listaRpta;
+        }
+
         public Usuario getUsuario(string usuario)
         {
-            Usuario userRpta = null;
+            Usuario userRpta = new Usuario();
+            userRpta.usuario = usuario;
 
             //*********** DATA DE PRUEBA **********
 
-            userRpta = new Usuario();
-            userRpta.idUsuario = "420";
-            userRpta.usuario = "consultor3";
-            userRpta.password = "1234";
-            userRpta.area = new Area();
-            userRpta.area.codArea = "4";
-            userRpta.area.desArea = "Sistemas";
-            userRpta.area.sede = new Sede();
-            userRpta.area.sede.codSede = 1;
-            userRpta.area.sede.desSede = "Lima";
-            userRpta.Nombres = "Juan Miguel";
-            userRpta.ApellidoMaterno = "Paredes";
-            userRpta.ApellidoPaterno = "Diaz";
+            //userRpta = new Usuario();
+            //userRpta.idUsuario = "420";
+            //userRpta.usuario = "consultor3";
+            //userRpta.password = "1234";
+            //userRpta.area = new Area();
+            //userRpta.area.codArea = "4";
+            //userRpta.area.desArea = "Sistemas";
+            //userRpta.area.sede = new Sede();
+            //userRpta.area.sede.codSede = 1;
+            //userRpta.area.sede.desSede = "Lima";
+            //userRpta.Nombres = "Juan Miguel";
+            //userRpta.ApellidoMaterno = "Paredes";
+            //userRpta.ApellidoPaterno = "Diaz";
             //userRpta.nivelesAprobacion;
 
             //*************************************

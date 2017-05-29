@@ -16,6 +16,13 @@ namespace AppV2.Controllers
         public ActionResult Index()
         {
             Session["usuario"] = null;
+            if (Session["malInicio"] != null)
+            {
+                if ((bool)Session["malInicio"])
+                {
+                    ViewBag.mensaje = "No se han podido validar sus credenciales";
+                }
+            }
             return View();
         }
 
@@ -23,9 +30,17 @@ namespace AppV2.Controllers
         public ActionResult Login(Usuario cuenta)
         {
             LogicAcceso logic = new LogicAcceso();
-            Session["usuario"] =logic.Login(cuenta.usuario,cuenta.password);           
-            
-            return RedirectToAction("PorSede","Presupuesto");
+            Session.Timeout = 1440;
+            Session["usuario"] =logic.Login(cuenta.usuario,cuenta.password);
+            if (Session["usuario"] == null)
+            {
+                Session["malInicio"] = true;
+                return RedirectToAction("Index", "Login");
+            }
+            else {
+                return RedirectToAction("PorSede", "Presupuesto");
+            }
+          
         }
 
         public ActionResult Logout()
@@ -38,6 +53,19 @@ namespace AppV2.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index", "Login");
+        }
+
+        public ActionResult Configuracion()
+        {
+            if (Session["usuario"] != null)
+            {
+                return View();
+
+            }
+            else {
+                return RedirectToAction("Index", "Login");
+            }
+
         }
 
     }

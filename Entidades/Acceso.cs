@@ -9,9 +9,6 @@ namespace Entidades
     public class Acceso
     {
 
-        public enum Accesos {
-            login,listarSedes,listarAreas
-        }
 
         public Accesos codigo { get; set; }
         public string descripcion { get; set; }

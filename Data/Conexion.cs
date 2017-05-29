@@ -16,7 +16,10 @@ namespace Data
     {
 
         private string conectionString;
-
+        public enum TipoConexion {
+            principal=0,
+            ora7=1
+        }
         public Conexion() {
 
             try
@@ -30,9 +33,20 @@ namespace Data
             }
         }
 
-        public Conexion(string ip,string schema, string user, string pass)
-        {           
-                conectionString = "Data Source="+ ip + "/"+ schema + ";User ID="+user+";Password="+pass;
+
+
+        public Conexion(TipoConexion tipo)
+        {
+            switch (tipo)
+            {
+
+                case TipoConexion.principal:
+                    conectionString = ConfigurationManager.ConnectionStrings["ORACLESTR"].ConnectionString;
+                    break;
+                case TipoConexion.ora7:
+                    conectionString = ConfigurationManager.ConnectionStrings["ORACLESTR2"].ConnectionString;
+                    break;
+            }
         }
 
        

@@ -20,5 +20,17 @@ namespace LogicAccess
             DAOMaterial dao = new DAOMaterial();
             return dao.getMaterial(cond);
         }
+
+        public List<Material> getServicios(string cond)
+        {
+            DAOMaterial dao = new DAOMaterial();
+            return dao.getServicios(cond);
+        }
+
+        public Material getServicio(string cond)
+        {
+            DAOMaterial dao = new DAOMaterial();
+            return dao.getServicio(cond);
+        }
     }
 }

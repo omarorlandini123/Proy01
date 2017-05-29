@@ -42,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acceso.cs" />
+    <Compile Include="Accesos.cs" />
     <Compile Include="Aprobacion.cs" />
     <Compile Include="Archivo.cs" />
     <Compile Include="Area.cs" />
+    <Compile Include="CentroCosto.cs" />
     <Compile Include="Clase.cs" />
     <Compile Include="DetalleVersion.cs" />
+    <Compile Include="GrupoCentroCosto.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="MesEntSoli.cs" />
     <Compile Include="NivelAprobacion.cs" />

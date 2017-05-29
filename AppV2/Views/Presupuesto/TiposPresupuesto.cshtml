@@ -7,27 +7,37 @@
     {
         foreach (DetallePresupuesto preArea in Model.TiposPresupuestos)
         {
+            var claseFila = "est-edicion";
+            if (preArea.estadoActual == Aprobacion.estados.Aprobado)
+            {
+                claseFila = "est-aprobado";
+            }
+            else if (preArea.estadoActual == Aprobacion.estados.Desaprobado)
+            {
+                claseFila = "est-desaprobado";
+            }
+            else if (preArea.estadoActual == Aprobacion.estados.Enviado)
+            {
+                claseFila = "est-enviado";
+            }
 
-            <div href="#" class="list-group-item est-edicion">
+            <div href="#" class="list-group-item @claseFila">
                 <div class="row">
-                    <div class="col-sm-6 excesodiv">
+                    <div class="col-sm-12 excesodiv">
                         <a href="#" onclick="listarVersiones(@preArea.idPresupuestoTipo);">
-                            <h4 class="list-group-item-heading">
-                                <span class="glyphicon glyphicon-info-sign color-indicador" aria-hidden="true">&nbsp</span>
-                                @preArea.tipoPresupuesto.nombrePresupuesto
-                            </h4>
+                            <center>
+                                <h4 class="list-group-item-heading">
+                                    @*<span class="glyphicon glyphicon-info-sign color-indicador" aria-hidden="true">&nbsp</span>*@
+                                    @preArea.tipoPresupuesto.nombrePresupuesto
+                                </h4>
+                            </center>
                         </a>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="#"><h5 class="list-group-item-heading">Aprobar</h5></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="#"><h5 class="list-group-item-heading">Desaprobar</h5></a>
-                    </div>
+                   
                 </div>
                 <div class="row">
-                
-                    <div class="col-sm-3 col-sm-offset-6">Monto:</div>
+                    <div class="col-sm-6">Version Actual: #@preArea.nroActual</div>
+                    <div class="col-sm-3" >Monto:</div>
                     @if (preArea.monto > 0)
                     {
                         <div class="col-sm-3">S/ @string.Format("{0:0.00}", preArea.monto)</div>
@@ -38,16 +48,15 @@
                     }
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">Ultima Modif:</div>
-                    <div class="col-sm-3">01/01/2015</div>
+                    <div class="col-sm-6"><center><a href="javascript:NuevaVersion(@preArea.idPresupuestoTipo)">Nueva Version</a></center></div>
                     <div class="col-sm-3">Desde:</div>
-                    <div class="col-sm-3">En edición</div>
+                    <div class="col-sm-3">@preArea.fechaValIni.ToShortDateString()</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">Verificado por:</div>
-                    <div class="col-sm-3"><a href="#">Ver</a></div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"></div>
                     <div class="col-sm-3">Hasta:</div>
-                    <div class="col-sm-3">En edición</div>
+                    <div class="col-sm-3">@preArea.fechaValFin.ToShortDateString()</div>
                 </div>
             </div>
 

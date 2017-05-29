@@ -17,3 +17,8 @@ D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\obj\Deb
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\bin\Debug\Entidades.dll
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\bin\Debug\Entidades.pdb
 D:\omar\Proyectos\Proyecto Presupuesto Sima\Version GIT\Proy01\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+D:\Presupuestos\Proy01\Entidades\bin\Debug\Entidades.dll
+D:\Presupuestos\Proy01\Entidades\bin\Debug\Entidades.pdb
+D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.dll
+D:\Presupuestos\Proy01\Entidades\obj\Debug\Entidades.pdb

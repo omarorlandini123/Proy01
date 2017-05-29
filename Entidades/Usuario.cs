@@ -36,10 +36,27 @@ namespace Entidades
         /// Lista los niveles de aprobacion que tiene el usuario
         /// </summary>
         public List<NivelAprobacion> nivelesAprobacion { get; set; }
+        public List<Perfil> perfiles { get; set; }
+        public string numeroPersonal { get; set; }
+        public CentroCosto centroCosto { get; set; }
+        public GrupoCentroCosto grupoCentroCosto { get; set; }
+
+        public bool tieneAccesoA(Accesos acc) {
+            foreach (Perfil per in perfiles) {
+                foreach (Acceso acces in per.accesos) {
+                    if (acces.codigo == acc) {
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// List los detalles de presupuesto que han sido creados por el usuario
         /// </summary>
-      
+
         public Usuario() {
             presupAper = new List<Presupuesto>();
             presupAprob = new List<Presupuesto>();

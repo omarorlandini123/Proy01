@@ -1,10 +1,10 @@
 ﻿@model Entidades.Usuario
 
 
-@using (Html.BeginForm("Login", "Login",FormMethod.Post))
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <div class="col-sm-6 col-sm-offset-3">
             <br />
@@ -28,6 +28,18 @@
                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
             </div>
+            @if (Session["malInicio"] != null)
+            {
+                if ((bool)Session["malInicio"])
+                {
+                    <div class="alert alert-danger fade in alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        <strong>Atención</strong> @ViewBag.mensaje
+                    </div>
+                }
+
+            }
+            
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
